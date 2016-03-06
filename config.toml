@@ -4,8 +4,9 @@ title = "Semi-Coherent Infoblag"
 theme = "blackburn"
 
 [taxonomies]
-arch = "archs"
-release = "releases"
+architecture = "architectures"
+distribution = "distributions"
+component = "components"
 
 [indexes]
 tag = "blog"

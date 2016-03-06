@@ -6,8 +6,8 @@ tags = []
 title = "ca-certificates-hhome"
 topics = []
 distributions = ["wheezy", "trusty"]
-archs = ["any", "armhf", "amd64"]
-component = "main"
+architectures = ["any", "armhf", "amd64"]
+components = ["main"]
 version = "0.1.1"
 +++
 

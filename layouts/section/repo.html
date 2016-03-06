@@ -20,9 +20,9 @@
       <tr>
         <td>{{ .Title }}</td>
         <td>{{ .Params.version }}</td>
-        <td>{{ .Params.component }}</td>
+        <td>{{ index .Params.components 0 }}</td>
         <td>
-          {{ range .Params.archs }}
+          {{ range .Params.architectures }}
           {{ . }}
           {{ end }}
         </td>
@@ -37,5 +37,11 @@
   </table>
 
 </div>
+
+<style>
+  td {
+    padding-right: 2em;
+  }
+</style>
 
 {{ partial "footer.html" . }}
