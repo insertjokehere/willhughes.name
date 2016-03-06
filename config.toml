@@ -1,3 +1,40 @@
 baseurl = "http://replace-this-with-your-hugo-site.com/"
 languageCode = "en-us"
-title = "Infoblag"
+title = "Semi-Coherent Infoblag"
+
+[indexes]
+tag = "blog"
+
+[menu]
+  # Shown in the side menu.
+  [[menu.main]]
+    name = "Home"
+    pre = "<i class='fa fa-home fa-fw'></i>"
+    weight = 0
+    identifier = "home"
+    url = "/"
+  [[menu.main]]
+    name = "About"
+    pre = "<i class='fa fa-user fa-fw'></i>"
+    weight = 1
+    identifier = "about"
+    url = "/about/"
+  [[menu.main]]
+    name = "Git"
+    pre = "<i class='fa fa-git fa-fw'></i>"
+    weight = 2
+    identifier = "git"
+    url = "http://git.willhughes.name/"
+  [[menu.main]]
+    name = "Repo"
+    pre = "<i class='fa fa-cube fa-fw'></i>"
+    weight = 3
+    identifier = "repo"
+    url = "/repo/"
+
+
+[social]
+  # Link your social networking accouns to the side menu
+  # by entering your username or ID.
+  twitter = "nzwillhughes"
+  github = "insertjokehere"
