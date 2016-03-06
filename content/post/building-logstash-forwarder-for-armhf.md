@@ -1,6 +1,6 @@
 +++
 date = "2014-10-02T16:47:44+13:00"
-draft = true
+draft = false
 title = "Building logstash-forwarder v0.3.0 for armhf"
 aliases = [ "/blog/building-logstash-forwarder-for-armhf/" ]
 +++
