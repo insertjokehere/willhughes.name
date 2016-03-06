@@ -1,6 +1,11 @@
 baseurl = "http://replace-this-with-your-hugo-site.com/"
 languageCode = "en-us"
 title = "Semi-Coherent Infoblag"
+theme = "blackburn"
+
+[taxonomies]
+arch = "archs"
+release = "releases"
 
 [indexes]
 tag = "blog"
@@ -30,7 +35,7 @@ tag = "blog"
     pre = "<i class='fa fa-cube fa-fw'></i>"
     weight = 3
     identifier = "repo"
-    url = "/repo/"
+    url = "/repo/about/"
 
 
 [social]
