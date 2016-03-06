@@ -18,7 +18,7 @@
     <tbody>
       {{ range .Data.Pages }}
       <tr>
-        <td>{{ .Title }}</td>
+        <td><a href="{{ .Permalink }}">{{ .Title }}</a></td>
         <td>{{ .Params.version }}</td>
         <td>{{ index .Params.components 0 }}</td>
         <td>
