@@ -1,4 +1,4 @@
-baseurl = "http://replace-this-with-your-hugo-site.com/"
+baseurl = "https://www.willhughes.name/"
 languageCode = "en-us"
 title = "Semi-Coherent Infoblag"
 theme = "blackburn"
@@ -36,7 +36,7 @@ tag = "blog"
     pre = "<i class='fa fa-cube fa-fw'></i>"
     weight = 3
     identifier = "repo"
-    url = "/repo/about/"
+    url = "/repo/"
 
 
 [social]
