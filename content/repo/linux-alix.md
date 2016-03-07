@@ -11,3 +11,4 @@ distributions = ["trusty"]
 version = "0.0"
 +++
 
+Linux kernel for PC Engines ALIX

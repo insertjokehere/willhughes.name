@@ -1,0 +1,38 @@
+{{ partial "header.html" . }}
+
+<div class="header">
+  <h1>{{ .Title }}</h1>
+  <h2>{{ .Description }}</h2>
+</div>
+<div class="content">
+  <aside>
+    <table>
+      <tr>
+	<td><b>Version</b></td>
+	<td>{{ .Params.version }}</td>
+      </tr>
+      <tr>
+	<td><b>Architectures</b></td>
+	<td>{{ range .Params.architectures }} {{ . }} {{ end }}</td>
+      </tr>
+      <tr>
+	<td><b>Distributions</b></td>
+	<td>{{ range .Params.distributions }} {{ . }} {{ end }}</td>
+      </tr>
+    </table>
+  </aside>
+
+  {{ .Content }}
+</div>
+
+<style>
+  td {
+    padding-right: 2em;
+  }
+  th {
+    padding-right: 2em;
+    align: left;
+  }
+</style>
+
+{{ partial "footer.html" . }}

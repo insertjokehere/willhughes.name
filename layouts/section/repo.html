@@ -5,7 +5,7 @@
   <h2>{{ .Description }}</h2>
 </div>
 <div class="content">
-    {{ range .Data.Pages.GroupByParam "component" }}
+  {{ range .Data.Pages.GroupByParam "component" }}
     <h3>{{ .Key }}</h3>
     <table>
       <tr>
@@ -14,7 +14,7 @@
         <th>Architectures</th>
         <th>Distributions</th>
       </tr>
-      {{ range .Pages }}
+      {{ range .Pages.ByTitle }}
       {{ .Render "tr" }}
       {{ end }}
     </table>

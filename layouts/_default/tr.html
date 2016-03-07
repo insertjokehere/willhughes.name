@@ -1,5 +1,5 @@
 <tr>
-  <td>{{ .Title }}</td>
+  <td><a href="{{ .Permalink }}">{{ .Title }}</a></td>
   <td>{{ .Params.version }}</td>
   <td>{{ range .Params.architectures }} {{ . }} {{ end }}</td>
   <td>{{ range .Params.distributions }} {{ . }} {{ end }}</td>
