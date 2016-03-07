@@ -4,6 +4,7 @@ draft = false
 title = "WXC VoIP on an Orcon Genius/Netcomm NV4F"
 slug = "wxc-voip-on-an-orcon-geniusnetcomm-nv4f"
 aliases = [ "/blog/wxc-voip-on-an-orcon-geniusnetcomm-nv4f/" ]
+tags = ["Orcon", "VoIP", "WXC"]
 +++
 
 *Disclaimer: This should not be read as an endorsement or criticism of either Orcon or WXC. A review of these services may appear later if I feel I have something worth talking about*
