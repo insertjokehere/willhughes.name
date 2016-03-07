@@ -1,7 +1,7 @@
 +++
 date = "2015-09-04T16:49:54+13:00"
 description = ""
-draft = true
+draft = false
 tags = ["Python", "Mezzanine", "Conference", "Pycon"]
 title = "Mezzanine: A Brief Primer at Kiwi Pycon 2015"
 topics = []
