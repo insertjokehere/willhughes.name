@@ -5,6 +5,9 @@ draft = true
 tags = []
 title = "lvm2"
 topics = []
-component = "main"
+distributions = ["trusty"]
+architectures = ["amd64"]
+component = "backports"
+version = "0.0"
 +++
 

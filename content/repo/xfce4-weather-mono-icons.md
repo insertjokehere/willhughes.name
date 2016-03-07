@@ -5,6 +5,9 @@ draft = true
 tags = []
 title = "xfce4 weather mono icons"
 topics = []
+distributions = ["trusty"]
+architectures = ["all"]
 component = "main"
+version = "0.0"
 +++
 

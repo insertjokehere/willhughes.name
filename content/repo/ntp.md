@@ -5,6 +5,9 @@ draft = true
 tags = []
 title = "ntp"
 topics = []
-component = "main"
+distributions = ["wheezy"]
+architectures = ["armhf"]
+component = "ntpi"
+version = "0.0"
 +++
 

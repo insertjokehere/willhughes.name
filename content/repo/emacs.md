@@ -5,6 +5,9 @@ draft = true
 tags = []
 title = "emacs"
 topics = []
-component = "main"
+distributions = ["wheezy", "trusty"]
+architectures = ["any", "armhf", "amd64"]
+component = "backports"
+version = "0.0"
 +++
 
