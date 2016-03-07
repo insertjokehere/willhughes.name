@@ -5,6 +5,9 @@ draft = true
 tags = []
 title = "anope"
 topics = []
-
+distributions = ["trusty"]
+architectures = ["amd64"]
+component = "main"
+version = "0.0"
 +++
 

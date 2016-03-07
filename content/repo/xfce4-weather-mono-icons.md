@@ -5,6 +5,6 @@ draft = true
 tags = []
 title = "xfce4 weather mono icons"
 topics = []
-
+component = "main"
 +++
 

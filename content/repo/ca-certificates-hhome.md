@@ -7,7 +7,7 @@ title = "ca-certificates-hhome"
 topics = []
 distributions = ["wheezy", "trusty"]
 architectures = ["any", "armhf", "amd64"]
-components = ["main"]
-version = "0.1.1"
+component = "main"
+version = "0.0"
 +++
 

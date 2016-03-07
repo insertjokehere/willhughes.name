@@ -5,6 +5,6 @@ draft = true
 tags = []
 title = "google authenticator"
 topics = []
-
+component = "main"
 +++
 

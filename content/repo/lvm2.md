@@ -5,6 +5,6 @@ draft = true
 tags = []
 title = "lvm2"
 topics = []
-
+component = "main"
 +++
 

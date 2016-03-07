@@ -5,6 +5,6 @@ draft = true
 tags = []
 title = "quassel"
 topics = []
-
+component = "main"
 +++
 

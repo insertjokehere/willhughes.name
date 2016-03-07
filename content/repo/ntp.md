@@ -5,6 +5,6 @@ draft = true
 tags = []
 title = "ntp"
 topics = []
-
+component = "main"
 +++
 

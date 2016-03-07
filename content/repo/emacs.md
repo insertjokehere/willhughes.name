@@ -5,6 +5,6 @@ draft = true
 tags = []
 title = "emacs"
 topics = []
-
+component = "main"
 +++
 

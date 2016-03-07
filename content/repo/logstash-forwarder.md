@@ -5,6 +5,6 @@ draft = true
 tags = []
 title = "logstash forwarder"
 topics = []
-
+component = "main"
 +++
 
