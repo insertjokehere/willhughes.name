@@ -1,13 +1,18 @@
 +++
 date = "2016-03-07T10:16:39+13:00"
 description = ""
-draft = true
+draft = false
 tags = []
 title = "ca-certificates-hhome"
 topics = []
-distributions = ["wheezy", "trusty"]
-architectures = ["any", "armhf", "amd64"]
+distributions = ["wheezy", "trusty", "vivid", "wily"]
+architectures = ["all"]
 component = "main"
-version = "0.0"
+version = "1.1.2"
 +++
 
+You probably don't want to install this package on your own system, as it adds my personal CA{{< ann 1 >}} as a trusted root on the system.
+
+#### Notes
+
+1. {{< ann_text 1>}}This is now largely redundant as Lets Encrypt has entered public beta
