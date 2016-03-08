@@ -2,6 +2,7 @@ baseurl = "https://www.willhughes.name/"
 languageCode = "en-us"
 title = "Semi-Coherent Infoblag"
 theme = "blackburn"
+pygmentsstyle = "tango"
 
 [taxonomies]
 architecture = "architectures"
