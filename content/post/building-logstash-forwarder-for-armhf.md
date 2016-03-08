@@ -18,25 +18,32 @@ The wonders of Logstash is a subject for a future blog post, but in the mean tim
 
 This is not nearly as intimidating as it sounds, and shouldn't take much longer than 10 minutes on a moderatly powerful system. You will probably require the usual build-essential stuff to make this work. Download and build go itself
 
-    hg clone https://code.google.com/p/go
-    cd go/src
-    ./all.bash
+{{< highlight bash >}}
+hg clone https://code.google.com/p/go
+cd go/src
+./all.bash
+{{< /highlight >}}
 
 Then grab the crosscompile scripts off github, and build for all supported platforms (or just linux/arm if you are in a serious hurry)
 
-    git clone git://github.com/davecheney/golang-crosscompile.git
-    source golang-crosscompile/crosscompile.bash
-    go-crosscompile-build-all
-
+{{< highlight bash >}}
+git clone git://github.com/davecheney/golang-crosscompile.git
+source golang-crosscompile/crosscompile.bash
+go-crosscompile-build-all
+{{< /highlight >}}
 
 Add your freshly minted go to your path
 
-    export PATH=`pwd`/bin:$PATH
+{{< highlight bash >}}
+export PATH=`pwd`/bin:$PATH
+{{< /highlight >}}
 
 ### Clone the logstash-forwarder source off github
 
-    git clone https://github.com/elasticsearch/logstash-forwarder.git
-    git checkout e12e3415f2c0baf1519419cca741f4a02e47ea7b</pre>
+{{< highlight bash >}}
+git clone https://github.com/elasticsearch/logstash-forwarder.git
+git checkout e12e3415f2c0baf1519419cca741f4a02e47ea7b</pre>
+{{< /highlight >}}
 
 ### Edit the Makefile{{< ann 2 >}}
 
@@ -47,7 +54,9 @@ Add your freshly minted go to your path
 
 Logstash-forwarder uses <a href="https://github.com/jordansissel/fpm">fpm</a> to package up the compiled program, so install it, then:
 
-    GOOS=linux GOARCH=arm make deb
+{{< highlight bash >}}
+GOOS=linux GOARCH=arm make deb
+{{< /highlight >}}
 
 To compile logstash-forwarder and build a Debian package{{< ann 3 >}}
 
