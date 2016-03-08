@@ -4,7 +4,7 @@ draft = false
 title = "About"
 +++
 
-All content is&nbsp;&copy; Will Hughes, 2014 unless otherwise noted
+All content is&nbsp;&copy; Will Hughes, 2014-2016 unless otherwise noted, and is made available under the [Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) licence](https://creativecommons.org/licenses/by-sa/4.0/) unless otherwise noted.
 
 All code is licenced under the [BSD 3-Clause License](/licence/) unless noted otherwise
 
