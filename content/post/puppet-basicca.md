@@ -1,7 +1,7 @@
 +++
 date = "2014-03-28T23:17:13+13:00"
 description = ""
-draft = true
+draft = false
 tags = ["Puppet", "SSL"]
 title = "puppet-basicca"
 topics = []
