@@ -8,11 +8,11 @@ topics = []
 aliases = ["/projects/puppet-basicca/"]
 +++
 
-puppet-basicca is a puppet module designed to automate the process of creating SSL certificates, paticularly self-signed certificates. I also use it to create certificate signing requests (CSRs) to submit to the authorities who sign my certificates (at time of writing, <a href="http://www.startssl.com/" target="_blank">StartCOM</a>).
+[puppet-basicca](https://github.com/insertjokehere/puppet-basicca) is a puppet module designed to automate the process of creating SSL certificates, paticularly self-signed certificates. I also use it to create certificate signing requests (CSRs) to submit to the authorities who sign my certificates (at time of writing, ~~[StartCOM](http://www.startssl.com/")~~ [Namecheap](https://www.namecheap.com/security/ssl-certificates/domain-validation.aspx){{< ann 1 >}}).
 
 <!--more-->
 
-The readme in the Git repo has some detailed usage examples, but simply:
+The readme in the [Git repo](https://github.com/insertjokehere/puppet-basicca/blob/master/readme.md) has some detailed usage examples, but simply:
 
 {{< highlight puppet >}}
 basicca::certrequest{ $fqdn:
@@ -25,3 +25,6 @@ basicca::certrequest{ $fqdn:
 {{< /highlight >}}
 
 will produce a signing request for the FQDN of the node the manifest is running on
+
+#### Notes
+1. {{< ann_text 1 >}}And only when I need a cert for a year - like this blog for instance, because replacing a cert on Cloudfront in a pain, and Amazon didn't have their own CA when I set things up. Most of my things now use Lets Encrypt certs
