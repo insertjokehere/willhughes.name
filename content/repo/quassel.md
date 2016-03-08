@@ -8,7 +8,7 @@ topics = []
 distributions = ["wheezy", "trusty", "vivid", "wily"]
 architectures = ["amd64"]
 component = "backports"
-version = "0.12.2"
+version = "0.12.3"
 +++
 
-[Quassel IRC](http://quassel-irc.org/) packaged for Ubuntu and Debian Wheezy
+[Quassel IRC](http://quassel-irc.org/) packaged for Ubuntu and Debian Wheezy. The source that this is built from is available in my [git repo](http://git.willhughes.name/quassel/)
