@@ -1,4 +1,4 @@
-baseurl = "https://www.willhughes.name/"
+baseurl = "/"
 languageCode = "en-us"
 title = "Semi-Coherent Infoblag"
 theme = "blackburn"
