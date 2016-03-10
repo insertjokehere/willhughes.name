@@ -1,3 +1,5 @@
+#!/usr/bin/nodejs
+
 var lunr = require('lunr');
 var $ = require('cheerio');
 var fs = require('fs');
