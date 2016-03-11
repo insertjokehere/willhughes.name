@@ -1,0 +1,19 @@
+{{ partial "header.html" . }}
+
+<div class="header">
+  <h1>{{ .Title }}</h1>
+  <h2>{{ .Description }}</h2>
+</div>
+<div class="content">
+  {{ .Content }}
+
+  <form>
+    <input class="search" />
+  </form>
+
+  <script src="//code.jquery.com/jquery-1.12.1.min.js"></script>
+  <script src="/js/lunr.js"></script>
+  <script src="/js/search.js"></script>
+</div>
+
+{{ partial "footer.html" . }}
