@@ -7,8 +7,18 @@ $(document).ready(function () {
 	docs = data.docs;
     });
 
-    $('.search').keypress(function (e) {
+    $('input[type="search"]').change(function (e) {
         do_search(this.value);
+    });
+
+    $('input[type="search"]').keypress(function (e) {
+        do_search(this.value);
+    });
+
+    $('form').submit(function (e) {
+	e.preventDefault();
+
+	do_search($('input[type="search"]').value);
     });
 
     function do_search(term) {

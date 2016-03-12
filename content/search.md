@@ -11,7 +11,7 @@ layout = "search"
 
 <p>
 <form>
-    <input class="search" type="search" placeholder="Type..."/>
+<input class="search" type="search" placeholder="Type..."/>
 </form>
 
 <div class="results" style="display:none">
