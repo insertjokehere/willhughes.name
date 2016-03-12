@@ -9,7 +9,9 @@ var index = lunr(function(){
     this.field('title', {boost: 10})
     this.field('body')
     this.ref('href')
-})
+});
+
+var docs = {};
 
 var outfile = 'public/search.json';
 
@@ -40,16 +42,23 @@ function index_file(index, filepath) {
     var body = content.text();
 
     var href = filepath;
+    href = href.slice(6);  // remove public/
+    href = href.slice(0, href.length - 10);  // remove index.html
+
+    console.log(href);
 
     index.add({
         href: href,
         title: title,
         body: body
     });
+
+    docs[href] = {'title': title}
 }
 
 var stream = fs.createWriteStream(outfile);
 stream.write(JSON.stringify({
-    index: index.toJSON()
+    index: index.toJSON(),
+    docs: docs
 }));
 stream.end();
