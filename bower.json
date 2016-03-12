@@ -1,0 +1,24 @@
+{
+  "name": "blog-hugo",
+  "description": "Source for my blog, willhughes.name, using Hugo",
+  "main": "gulpfile.js",
+  "authors": [
+    "William Hughes <whlabratz@gmail.com>"
+  ],
+  "license": "CC-BY-SA 4.0",
+  "moduleType": [
+    "node"
+  ],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "lunr.js": "^0.7.0"
+  }
+}

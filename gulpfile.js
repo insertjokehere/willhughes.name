@@ -3,6 +3,7 @@ var compress = require('gulp-yuicompressor');
 var shell = require('gulp-shell');
 var htmlmin = require('gulp-htmlmin');
 var indexer = require('./indexer.js');
+var bower = require('gulp-bower');
 const imagemin = require('gulp-imagemin');
 const pngquant = require('imagemin-pngquant');
 
@@ -14,9 +15,18 @@ gulp.task('dev', ['index'], function () {
     gulp.src('public/search.json').pipe(gulp.dest('static/'));
 });
 
-gulp.task('hugo', shell.task(['hugo']));
+gulp.task('bower', function() {
+  return bower();
+});
 
-gulp.task('mini_js', ['hugo'], function () {
+gulp.task('bower_copy', ['bower'], function() {
+    gulp.src('bower_components/lunr.js/lunr.js')
+	.pipe(gulp.dest('./static/js'));
+});
+
+gulp.task('hugo', ['bower_copy'], shell.task(['hugo']));
+
+gulp.task('mini_js', ['hugo', 'bower_copy'], function () {
     gulp.src('public/**/*.js')
 	.pipe(compress({
 	    type: 'js'
@@ -24,7 +34,7 @@ gulp.task('mini_js', ['hugo'], function () {
 	.pipe(gulp.dest('public'));
 });
 
-gulp.task('mini_css', ['hugo'], function () {
+gulp.task('mini_css', ['hugo', 'bower_copy'], function () {
     gulp.src('public/**/*.css')
 	.pipe(compress({
 	    type: 'css'
