@@ -5,7 +5,12 @@
   <h2>{{ .Description }}</h2>
 </div>
 <div class="content">
+  {{ range where .Data.Pages "Params.component" "_header" }}
+  {{ .Render }}
+  {{ end }}
+
   {{ range .Data.Pages.GroupByParam "component" }}
+  {{ if not (eq .Key "_header") }}
     <h3>{{ .Key }}</h3>
     <table class="pure-table pure-table-horizontal">
       <tr>
@@ -18,6 +23,7 @@
       {{ .Render "tr" }}
       {{ end }}
     </table>
+    {{ end }}
     {{ end }}
 </div>
 
