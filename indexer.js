@@ -52,6 +52,7 @@ module.exports = function(targetFile) {
 	});
 
 	docs[href] = {
+	    href: href,
 	    title: title
 	};
 
