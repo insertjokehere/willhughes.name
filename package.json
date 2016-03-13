@@ -18,6 +18,7 @@
     "gulp-util": "^3.0.7",
     "gulp-wrap": "^0.11.0",
     "gulp-yuicompressor": "^0.0.3",
+    "handlebars": "^4.0.5",
     "imagemin-pngquant": "^4.2.2",
     "lunr": "^0.7.0",
     "through": "^2.3.8"
