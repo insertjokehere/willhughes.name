@@ -1,11 +1,12 @@
-var gulp = require('gulp');
-var compress = require('gulp-yuicompressor');
-var shell = require('gulp-shell');
-var htmlmin = require('gulp-htmlmin');
-var indexer = require('./indexer.js');
-var bower = require('gulp-bower');
+const gulp = require('gulp');
+const compress = require('gulp-yuicompressor');
+const shell = require('gulp-shell');
+const htmlmin = require('gulp-htmlmin');
+const indexer = require('./indexer.js');
+const bower = require('gulp-bower');
 const imagemin = require('gulp-imagemin');
 const pngquant = require('imagemin-pngquant');
+const filter = require('gulp-filter');
 
 gulp.task('default', ['release', 'dev'], function () {});
 
@@ -22,12 +23,19 @@ gulp.task('bower', function() {
 gulp.task('bower_copy', ['bower'], function() {
     gulp.src('bower_components/lunr.js/lunr.js')
 	.pipe(gulp.dest('./static/js'));
+
+    // YUI gets really, really confused if we try to minify the main JQuery JS
+    gulp.src('bower_components/jquery/dist/jquery.min.{js,map}')
+	.pipe(gulp.dest('./static/js'));
 });
 
 gulp.task('hugo', ['bower_copy'], shell.task(['hugo']));
 
 gulp.task('mini_js', ['hugo', 'bower_copy'], function () {
+    const f = filter(['*', '!*.min.*']);
+    
     gulp.src('public/**/*.js')
+	.pipe(f)
 	.pipe(compress({
 	    type: 'js'
 	}))
