@@ -5,13 +5,14 @@ $(document).ready(function () {
     $.get('/search.json', function (data) {
         index = lunr.Index.load(data.index);
 	docs = data.docs;
+        $('input[type="search"]').removeAttr('disabled');
     });
 
     $('input[type="search"]').change(function (e) {
         do_search(this.value);
     });
 
-    $('input[type="search"]').keypress(function (e) {
+    $('input[type="search"]').keyup(function (e) {
         do_search(this.value);
     });
 
