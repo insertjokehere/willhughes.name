@@ -27,6 +27,15 @@ gulp.task('bower_copy', ['bower'], function() {
     // YUI gets really, really confused if we try to minify the main JQuery JS
     gulp.src('bower_components/jquery/dist/jquery.min.{js,map}')
 	.pipe(gulp.dest('./static/js'));
+
+    gulp.src('bower_components/pure/pure.css')
+	.pipe(gulp.dest('./static/css'));
+
+    gulp.src('bower_components/pure/grids-responsive-old-ie.css')
+	.pipe(gulp.dest('./static/css'));
+    
+    gulp.src('bower_components/pure/grids-responsive.css')
+	.pipe(gulp.dest('./static/css'));
 });
 
 gulp.task('hugo', ['bower_copy'], shell.task(['hugo']));
