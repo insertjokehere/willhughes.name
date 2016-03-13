@@ -7,6 +7,10 @@ const bower = require('gulp-bower');
 const imagemin = require('gulp-imagemin');
 const pngquant = require('imagemin-pngquant');
 const filter = require('gulp-filter');
+const handlebars = require('gulp-handlebars');
+const wrap = require('gulp-wrap');
+const declare = require('gulp-declare');
+const concat = require('gulp-concat');
 
 gulp.task('default', ['release', 'dev'], function () {});
 
@@ -42,9 +46,27 @@ gulp.task('bower_copy', ['bower'], function() {
 
     gulp.src('bower_components/font-awesome/css/font-awesome.css')
 	.pipe(gulp.dest('./static/css'));
+
+    gulp.src('bower_components/handlebars/handlebars.runtime.js')
+	.pipe(gulp.dest('./static/js'));
 });
 
-gulp.task('hugo', ['bower_copy'], shell.task(['hugo']));
+
+gulp.task('handlebars', function(){
+    gulp.src('templates/*.hbs')
+	.pipe(handlebars({
+	    handlebars: require('handlebars')
+	}))
+	.pipe(wrap('Handlebars.template(<%= contents %>)'))
+	.pipe(declare({
+	    namespace: 'Blog.templates',
+	    noRedeclare: true, // Avoid duplicate declarations 
+	}))
+	.pipe(concat('templates.js'))
+	.pipe(gulp.dest('static/js/'));
+});
+
+gulp.task('hugo', ['bower_copy', 'handlebars'], shell.task(['hugo']));
 
 gulp.task('mini_js', ['hugo', 'bower_copy'], function () {
     const f = filter(['*', '!*.min.*']);

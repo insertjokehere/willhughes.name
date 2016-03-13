@@ -40,7 +40,7 @@ $(document).ready(function () {
 		$.each(results, function () {
 		    console.log(this);
 		    results_list.append(
-			$('<li>').append($('<a>').attr('href', this.ref).text(docs[this.ref].title))
+			Blog.templates.search_result(docs[this.ref])
 		    );
 		});
 
