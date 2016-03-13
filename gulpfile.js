@@ -36,6 +36,12 @@ gulp.task('bower_copy', ['bower'], function() {
     
     gulp.src('bower_components/pure/grids-responsive.css')
 	.pipe(gulp.dest('./static/css'));
+
+    gulp.src('bower_components/font-awesome/fonts/*')
+	.pipe(gulp.dest('./static/fonts/'));
+
+    gulp.src('bower_components/font-awesome/css/font-awesome.css')
+	.pipe(gulp.dest('./static/css'));
 });
 
 gulp.task('hugo', ['bower_copy'], shell.task(['hugo']));
