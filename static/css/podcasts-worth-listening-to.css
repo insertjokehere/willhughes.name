@@ -1,0 +1,10 @@
+img {
+    width: 150px;
+    height: 150px;
+    float: left;
+    margin-right: 10px;
+}
+
+h3 {
+    clear: both;
+}
