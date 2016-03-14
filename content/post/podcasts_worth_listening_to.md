@@ -12,7 +12,7 @@ I spend a fair amount of time each day listening to podcasts, mainly in the car 
 
 <!--more-->
 
-They are by no means the only podcasts I listen to; I enjoy listening to [Radiolab]() and [Serial](), but others have heaped enough praise on them already, and so I don't feel a need to add to that.
+They are by no means the only podcasts I listen to; I enjoy listening to [Radiolab](), [Reply All]() and [Serial](), but others have heaped enough praise on them already, and so I don't feel a need to add to that.
 
 Consider giving these a listen if you haven't already - some are funny, some informative (most are both), and I generally consider the time given listening to them well spent. There is a strong North American slant in this list, mainly due to the amount of funding and support organizations like PRX and NRP receive compared to equivalent organizations in Europe and Australasia. Hopefully the next time I compile a list like this there will be a bit more diversity to it.
 
@@ -35,5 +35,9 @@ Consider giving these a listen if you haven't already - some are funny, some inf
 ### Still Untitled: The Adam Savage Project
 
 ### The Memory Palace
+
+A series of vignettes from American history, mostly small moments told from perspectives often overlooked in the main narrative. The Brooklyn Bridge is an amazing feat of engeneering, but [the story of the miners who dug the foundations](below, from above) adds another level to the story. The story of [three friends from Georgia who ran over an alien in 1953](every night ever) gives an interesting snapshot of the time with a thought provoking conclusion.
+
+Narator Nate Dimeo is wonderful and has a way of putting you right into a moment - when he describes a hot, sticky July evening in Georgia you can almost feel it. Someone needs to get him to narrate their audio book, he has the same even-but-not-monotonous story telling voice that Stephen Fry does. I could listen to him read just about anything, but the quality and depth of material in The Memory Palace means I try not to listen to this in the car. I want to sit quietly somewhere and just savor the experience.
 
 <link rel="stylesheet" href="/css/podcasts-worth-listening-to.css" />
