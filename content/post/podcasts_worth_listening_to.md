@@ -12,29 +12,39 @@ I spend a fair amount of time each day listening to podcasts, mainly in the car 
 
 <!--more-->
 
-They are by no means the only podcasts I listen to; I enjoy listening to [Radiolab](), [Reply All]() and [Serial](), but others have heaped enough praise on them already, and so I don't feel a need to add to that.
+They are by no means the only podcasts I listen to; I enjoy listening to [Radiolab](http://www.radiolab.org/series/podcasts/), [Reply All](https://gimletmedia.com/show/reply-all/) and [Serial](https://serialpodcast.org/), but others have heaped enough praise on them already, and so I don't feel a need to add to that.
 
 Consider giving these a listen if you haven't already - some are funny, some informative (most are both), and I generally consider the time given listening to them well spent. There is a strong North American slant in this list, mainly due to the amount of funding and support organizations like PRX and NRP receive compared to equivalent organizations in Europe and Australasia. Hopefully the next time I compile a list like this there will be a bit more diversity to it.
 
 ### 99% Invisible
 
-[![99% Invisible logo](http://cdn.99percentinvisible.org/wp-content/uploads/powerpress/99invisible-logo-300.png)](http://feeds.99percentinvisible.org/99percentinvisible)
+[![99% Invisible logo](http://cdn.99percentinvisible.org/wp-content/uploads/powerpress/99invisible-logo-300.png)](http://99percentinvisible.org/)
 
 ### Futility Closet
 
-[![Futility Closet logo](http://static.feedpress.it/logo/futilitycloset.png)](http://feedpress.me/futilitycloset)
+[![Futility Closet logo](http://static.feedpress.it/logo/futilitycloset.png)](http://www.futilitycloset.com/category/podcast/)
 
 ### Gastropod
 
-[![Gastropod logo](http://gastropod.com/wp-content/uploads/2015/08/GPAvatar144px.jpg)](http://gastropod.com/feed)
+[![Gastropod logo](http://gastropod.com/wp-content/uploads/2015/08/GPAvatar144px.jpg)](http://gastropod.com/)
 
 ### Qwerpline
 
+[![Qwerpline logo]()](http://loadingreadyrun.com/lrrcasts/archive/qwerp)
+
 ### Risky Business
+
+[![Risky Business logo]()](http://risky.biz/)
 
 ### Still Untitled: The Adam Savage Project
 
+[![Still Untitled logo](http://files.tested.com/static/adam_podcast_itunes_logo.jpg)](http://www.tested.com/still-untitled-the-adam-savage-project/)
+
+The fact that Adam Savage is mainly, and in many cases exclusively, known as the co-host of Mythbusters is a bit of a shame - I greatly enjoy the show - however in service of the show you loose a lot of the depth to his character. The way he talks about the cross-over between art and science, about making and engineering and film, and about his time at ILM is great to listen to. He simply a genuinely interesting person, that friend-of-a-friend who has been more places and seen more things than you - seemingly without actually trying to - but is still ready to share his knowledge and passion if you just ask. Episodes are usually topical so it isn't require that you listen to old episodes, some recent episodes that are good to start with are [The Significance of Billiards]() and talking about [The Mythbusters Finale]()
+
 ### The Memory Palace
+
+[![The Memory Palace logo](http://static.libsyn.com/p/assets/4/7/0/5/470512fde2e9a15b/Memory_Palace_Logo_RGB.jpg)](http://thememorypalace.us/)
 
 A series of vignettes from American history, mostly small moments told from perspectives often overlooked in the main narrative. The Brooklyn Bridge is an amazing feat of engeneering, but [the story of the miners who dug the foundations](below, from above) adds another level to the story. The story of [three friends from Georgia who ran over an alien in 1953](every night ever) gives an interesting snapshot of the time with a thought provoking conclusion.
 
