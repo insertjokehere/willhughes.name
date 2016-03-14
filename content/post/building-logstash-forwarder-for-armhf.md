@@ -64,5 +64,5 @@ To compile logstash-forwarder and build a Debian package{{< ann 3 >}}
 #### Notes
 
 1. {{< ann_text 1 >}}Based off Dave Cheney's instructions, <a href="http://dave.cheney.net/2013/07/09/an-introduction-to-cross-compilation-with-go-1-1">found here</a>
-2. {{< ann_text 2 >}}Or apply the diff from <a href="http://git.willhughes.name/blogSnippets/blob/master/blog/2014/10/02/building-logstash-forwarder-for-armhf/Makefile.diff">here</a>
+2. {{< ann_text 2 >}}Or apply the diff from [here](/files/logstash-forwarder/Makefile.diff)
 3. {{< ann_text 3 >}}In theory 'make rpm' should build a rpm, but I haven't tested this

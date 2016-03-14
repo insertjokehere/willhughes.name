@@ -1,0 +1,24 @@
+diff --git a/Makefile b/Makefile
+index 509eaee..1a999d0 100644
+--- a/Makefile
++++ b/Makefile
+@@ -20,8 +20,8 @@ include Makefile.ext
+ 
+ .PHONY: go-check
+ go-check:
+-	@go version > /dev/null || (echo "Go not found. You need to install go: http://golang.org/doc/install"; false)
+-	@go version | grep -q 'go version go1.3' || (echo "Go version 1.3 required, you have a version of go that is unsupported. See http://golang.org/doc/install"; false)
++#	@go version > /dev/null || (echo "Go not found. You need to install go: http://golang.org/doc/install"; false)
++#	@go version | grep -q 'go version go1.3' || (echo "Go version 1.3 required, you have a version of go that is unsupported. See http://golang.org/doc/install"; false)
+ 
+ 
+ clean:
+@@ -46,7 +46,7 @@ vendor-clean:
+ 
+ rpm deb: PREFIX=/opt/logstash-forwarder
+ rpm deb: | build-all
+-	fpm -s dir -t $@ -n logstash-forwarder -v $(VERSION) \
++	fpm -a armhf -s dir -t $@ -n logstash-forwarder -v $(VERSION) \
+ 		--replaces lumberjack \
+ 		--exclude '*.a' --exclude 'lib/pkgconfig/zlib.pc' \
+ 		--description "a log shipping tool" \
