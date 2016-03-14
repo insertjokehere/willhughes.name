@@ -30,11 +30,13 @@ Consider giving these a listen if you haven't already - some are funny, some inf
 
 ### Qwerpline
 
-[![Qwerpline logo]()](http://loadingreadyrun.com/lrrcasts/archive/qwerp)
+[![Qwerpline logo](http://loadingreadyrun.com/img/lrrcast_headers/qwerp-splash.jpg)](http://loadingreadyrun.com/lrrcasts/archive/qwerp)
+
+LoadingReadyRun in general is probably a subject for a future post, but this is probably a good place to get an aprecieation of the sort of comedy they produce. A drive-time radio show in the ficticious town of nsburg, the show has rapidly build an extensive cast of characters and backstory, so you are going to have to listen from the begining. Graham has described it as 'scripted-improv'; the performers don't have much prepaired in advance, and workshop the jokes in one recording session which is then edited down into the final 12-ish minute episode.
 
 ### Risky Business
 
-[![Risky Business logo]()](http://risky.biz/)
+[![Risky Business logo](http://risky.biz/sites/all/themes/riskybiz/images/rbipod2.jpg)](http://risky.biz/)
 
 ### Still Untitled: The Adam Savage Project
 
