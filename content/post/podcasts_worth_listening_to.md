@@ -12,7 +12,7 @@ I spend a fair amount of time each day listening to podcasts, mainly in the car 
 
 <!--more-->
 
-They are by no means the only podcasts I listen to; I enjoy listening to [Radiolab](http://www.radiolab.org/series/podcasts/), [Reply All](https://gimletmedia.com/show/reply-all/) and [Serial](https://serialpodcast.org/), but others have heaped enough praise on them already, and so I don't feel a need to add to that.
+They are by no means the only podcasts I listen to; I enjoy listening to [Radiolab](http://www.radiolab.org/series/podcasts/), [Reply All](https://gimletmedia.com/show/reply-all/) and [Serial](https://serialpodcast.org/) among others, but others have heaped enough praise on them already, and so I don't feel a need to add to that.
 
 Consider giving these a listen if you haven't already - some are funny, some informative (most are both), and I generally consider the time given listening to them well spent. There is a strong North American slant in this list, mainly due to the amount of funding and support organizations like PRX and NRP receive compared to equivalent organizations in Europe and Australasia. Hopefully the next time I compile a list like this there will be a bit more diversity to it.
 
@@ -28,11 +28,13 @@ Consider giving these a listen if you haven't already - some are funny, some inf
 
 [![Gastropod logo](http://gastropod.com/wp-content/uploads/2015/08/GPAvatar144px.jpg)](http://gastropod.com/)
 
+A podcast about the science and politics of food that I've only started listening to recently and I'm finding very interesting. Some of the episodes could do with being a little bit shorter - there are bits where I feel things are being over-explained in order to pad for time - but in general very interesting and informative. Good episodes to start with are the discussion about [why some people find coriander unplesent]() and [the history of mezcal]().
+
 ### Qwerpline
 
 [![Qwerpline logo](http://loadingreadyrun.com/img/lrrcast_headers/qwerp-splash.jpg)](http://loadingreadyrun.com/lrrcasts/archive/qwerp)
 
-LoadingReadyRun in general is probably a subject for a future post, but this is probably a good place to get an aprecieation of the sort of comedy they produce. A drive-time radio show in the ficticious town of nsburg, the show has rapidly build an extensive cast of characters and backstory, so you are going to have to listen from the begining. Graham has described it as 'scripted-improv'; the performers don't have much prepaired in advance, and workshop the jokes in one recording session which is then edited down into the final 12-ish minute episode.
+LoadingReadyRun in general is probably a subject for a future post, but this is probably a good place to get an aprecieation of the sort of comedy they produce. A drive-time radio show from the ficticious town of nsburg, Thurpston County, the show has rapidly build an extensive cast of characters and backstory, so you are going to have to listen from the begining. Graham has described it as 'scripted-improv'; the performers don't have much prepaired in advance, and workshop the jokes in one recording session which is then edited down into the final 12-ish minute episode.
 
 ### Risky Business
 
