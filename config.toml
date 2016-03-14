@@ -4,6 +4,10 @@ title = "Semi-Coherent Infoblag"
 theme = "blackburn"
 pygmentsstyle = "tango"
 
+[params]
+googleAnalytics = "UA-60679520-3"
+subtitle = "Probably won't catch fire"
+
 [taxonomies]
 architecture = "architectures"
 distribution = "distributions"
