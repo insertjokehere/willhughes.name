@@ -20,7 +20,7 @@ paths = {
 
 gulp.task('default', ['release', 'dev'], function () {});
 
-gulp.task('release', ['hugo', 'mini_js', 'mini_css', 'mini_html', 'mini_png'], function () {});
+gulp.task('release', ['hugo', 'mini_js', 'mini_css', 'mini_html', 'mini_png', 'index'], function () {});
 
 gulp.task('dev', ['index'], function () {
     gulp.src('public/search.json').pipe(gulp.dest('static/'));
