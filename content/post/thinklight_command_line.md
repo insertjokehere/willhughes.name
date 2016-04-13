@@ -14,14 +14,9 @@ I found out I can toggle most of the lights on my laptop from the command line i
 
 I have a Lenovo{{< ann 1 >}} Thinkpad T420 that I use as a secondary workstation when I don't need the full power of my main desktop (and don't want to be too anti-social shutting myself away in the office). Its great - rugged, repairable, cheap, powerful enough for my purposes{{< ann 2 >}} and given that it looks like a relic from the Soviet era unlikely to get stolen. One of the features it has that I'm sure seemed like a good idea at the time is a LED just above the webcam with a lens that lets it illuminates maybe 30% of the keyboard, which some clever marketing person decided should be called a Thinklight. Yup.
 
-Anyway, it turns out that the Linux kernel that ships with Ubuntu includes a driver{{< ann 3 >}} that lets 
-This isn't the only thing you can do with the led subsystem though. The kernel defines an interface that allows developers to write 'triggers' to decide when a particular LED should be lit. You can inspect which triggers are available on a system by inspecting the 'trigger' virtual file.
+Anyway, it turns out that the Linux kernel that ships with Ubuntu includes a driver{{< ann 3 >}} that exposes the Thinklight - and for some reason, the power and sleep LEDs - as targets for the Linux LED subsystem. The practical upshot of this is you can control the LEDs by writing magic values into special files in the sysfs.
 
-{{< highlight bash >}}
-cat /sys/class/leds/tpacpi::thinklight/trigger
-{{< /highlight >}}
-
-you access this via the sysfs 'led' interface. This means you can do:
+This means you can do:
 
 {{< highlight bash >}}
 echo 1 | sudo tee /sys/class/leds/tpacpi::thinklight/brightness
@@ -34,6 +29,18 @@ echo 0 | sudo tee /sys/class/leds/tpacpi::thinklight/brightness
 {{< /highlight >}}
 
 to turn if off again. Which is cool. Kinda. I don't know why its useful to know this.
+
+The kernel also defines an interface that allows developers to write 'triggers' to decide when a particular LED should be lit. You can inspect which triggers are available on a system by inspecting the 'trigger' virtual file.
+
+{{< highlight bash >}}
+cat /sys/class/leds/tpacpi::thinklight/trigger
+{{< /highlight >}}
+
+and select a trigger by writing the name to the same file:
+
+{{< highlight bash >}}
+echo heartbeat | sudo tee /sys/class/leds/tpacpi::thinklight/trigger
+{{< /highlight >}}
 
 #### Notes
 
