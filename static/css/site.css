@@ -1,0 +1,14 @@
+@font-face {
+    font-family: "Monoid";
+    src: url(/fonts/Monoid-Regular.ttf) format("truetype");
+}
+
+code, kbd, pre, samp {
+    font-family: Monoid, monospace;
+    font-size: 10pt;
+}
+
+.body-content {
+    font-size: 15pt;
+    line-height: 135%;
+}
