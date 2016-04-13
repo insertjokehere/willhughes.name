@@ -40,11 +40,13 @@ LoadingReadyRun in general is probably a subject for a future post, but this is 
 
 [![Risky Business logo](http://risky.biz/sites/all/themes/riskybiz/images/rbipod2.jpg)](http://risky.biz/)
 
+A weekly InfoSec news podcast presented by Patrick Grey. This has quite a strong technical lean to it, so I will forgive you if you're not interested. I will sometimes skip the sponsor interview spot - where Patrick interviews someone from the company that is sponsoring the episode - depending on the content. A lot of them aren't strictly advertisments, Haroon Meer from Thinkst talking about [Canary Tokens](http://canarytokens.org) in [episode 396]() for example, but some of them I find less interesting. The clear highlight of the show is the news section, usually co-hosted with Adam Boileau (Metlstorm, of Kiwicon fame) is normally very entertaining. As a general rule, you probably want to avoid being talked about on the Risky Business news segment.
+
 ### Still Untitled: The Adam Savage Project
 
 [![Still Untitled logo](http://files.tested.com/static/adam_podcast_itunes_logo.jpg)](http://www.tested.com/still-untitled-the-adam-savage-project/)
 
-The fact that Adam Savage is mainly, and in many cases exclusively, known as the co-host of Mythbusters is a bit of a shame - I greatly enjoy the show - however in service of the show you loose a lot of the depth to his character. The way he talks about the cross-over between art and science, about making and engineering and film, and about his time at ILM is great to listen to. He simply a genuinely interesting person, that friend-of-a-friend who has been more places and seen more things than you - seemingly without actually trying to - but is still ready to share his knowledge and passion if you just ask. Episodes are usually topical so it isn't require that you listen to old episodes, some recent episodes that are good to start with are [The Significance of Billiards]() and talking about [The Mythbusters Finale]()
+The fact that Adam Savage is mainly, and in many cases exclusively, known as the co-host of Mythbusters is a bit of a shame - I greatly enjoy the show - however in service of the show you loose a lot of the depth to his character. The way he talks about the cross-over between art and science, about making and engineering and film, and about his time at ILM is great to listen to. He simply a genuinely interesting person, that friend-of-a-friend who has been more places and seen more things than you - seemingly without actually trying to - but is still ready to share his knowledge and passion if you just ask. Some recent episodes that are good to start with are [The Significance of Billiards]() and talking about [The Mythbusters Finale]()
 
 ### The Memory Palace
 
