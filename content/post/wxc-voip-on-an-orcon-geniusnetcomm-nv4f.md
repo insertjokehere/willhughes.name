@@ -17,7 +17,7 @@ After a bit of research I decided to subscribe the 'Open VFX' service from WXC. 
 
 The modem in question is a Netcomm NF4V, which Orcon brands as a 'Genius White', and in theory this should just work. SIP is a standard protocol, and the modem supports the standard set of audio codecs. The fun starts with the custom firmware that Orcon puts on their modems, which locks down the SIP settings in the admin interface so that it will only talk to the Orcon SIP servers. Fortunately they did a *really bad* job of locking down the admin interface, so its fairly straight forward to change these settings. All of the validation is done on the client side{{< ann 4 >}}, so we can use the developer tools in the browser to disable the validation.
 
-![Screenshot showing source of the modem settings page](/images/orcon-wxc.png)
+![Screenshot showing source of the modem settings page]({{< post_img "orcon-wxc.png" >}})
 
 Simply open the developer tools in your browser{{< ann 5 >}} and remove the 'readonly' attribute from the input elements.
 
