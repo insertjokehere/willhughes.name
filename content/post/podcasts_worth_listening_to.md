@@ -64,7 +64,7 @@ My comparison to _The Memory Palace_ is maybe a bit unfair - they are both great
 
 ### [The Bugle](http://thebuglepodcast.com/)
 
-[![The Bugle logo](/img/post/podcasts_worth_listening_to/cover400x400.jpeg)](http://thebuglepodcast.com/)
+[![The Bugle logo](/img/post/podcasts_worth_listening_to/cover400x400.jpg)](http://thebuglepodcast.com/)
 
 It is a deep source of shame that I only recently discovered _The Bugle_, having been a fan of John Oliver for quite some time (_Last Week Tonight_ is the most consistently funny of the fake news/comedy current events genre), but at least coming into it late I've got an extensive back catalog to listen to. 'An audio newspaper for a visual world'; John and co-host Andy Zaltzman address the issues of the day with the requisite angry satire that both John and Andy are known for.
 
