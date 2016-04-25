@@ -13,6 +13,7 @@ const wrap = require('gulp-wrap');
 const declare = require('gulp-declare');
 const concat = require('gulp-concat');
 const inlinesource = require('gulp-inline-source');
+const clean = require('gulp-clean');
 
 paths = {
     handlebars: ['templates/*.hbs'],
@@ -20,19 +21,24 @@ paths = {
     content: ['content/**/*']
 }
 
-gulp.task('default', ['release', 'dev'], function () {});
+gulp.task('default', ['clean', 'release', 'dev'], function () {});
 
-gulp.task('release', ['hugo', 'mini_js', 'mini_css', 'inline', 'mini_html', 'mini_png', 'mini_jpg', 'index'], function () {});
+gulp.task('release', ['clean', 'hugo', 'mini_js', 'mini_css', 'inline', 'mini_html', 'mini_png', 'mini_jpg', 'index'], function () {});
 
-gulp.task('dev', ['index'], function () {
+gulp.task('dev', ['clean', 'index'], function () {
     gulp.src('public/search.json').pipe(gulp.dest('static/'));
+});
+
+gulp.task('clean', function () {
+    return gulp.src('public', {read: false})
+	.pipe(clean());
 });
 
 gulp.task('bower', function() {
   return bower();
 });
 
-gulp.task('bower_copy', ['bower'], function() {
+gulp.task('bower_copy', ['clean', 'bower'], function() {
     gulp.src('bower_components/lunr.js/lunr.js')
 	.pipe(gulp.dest('./static/js'));
 
@@ -60,7 +66,7 @@ gulp.task('bower_copy', ['bower'], function() {
 });
 
 
-gulp.task('handlebars', function(){
+gulp.task('handlebars', ['clean'], function(){
     gulp.src(paths.handlebars)
 	.pipe(handlebars({
 	    handlebars: require('handlebars')
@@ -74,20 +80,19 @@ gulp.task('handlebars', function(){
 	.pipe(gulp.dest('static/js/'));
 });
 
-gulp.task('hugo', ['bower_copy', 'handlebars'], shell.task(['hugo']));
+gulp.task('hugo', ['clean', 'bower_copy', 'handlebars'], shell.task(['hugo']));
 
-gulp.task('mini_js', ['hugo', 'bower_copy'], function () {
+gulp.task('mini_js', ['clean', 'hugo', 'bower_copy'], function () {
     const f = filter(['*', '!*.min.*']);
 
-    gulp.src('public/**/*.js')
-	.pipe(f)
+    gulp.src('public/js/*.js')
 	.pipe(compress({
 	    type: 'js'
 	}))
-	.pipe(gulp.dest('public'));
+	.pipe(gulp.dest('public/js'));
 });
 
-gulp.task('mini_css', ['hugo', 'bower_copy'], function () {
+gulp.task('mini_css', ['clean', 'hugo', 'bower_copy'], function () {
     gulp.src('public/**/*.css')
 	.pipe(compress({
 	    type: 'css'
@@ -95,19 +100,19 @@ gulp.task('mini_css', ['hugo', 'bower_copy'], function () {
 	.pipe(gulp.dest('public'));
 });
 
-gulp.task('inline', ['hugo', 'mini_css'], function () {
+gulp.task('inline', ['clean', 'hugo', 'mini_css'], function () {
     return gulp.src('public/**/*.html')
         .pipe(inlinesource())
         .pipe(gulp.dest('public'));
 });
 
-gulp.task('mini_html', ['hugo', 'inline'], function() {
+gulp.task('mini_html', ['clean', 'hugo', 'inline'], function() {
   return gulp.src('public/**/*.html')
     .pipe(htmlmin({collapseWhitespace: true}))
     .pipe(gulp.dest('public'))
 });
 
-gulp.task('mini_png', ['hugo'], function() {
+gulp.task('mini_png', ['clean', 'hugo'], function() {
     return gulp.src('public/img/**/*.png')
 	.pipe(imagemin({
 	    progressive: true,
@@ -117,7 +122,7 @@ gulp.task('mini_png', ['hugo'], function() {
 	.pipe(gulp.dest('public/img/'))
 });
 
-gulp.task('mini_jpg', ['hugo'], function() {
+gulp.task('mini_jpg', ['clean', 'hugo'], function() {
     return gulp.src('public/img/**/*.jpg')
 	.pipe(imagemin({
 	    progressive: true,
@@ -128,7 +133,7 @@ gulp.task('mini_jpg', ['hugo'], function() {
 });
 
 
-gulp.task('index', ['hugo'], function () {
+gulp.task('index', ['clean', 'hugo'], function () {
     return gulp.src(paths.indexed)
 	.pipe(indexer('search.json'))
 	.pipe(gulp.dest('./public'));
