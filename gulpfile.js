@@ -12,6 +12,7 @@ const handlebars = require('gulp-handlebars');
 const wrap = require('gulp-wrap');
 const declare = require('gulp-declare');
 const concat = require('gulp-concat');
+const inlinesource = require('gulp-inline-source');
 
 paths = {
     handlebars: ['templates/*.hbs'],
@@ -21,7 +22,7 @@ paths = {
 
 gulp.task('default', ['release', 'dev'], function () {});
 
-gulp.task('release', ['hugo', 'mini_js', 'mini_css', 'mini_html', 'mini_png', 'mini_jpg', 'index'], function () {});
+gulp.task('release', ['hugo', 'mini_js', 'mini_css', 'inline', 'mini_html', 'mini_png', 'mini_jpg', 'index'], function () {});
 
 gulp.task('dev', ['index'], function () {
     gulp.src('public/search.json').pipe(gulp.dest('static/'));
@@ -94,7 +95,13 @@ gulp.task('mini_css', ['hugo', 'bower_copy'], function () {
 	.pipe(gulp.dest('public'));
 });
 
-gulp.task('mini_html', ['hugo'], function() {
+gulp.task('inline', ['hugo', 'mini_css'], function () {
+    return gulp.src('public/**/*.html')
+        .pipe(inlinesource())
+        .pipe(gulp.dest('public'));
+});
+
+gulp.task('mini_html', ['hugo', 'inline'], function() {
   return gulp.src('public/**/*.html')
     .pipe(htmlmin({collapseWhitespace: true}))
     .pipe(gulp.dest('public'))
