@@ -1,0 +1,22 @@
+</div>
+</div>
+<script src="{{ .Site.BaseURL }}js/ui.js"></script>
+
+{{ partial "google_analytics.html" . }}
+
+<!-- Icons -->
+<link rel="stylesheet" href="/css/font-awesome.css">
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+{{ with .Site.Params.highlightjs }}
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/{{ . }}.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+{{ end }}
+
+<link rel="stylesheet" href="/css/site.css">
+
+</body>
+</html>
