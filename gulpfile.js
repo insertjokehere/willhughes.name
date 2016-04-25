@@ -6,6 +6,7 @@ const indexer = require('./indexer.js');
 const bower = require('gulp-bower');
 const imagemin = require('gulp-imagemin');
 const pngquant = require('imagemin-pngquant');
+const jpegtran = require('imagemin-jpegtran');
 const filter = require('gulp-filter');
 const handlebars = require('gulp-handlebars');
 const wrap = require('gulp-wrap');
@@ -20,7 +21,7 @@ paths = {
 
 gulp.task('default', ['release', 'dev'], function () {});
 
-gulp.task('release', ['hugo', 'mini_js', 'mini_css', 'mini_html', 'mini_png', 'index'], function () {});
+gulp.task('release', ['hugo', 'mini_js', 'mini_css', 'mini_html', 'mini_png', 'mini_jpg', 'index'], function () {});
 
 gulp.task('dev', ['index'], function () {
     gulp.src('public/search.json').pipe(gulp.dest('static/'));
@@ -100,14 +101,25 @@ gulp.task('mini_html', ['hugo'], function() {
 });
 
 gulp.task('mini_png', ['hugo'], function() {
-    return gulp.src('public/images/*.png')
+    return gulp.src('public/img/**/*.png')
 	.pipe(imagemin({
 	    progressive: true,
 	    svgoPlugins: [{removeViewBox: false}],
 	    use: [pngquant()]
 	}))
-	.pipe(gulp.dest('public/images/'))
+	.pipe(gulp.dest('public/img/'))
 });
+
+gulp.task('mini_jpg', ['hugo'], function() {
+    return gulp.src('public/img/**/*.jpg')
+	.pipe(imagemin({
+	    progressive: true,
+	    svgoPlugins: [{removeViewBox: false}],
+	    use: [jpegtran()]
+	}))
+	.pipe(gulp.dest('public/img/'))
+});
+
 
 gulp.task('index', ['hugo'], function () {
     return gulp.src(paths.indexed)
