@@ -1,7 +1,7 @@
 +++
-date = "2016-04-25T10:26:47+12:00"
+date = "2016-04-27T21:56:21+12:00"
 description = ""
-draft = true
+draft = false
 tags = ["Podcasts"]
 slug = "podcasts-worth-listening-to-april-2016"
 title = "Podcasts worth listening to, April 2016"
@@ -41,13 +41,13 @@ A podcast about the science and politics of food that I've only started listenin
 
 [![Qwerpline logo]({{< post_img "qwerp-splash.jpg" >}})](http://loadingreadyrun.com/lrrcasts/archive/qwerp)
 
-LoadingReadyRun in general is probably a subject for a future post, but this is probably a good place to get an appreciation of the sort of comedy they produce. A drive-time radio show from the fictitious town of nsburg, Thurpston County, the show has rapidly build an extensive cast of characters and back story, so you are going to have to listen from the beginning. Graham has described it as 'scripted-improv'; the performers don't have much prepared in advance, and workshop the jokes in one recording session which is then edited down into the final 12-ish minute episode.
+LoadingReadyRun in general is probably a subject for a future post, but this is probably a good place to get an appreciation of the sort of comedy they produce. A drive-time radio show from the fictitious town of Nsburg, Thurpston County, the show has rapidly build an extensive cast of characters and back story, so you are going to have to listen from the beginning. Graham has described it as 'scripted-improv'; the performers don't have much prepared in advance, and workshop the jokes in one recording session which is then edited down into the final 12-ish minute episode.
 
 ### [Risky Business](http://risky.biz/)
 
 [![Risky Business logo]({{< post_img "rbipod2.jpg" >}})](http://risky.biz/)
 
-A weekly InfoSec news podcast presented by Patrick Grey. This has quite a strong technical lean to it, so I will forgive you if you're not interested. I will sometimes skip the sponsor interview spot - where Patrick interviews someone from the company that is sponsoring the episode - depending on the content. A lot of them aren't strictly advertisements, Haroon Meer from Thinkst talking about [Canary Tokens](http://canarytokens.org) in [episode 396](http://risky.biz/RB396) for example, but some of them I find less interesting. The clear highlight of the show is the news section, usually co-hosted with Adam Boileau ([Metlstorm](https://twitter.com/metlstorm), of Kiwicon fame) is very entertaining - as well as being informative. As a general rule, you probably want to avoid being talked about on the Risky Business news segment.
+A weekly InfoSec news podcast presented by Patrick Grey. This has quite a strong technical lean to it, so I will forgive you if you're not interested. I will sometimes skip the sponsor interview spot - where Patrick interviews someone from the company that is sponsoring the episode - depending on the content. A lot of them aren't strictly advertisements, Haroon Meer from Thinkst talking about [Canary Tokens](http://canarytokens.org) in [episode 396](http://risky.biz/RB396) for example, but some of them I find less interesting. The clear highlight of the show is the news section, usually co-hosted by Adam Boileau ([Metlstorm](https://twitter.com/metlstorm), of Kiwicon fame) is very entertaining - as well as being informative. As a general rule, you probably want to avoid being talked about on the Risky Business news segment.
 
 ### [Still Untitled: The Adam Savage Project](http://www.tested.com/still-untitled-the-adam-savage-project/)
 
