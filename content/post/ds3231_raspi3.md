@@ -12,7 +12,7 @@ By this point I really don't need to explain how great the Raspberry Pi is - a n
 
 <!--more-->
 
-The reason for this is pretty obvious - even though RTC modules are fairly inexpensive, the extra circuitry and space for a battery would be hard to justify for a device that is going to be network connected and therefore able to sync its clock over NTP. For most things, this trade off doesn't really matter; just add an init script to run ntpdate after the network comes up but before ntpd starts and the difference becomes an implementation detail{{< ann 2 >}}.
+The reason for omitting this is pretty obvious - even though RTC modules are fairly inexpensive, the extra circuitry and space for a battery would be hard to justify for a device that is going to be network connected and therefore able to sync its clock over NTP. For most things, this trade off doesn't really matter; just add an init script to run ntpdate after the network comes up but before ntpd starts and the difference becomes an implementation detail{{< ann 2 >}}.
 
 The obvious exception for this is when you are in an environment where you *don't* have a reliable network link, so can't run ntpd. Fortunatly, as previously mentioned, RTC modules are fairly inexpensive. I'm using a DS3231 TCXO{{< ann 3 >}} I2C Module{{< ann 4 >}}, although there are others available.
 
@@ -46,7 +46,7 @@ This presents a bit of a catch-22, no DNS until the clock is set right, but I ca
 #### Notes
 1. {{< ann_text 1 >}}oh, and the whole democratisation of computer education and all that jazz
 2. {{< ann_text 2 >}}this is, in fact, what Raspbian does
-2. {{< ann_text 3 >}}temperature-compensated crystal oscillator
+2. {{< ann_text 3 >}}temperature-compensated crystal oscillator - the frequency which a crystal oscillator ticks is dependant on temperature, so a TCXO adds extra circuity to account for this
 3. {{< ann_text 4 >}}from [Nicegear](https://nicegear.co.nz/raspberry-pi/high-precision-real-time-clock-for-raspberry-pi/), although you can get them a bit cheaper from eBay
 5. {{< ann_text 5 >}}Confusingly, the DS3231 it uses the rtc_ds1307 driver
 6. {{< ann_text 6 >}}Ryan Finnies' images from [the Ubuntu wiki](https://wiki.ubuntu.com/ARM/RaspberryPi)
