@@ -6,7 +6,7 @@ pygmentsstyle = "tango"
 
 [params]
 googleAnalytics = "UA-60679520-3"
-subtitle = "Probably won't catch fire"
+subtitle = "Consists entirely of splines"
 
 [taxonomies]
 architecture = "architectures"
@@ -28,12 +28,6 @@ tag = "tags"
     weight = 1
     identifier = "about"
     url = "/about/"
-  [[menu.main]]
-    name = "Git"
-    pre = "<i class='fa fa-git fa-fw'></i>"
-    weight = 2
-    identifier = "git"
-    url = "http://git.willhughes.name/"
   [[menu.main]]
     name = "Repo"
     pre = "<i class='fa fa-cube fa-fw'></i>"
