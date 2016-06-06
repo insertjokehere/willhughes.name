@@ -9,17 +9,19 @@ node('docker') {
     stage 'npm'
     sh('npm install .')
 
+    stage 'check-spelling'
+    sh('''#!/bin/bash
+    aspelllint content/ || true
+    ''')
+
     stage 'build'
     sh('node ./node_modules/.bin/gulp release')
 
     stage 'check-links'
     sh('''#!/bin/bash
-    check-links public/ --max-threads 1 || true
-    ''')
-
-    stage 'check-spelling'
-    sh('''#!/bin/bash
-    aspelllint content/
+    trap "trap - SIGTERM && kill -- -$$" SIGINT SIGTERM EXIT
+    python -m SimpleHTTPServer > /dev/null 2>&1 &
+    linkchecker http://localhost:8000/
     ''')
   }
 }
