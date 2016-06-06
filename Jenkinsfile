@@ -20,7 +20,9 @@ node('docker') {
     stage 'check-links'
     sh('''#!/bin/bash
     trap "trap - SIGTERM && kill -- -$$" SIGINT SIGTERM EXIT
+    cd public
     python -m SimpleHTTPServer > /dev/null 2>&1 &
+    cd ..
     linkchecker http://localhost:8000/
     ''')
   }
