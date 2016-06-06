@@ -12,7 +12,7 @@ By this point I really don't need to explain how great the Raspberry Pi is - a n
 
 <!--more-->
 
-The reason for omitting this is pretty obvious - even though RTC modules are fairly inexpensive, the extra circuitry and space for a battery would be hard to justify for a device that is going to be network connected and therefore able to sync its clock over NTP. For most things, this trade off doesn't really matter; just add an init script to run ntpdate after the network comes up but before ntpd starts and the difference becomes an implementation detail{{< ann 2 >}}.
+The reason for omitting this is pretty obvious - even though RTC modules are fairly inexpensive, the extra circuitry and space for a battery would be hard to justify for a device that is going to be network connected and therefore able to sync its clock over NTP. For most things, this trade off doesn't really matter; just add an init script to run `ntpdate` after the network comes up but before `ntpd` starts and the difference becomes an implementation detail{{< ann 2 >}}.
 
 The obvious exception for this is when you are in an environment where you *don't* have a reliable network link, so can't run ntpd. Fortunatly, as previously mentioned, RTC modules are fairly inexpensive. I'm using a DS3231 TCXO{{< ann 3 >}} I2C Module{{< ann 4 >}}, although there are others available.
 
