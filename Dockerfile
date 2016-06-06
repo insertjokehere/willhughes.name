@@ -16,3 +16,8 @@ RUN ln -s /usr/bin/nodejs /usr/bin/node
 RUN pip install pygments
 
 RUN adduser --quiet --uid 106 --ingroup nogroup --no-create-home --shell /bin/bash jenkins
+
+RUN mkdir -p /home/jenkins
+
+RUN chown jenkins:nogroup -R /home/jenkins
+
