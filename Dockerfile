@@ -14,3 +14,5 @@ RUN wget https://github.com/yui/yuicompressor/releases/download/v${YUI_VER}/yuic
 RUN ln -s /usr/bin/nodejs /usr/bin/node
 
 RUN pip install pygments
+
+RUN adduser --quiet --uid 106 --ingroup nogroup --no-create-home --shell /bin/bash jenkins
