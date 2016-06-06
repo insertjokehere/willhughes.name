@@ -10,6 +10,6 @@ node('docker') {
     sh('npm install .')
 
     stage 'build'
-    sh('nodejs ./node_modules/.bin/gulp release')
+    sh('node ./node_modules/.bin/gulp release')
   }
 }
