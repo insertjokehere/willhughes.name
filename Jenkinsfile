@@ -1,8 +1,6 @@
 node('docker') {
 
-  sh 'echo $HOME'
-  sh 'whoami'
-  sh 'export HOME=`pwd`'
+  checkout scm
 
   stage 'container'
   def container = docker.build('willhughes_name')
