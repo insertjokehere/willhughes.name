@@ -9,11 +9,6 @@ node('docker') {
     stage 'npm'
     sh('npm install .')
 
-    stage 'check-spelling'
-    sh('''#!/bin/bash
-    aspelllint content/ || true
-    ''')
-
     stage 'build'
     sh('node ./node_modules/.bin/gulp release')
 
@@ -25,5 +20,14 @@ node('docker') {
     cd ..
     linkchecker http://localhost:8000/ --check-extern
     ''')
+
   }
+
+  stage 'upload'
+  sshagent(['6ba10844-b480-4dbe-be8f-c692dbfcdfe7']) {
+    sh('''cd public
+    rsync -avz . www-static@zaphod.hhome.me:/srv/http/willhughes.name/
+    ''')
+  }
+
 }
