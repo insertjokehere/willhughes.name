@@ -16,7 +16,7 @@ The wonders of Logstash is a subject for a future blog post, but in the mean tim
 
 ### Install Go from source{{< ann 1 >}}.
 
-This is not nearly as intimidating as it sounds, and shouldn't take much longer than 10 minutes on a moderatly powerful system. You will probably require the usual build-essential stuff to make this work. Download and build go itself
+This is not nearly as intimidating as it sounds, and shouldn't take much longer than 10 minutes on a moderately powerful system. You will probably require the usual build-essential stuff to make this work. Download and build go itself
 
 {{< highlight bash >}}
 hg clone https://code.google.com/p/go
@@ -24,7 +24,7 @@ cd go/src
 ./all.bash
 {{< /highlight >}}
 
-Then grab the crosscompile scripts off github, and build for all supported platforms (or just linux/arm if you are in a serious hurry)
+Then grab the cross-compile scripts off GitHub, and build for all supported platforms (or just Linux/arm if you are in a serious hurry)
 
 {{< highlight bash >}}
 git clone git://github.com/davecheney/golang-crosscompile.git
@@ -38,7 +38,7 @@ Add your freshly minted go to your path
 export PATH=`pwd`/bin:$PATH
 {{< /highlight >}}
 
-### Clone the logstash-forwarder source off github
+### Clone the logstash-forwarder source off GitHub
 
 {{< highlight bash >}}
 git clone https://github.com/elasticsearch/logstash-forwarder.git

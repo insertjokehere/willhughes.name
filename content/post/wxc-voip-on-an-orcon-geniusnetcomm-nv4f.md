@@ -13,7 +13,7 @@ I recently switched to Fibre broadband through Orcon, and decided that I really 
 
 <!--more-->
 
-After a bit of research I decided to subscribe the 'Open VFX' service from WXC. I picked up a cheep analog handset, with the intention of using the modem Orcon provides{{< ann 2 >}} as an ATA{{< ann 3 >}}, because it conveniently has a two port ATA built in, the intention being for you to use it with the Orcon VoIP service.
+After a bit of research I decided to subscribe the 'Open VFX' service from WXC. I picked up a cheep analogue handset, with the intention of using the modem Orcon provides{{< ann 2 >}} as an ATA{{< ann 3 >}}, because it conveniently has a two port ATA built in, the intention being for you to use it with the Orcon VoIP service.
 
 The modem in question is a Netcomm NF4V, which Orcon brands as a 'Genius White', and in theory this should just work. SIP is a standard protocol, and the modem supports the standard set of audio codecs. The fun starts with the custom firmware that Orcon puts on their modems, which locks down the SIP settings in the admin interface so that it will only talk to the Orcon SIP servers. Fortunately they did a *really bad* job of locking down the admin interface, so its fairly straight forward to change these settings. All of the validation is done on the client side{{< ann 4 >}}, so we can use the developer tools in the browser to disable the validation.
 
@@ -64,6 +64,6 @@ Once you have disabled the validation, you are now free to configure the SIP ser
 
 1. {{< ann_text 1 >}}NZD, at the time of writing
 2. {{< ann_text 2 >}}and requires you to use if you want to talk to their support people
-3. {{< ann_text 3 >}}Analog Telephone Adapter - basically a VoIP-to-analog bridge
+3. {{< ann_text 3 >}}Analogue Telephone Adaptor - basically a VoIP-to-analogue bridge
 4. {{< ann_text 4 >}}My theory is that Orcon can't change the CGI code on the modem because it would need a lot of validation, but changes to the admin theme are just fine
 5. {{< ann_text 5 >}}I'm using Firefox in the screenshot, although you can do the same thing with Chromium

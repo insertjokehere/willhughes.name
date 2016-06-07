@@ -12,9 +12,9 @@ I found out I can toggle most of the lights on my laptop from the command line i
 
 <!--more-->
 
-I have a Lenovo{{< ann 1 >}} Thinkpad T420 that I use as a secondary workstation when I don't need the full power of my main desktop (and don't want to be too anti-social shutting myself away in the office). Its great - rugged, repairable, cheap, powerful enough for my purposes{{< ann 2 >}} and given that it looks like a relic from the Soviet era unlikely to get stolen. One of the features it has that I'm sure seemed like a good idea at the time is a LED just above the webcam with a lens that lets it illuminates maybe 30% of the keyboard, which some clever marketing person decided should be called a Thinklight. Yup.
+I have a Lenovo{{< ann 1 >}} Thinkpad T420 that I use as a secondary workstation when I don't need the full power of my main desktop (and don't want to be too anti-social shutting myself away in the office). Its great - rugged, repairable, cheap, powerful enough for my purposes{{< ann 2 >}} and given that it looks like a relic from the Soviet era unlikely to get stolen. One of the features it has that I'm sure seemed like a good idea at the time is a LED just above the web cam with a lens that lets it illuminates maybe 30% of the keyboard, which some clever marketing person decided should be called a Thinklight. Yup.
 
-Anyway, it turns out that the Linux kernel that ships with Ubuntu includes a driver{{< ann 3 >}} that exposes the Thinklight - and for some reason, the power and sleep LEDs - as targets for the Linux LED subsystem. The practical upshot of this is you can control the LEDs by writing magic values into special files in the sysfs.
+Anyway, it turns out that the Linux kernel that ships with Ubuntu includes a driver{{< ann 3 >}} that exposes the Thinklight - and for some reason, the power and sleep LED's - as targets for the Linux LED subsystem. The practical upshot of this is you can control the LED's by writing magic values into special files in the sysfs.
 
 This means you can do:
 

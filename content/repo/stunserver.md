@@ -8,4 +8,4 @@ version = "1.2.7"
 draft = false
 +++
 
-The [Stuntman](http://www.stunprotocol.org/) STUN server, backported for Trusty from Xenial
+The [Stuntman](http://www.stunprotocol.org/) STUN server, back-ported for Trusty from Xenial

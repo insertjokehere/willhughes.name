@@ -11,4 +11,4 @@ component = "backports"
 version = "24.4"
 +++
 
-Raspbian Wheezy doesn't have emacs 24, and the emacs 24 in trusty is a little bit old for my needs, so emacs 24.4 backported.
+Raspbian Wheezy doesn't have Emacs 24, and the Emacs 24 in trusty is a little bit old for my needs, so Emacs 24.4 back-ported.

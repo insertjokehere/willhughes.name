@@ -8,7 +8,7 @@ topics = []
 aliases = ["/projects/puppet-basicca/"]
 +++
 
-[puppet-basicca](https://github.com/insertjokehere/puppet-basicca) is a puppet module designed to automate the process of creating SSL certificates, paticularly self-signed certificates. I also use it to create certificate signing requests (CSRs) to submit to the authorities who sign my certificates (at time of writing, ~~[StartCOM](http://www.startssl.com/")~~ [Namecheap](https://www.namecheap.com/security/ssl-certificates/domain-validation.aspx){{< ann 1 >}}).
+[puppet-basicca](https://github.com/insertjokehere/puppet-basicca) is a puppet module designed to automate the process of creating SSL certificates, particularly self-signed certificates. I also use it to create certificate signing requests (CSRs) to submit to the authorities who sign my certificates (at time of writing, ~~[StartCOM](http://www.startssl.com/")~~ [Namecheap](https://www.namecheap.com/security/ssl-certificates/domain-validation.aspx){{< ann 1 >}}).
 
 <!--more-->
 
