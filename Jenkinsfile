@@ -23,7 +23,7 @@ node('docker') {
     cd public
     python -m SimpleHTTPServer > /dev/null 2>&1 &
     cd ..
-    linkchecker http://localhost:8000/
+    linkchecker http://localhost:8000/ --check-extern
     ''')
   }
 }
