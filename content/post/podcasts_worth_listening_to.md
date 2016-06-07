@@ -21,7 +21,7 @@ Consider giving these a listen if you haven't already - some are funny, some inf
 
 [![The Memory Palace logo]({{< post_img "Memory_Palace_Logo_RGB.jpg" >}})](http://thememorypalace.us/)
 
-A series of vignettes from American history, mostly small moments told from perspectives often overlooked in the main narrative. The Brooklyn Bridge is an amazing feat of engineering, but [the story of the miners who dug the foundations](below, from above) adds another level to the story. The story of [three friends from Georgia who ran over an alien in 1953](every night ever) gives an interesting snapshot of the time with a thought provoking conclusion.
+A series of vignettes from American history, mostly small moments told from perspectives often overlooked in the main narrative. The Brooklyn Bridge is an amazing feat of engineering, but [the story of the miners who dug the foundations](http://thememorypalace.us/2016/01/below-from-above/) adds another level to the story. The story of [three friends from Georgia who ran over an alien in 1953](http://thememorypalace.us/2015/06/every-night-ever/) gives an interesting snapshot of the time with a thought provoking conclusion.
 
 Narrator Nate Dimeo is wonderful and has a way of putting you right into a moment - when he describes a hot, sticky July evening in Georgia you can almost feel it. Someone needs to get him to narrate their audio book, he has the same even-but-not-monotonous story telling voice that Stephen Fry does. I could listen to him read just about anything, but the quality and depth of material in The Memory Palace means I try not to listen to this in the car. I want to sit quietly somewhere and just savour the experience.
 
