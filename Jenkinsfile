@@ -10,7 +10,11 @@ node('docker') {
     sh('npm install .')
 
     stage 'build'
-    sh('node ./node_modules/.bin/gulp release')
+    sh('''#!/bin/bash
+    node ./node_modules/.bin/gulp release
+    if [ -z `find public/css/ -type f -empty` ]; then true; else false; fi
+    if [ -z `find public/js/ -type f -empty` ]; then true; else false; fi
+    ''')
 
     stage 'check-links'
     sh('''#!/bin/bash
