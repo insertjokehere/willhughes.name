@@ -14,6 +14,7 @@ const declare = require('gulp-declare');
 const concat = require('gulp-concat');
 const inlinesource = require('gulp-inline-source');
 const clean = require('gulp-clean');
+const cleanCSS = require('gulp-clean-css');
 
 paths = {
     handlebars: ['templates/*.hbs'],
@@ -87,11 +88,10 @@ gulp.task('mini_js', ['hugo'], function () {
 });
 
 gulp.task('mini_css', ['hugo'], function () {
-    return
     return gulp.src('public/css/*.css')
-	.pipe(compress({
-	    type: 'css'
-	}))
+	.pipe(cleanCSS({debug: true}, function(details) {
+            console.log(details.name + ': ' + Math.round((details.stats.minifiedSize / details.stats.originalSize) * 100) + '%');
+        }))
 	.pipe(gulp.dest('public/css'));
 });
 
