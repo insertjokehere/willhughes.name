@@ -1,5 +1,4 @@
 const gulp = require('gulp');
-const compress = require('gulp-yuicompressor');
 const shell = require('gulp-shell');
 const htmlmin = require('gulp-htmlmin');
 const indexer = require('./indexer.js');
@@ -15,6 +14,7 @@ const concat = require('gulp-concat');
 const inlinesource = require('gulp-inline-source');
 const clean = require('gulp-clean');
 const cleanCSS = require('gulp-clean-css');
+var uglify = require('gulp-uglify');
 
 paths = {
     handlebars: ['templates/*.hbs'],
@@ -37,8 +37,7 @@ gulp.task('bower_copy', ['bower'], function() {
     gulp.src('bower_components/lunr.js/lunr.js')
 	.pipe(gulp.dest('./static/js'));
 
-    // YUI gets really, really confused if we try to minify the main JQuery JS
-    gulp.src('bower_components/jquery/dist/jquery.min.{js,map}')
+    gulp.src('bower_components/jquery/dist/jquery.js')
 	.pipe(gulp.dest('./static/js'));
 
     gulp.src('bower_components/pure/pure.css')
@@ -81,9 +80,7 @@ gulp.task('mini_js', ['hugo'], function () {
     const f = filter(['*', '!*.min.*']);
 
     return gulp.src('public/js/*.js')
-	.pipe(compress({
-	    type: 'js'
-	}))
+	.pipe(uglify())
 	.pipe(gulp.dest('public/js'));
 });
 
