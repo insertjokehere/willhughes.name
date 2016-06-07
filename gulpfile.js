@@ -21,24 +21,18 @@ paths = {
     content: ['content/**/*']
 }
 
-gulp.task('default', ['clean', 'release', 'dev'], function () {});
-
-gulp.task('release', ['clean', 'hugo', 'mini_js', 'mini_css', 'inline', 'mini_html', 'mini_png', 'mini_jpg', 'index'], function () {});
-
-gulp.task('dev', ['clean', 'index'], function () {
-    gulp.src('public/search.json').pipe(gulp.dest('static/'));
-});
+gulp.task('release', ['mini_jpg', 'mini_png', 'index'], function () {});
 
 gulp.task('clean', function () {
     return gulp.src('public', {read: false})
 	.pipe(clean());
 });
 
-gulp.task('bower', function() {
+gulp.task('bower', ['clean'], function() {
   return bower();
 });
 
-gulp.task('bower_copy', ['clean', 'bower'], function() {
+gulp.task('bower_copy', ['bower'], function() {
     gulp.src('bower_components/lunr.js/lunr.js')
 	.pipe(gulp.dest('./static/js'));
 
@@ -66,8 +60,8 @@ gulp.task('bower_copy', ['clean', 'bower'], function() {
 });
 
 
-gulp.task('handlebars', ['clean'], function(){
-    gulp.src(paths.handlebars)
+gulp.task('handlebars', ['bower_copy'], function(){
+    return gulp.src(paths.handlebars)
 	.pipe(handlebars({
 	    handlebars: require('handlebars')
 	}))
@@ -80,39 +74,39 @@ gulp.task('handlebars', ['clean'], function(){
 	.pipe(gulp.dest('static/js/'));
 });
 
-gulp.task('hugo', ['clean', 'bower_copy', 'handlebars'], shell.task(['hugo']));
+gulp.task('hugo', ['handlebars'], shell.task(['hugo']));
 
-gulp.task('mini_js', ['clean', 'hugo', 'bower_copy'], function () {
+gulp.task('mini_js', ['hugo'], function () {
     const f = filter(['*', '!*.min.*']);
 
-    gulp.src('public/js/*.js')
+    return gulp.src('public/js/*.js')
 	.pipe(compress({
 	    type: 'js'
 	}))
 	.pipe(gulp.dest('public/js'));
 });
 
-gulp.task('mini_css', ['clean', 'hugo', 'bower_copy'], function () {
-    gulp.src('public/**/*.css')
+gulp.task('mini_css', ['hugo'], function () {
+    return gulp.src('public/**/*.css')
 	.pipe(compress({
 	    type: 'css'
 	}))
 	.pipe(gulp.dest('public'));
 });
 
-gulp.task('inline', ['clean', 'hugo', 'mini_css'], function () {
+gulp.task('inline', ['mini_css', 'mini_js'], function () {
     return gulp.src('public/**/*.html')
         .pipe(inlinesource())
         .pipe(gulp.dest('public'));
 });
 
-gulp.task('mini_html', ['clean', 'hugo', 'inline'], function() {
+gulp.task('mini_html', ['inline'], function() {
   return gulp.src('public/**/*.html')
     .pipe(htmlmin({collapseWhitespace: true}))
     .pipe(gulp.dest('public'))
 });
 
-gulp.task('mini_png', ['clean', 'hugo'], function() {
+gulp.task('mini_png', ['hugo'], function() {
     return gulp.src('public/img/**/*.png')
 	.pipe(imagemin({
 	    progressive: true,
@@ -122,7 +116,7 @@ gulp.task('mini_png', ['clean', 'hugo'], function() {
 	.pipe(gulp.dest('public/img/'))
 });
 
-gulp.task('mini_jpg', ['clean', 'hugo'], function() {
+gulp.task('mini_jpg', ['hugo'], function() {
     return gulp.src('public/img/**/*.jpg')
 	.pipe(imagemin({
 	    progressive: true,
@@ -133,13 +127,8 @@ gulp.task('mini_jpg', ['clean', 'hugo'], function() {
 });
 
 
-gulp.task('index', ['clean', 'hugo'], function () {
+gulp.task('index', ['mini_html'], function () {
     return gulp.src(paths.indexed)
 	.pipe(indexer('search.json'))
 	.pipe(gulp.dest('./public'));
-});
-
-gulp.task('watch', function () {
-    gulp.watch(paths.handlebars, ['handlebars'])
-    gulp.watch(paths.indexed, ['index', 'dev'])
 });
