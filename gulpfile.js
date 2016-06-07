@@ -87,11 +87,11 @@ gulp.task('mini_js', ['hugo'], function () {
 });
 
 gulp.task('mini_css', ['hugo'], function () {
-    return gulp.src('public/**/*.css')
+    return gulp.src('public/css/*.css')
 	.pipe(compress({
 	    type: 'css'
 	}))
-	.pipe(gulp.dest('public'));
+	.pipe(gulp.dest('public/css'));
 });
 
 gulp.task('inline', ['mini_css', 'mini_js'], function () {
