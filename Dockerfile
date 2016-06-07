@@ -1,6 +1,6 @@
 FROM node:4.4
 
-ENV HUGO_VER=0.15
+ENV HUGO_VER=0.16
 ENV YUI_VER=2.4.8
 
 RUN apt-get update && apt-get install -y \
