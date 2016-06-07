@@ -87,6 +87,7 @@ gulp.task('mini_js', ['hugo'], function () {
 });
 
 gulp.task('mini_css', ['hugo'], function () {
+    return
     return gulp.src('public/css/*.css')
 	.pipe(compress({
 	    type: 'css'
