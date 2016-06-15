@@ -3,19 +3,77 @@ date = "2016-06-15T20:51:16+12:00"
 description = ""
 draft = true
 tags = []
-title = "fun_and_games_and_xenial"
+title = "Fun and Games and Xenial"
 topics = []
 
 +++
 
-  PV         VG     Fmt  Attr PSize   PFree  
+I have just finished upgrading my main workstation at home ('hactar') from Ubuntu 15.10 'Wily' to Ubuntu 16.04 'Xenial' which, after 3 days of trying, turned out to be one of the most involved upgrades I have ever undertaken. At the end of the day this was because of a bug{{< ann 1 >}} in the LVM2 package on Xenial, and was a bit challenging to fix without just nuking the system and starting again
+
+<!-- more -->
+
+This should go without saying, but in the course of this post I'm going to be describing some fairly hairy things you can do if you find yourself stuck in the situation I was, and I make no promises at all that what worked for me isn't going to wipe all your drives and cause sand to start leaking out of your ethernet card. Backup your data as soon as you have the chance.
+
+### Setup
+
+Before diving into the weeds of the mess I got my system into, its worth describing how I've configured my storage devices on this machine. Hactar has three disk drives; a 120GB SSD{{< ann 2>}} that stores the EFI system partition, with the rest of the disk formatted as an LVM physical volume, and a pair of 500GB spinning rust drives configured in a RAID 0 mirror{{< ann 3 >}} formatted as a physical volume.
+
+Both of these physical volumes are part of the '`hactar`' volume group, and all of the data for the system is stored on these drives. The SSD stores the root and swap partitions, with the rest of the disk set aside as a cache for the home partition, which is stored on the spinning rust{{< ann 4 >}}. Disk caching was introduced in the version of LVM that shipped with Ubuntu 14.10 'Vivid', and adds integration with the `dm-cache` module that ships with the Linux kernel. Put simply, LVM cache lets you use a small, fast disk as a cache for a large, slower disk. The most commonly accessed blocks on the large disk are stored on the fast disk, so reads for those blocks don't need to wait for the slow disk, and I've configured it so that writes to cached blocks are written to the fast disk first, then copied back to the slow disk when the disk is idle{{< ann 5 >}}.
+
+The output of `pvs` looks like:
+
+```
+  PV         VG     Fmt  Attr PSize   PFree  things are set up. 
   /dev/md0   hactar lvm2 a--  465.63g 114.63g
   /dev/sda3  hactar lvm2 a--  111.39g 404.00m
+```
 
+And the output of `lvs` looks like:
+
+```
   LV   VG     Attr       LSize   Pool         Origin       Data%  Meta%  Move Log Cpy%Sync Convert
   home hactar Cwi-aoC--- 350.00g [home_cache] [home_corig] 21.28  0.80            0.00            
   root hactar -wi-ao----  30.00g                                                                  
   swap hactar -wi-ao----  16.00g
+```
+
+### Failed upgrade
+
+Upgrading from Wily to Xenial went as normal, but after rebooting I was dropped into an emergency shell immediatly after EFI GRUB, with the super helpful error message:
+
+```
+LV home has invalid cache's feature flag.
+LV home is missing cache policy name.
+Internal error: LV segments corrupted in home.
+```
+
+From what I can gather from the [Ubuntu bug report](https://bugs.launchpad.net/ubuntu/+source/lvm2/+bug/1556602), the version of LVM that shipped with Wily writes the metadata that associates the cache volume with the backing volume in a way that isn't seen as valid by the LVM in Xenial, so when Xenial boots up LVM can't load the volume group, so no root disk, and emergency shell.
+
+Getting past this error wasn't actually too hard. I booted a Wily live USB, and used removed the cache pool:
+```
+lvremove hactar/home_cache
+```
+
+### Deeper errors
+
+Once I had removed the cache volume, I rebooted back into the main system. The Ubuntu splash screen hung around for a lot longer than normal - at least it can read the root partition now - but eventually dropped me into an emergency shell again, this time one of the SystemD 'Give root password for maintanence or Control-D to continue' types. This time because it couldn't mount one of the file systems in `fstab`: my `home` partition.  Once I logged in, I found LVM was in a really odd state. It could see `/dev/md0`, running `pvscan -vv` and `pvdisplay` showed that it had detected the disk, but it was marked as 'missing' in the `pvs` output:
+
+```
+  PV         VG     Fmt  Attr PSize   PFree  things are set up. 
+  /dev/md0   hactar lvm2 a-m  465.63g 114.63g
+  /dev/sda3  hactar lvm2 a--  111.39g 404.00m
+```
+
+Because LVM thought that `/dev/md0` was missing, it marked the `home` logical volume as only being partially available, and doesn't make it active.
 
 vgcfgrestore -f /etc/lvm/archive/hactar_00005-1440886391.vg hactar
 lvchange -a y hactar/home --activationmode partial
+
+
+#### Notes
+
+1. {{< ann_text 1>}} [Ubuntu bug #1556602](https://bugs.launchpad.net/ubuntu/+source/lvm2/+bug/1556602)
+2. {{< ann_text 2>}} `/dev/sda` in the diagrams
+3. {{< ann_text 3>}} `/dev/md0`
+4. {{< ann_text 4>}} This whole crazy scheme could have been avoided if I had a pair of large SSDs I could setup as RAID 0. Donations gratefully accepted.
+5. {{< ann_text 5>}} This is called 'write-back' caching. It is also possible to configure LVM cache to use a 'write-through' scheme where writes go directly to the slow disk. This is safer - if the fast disk fails before data has been copied back to the slow disk, you will loose it - but has a performance penalty
