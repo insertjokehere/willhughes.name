@@ -94,6 +94,17 @@ vgcfgrestore -f /etc/lvm/archive/hactar_00005-1440886391.vg hactar
 
 One more reboot, and everything came up as expected. Next job, upgrade my laptop as well. Urgh.
 
+### The Laptop
+
+*Update 22/6/16*: Upgrading my laptop 'agrajag'{{< ann 7 >}} ended up being a lot less of a saga than my desktop - although not without issues. I hadn't setup caching so I didn't run into the same issues as with my desktop, just new and exciting problems:
+
+* My laptop is affected by [Ubuntu bug #1568604](https://bugs.launchpad.net/ubuntu/+source/xserver-xorg-video-intel/+bug/1568604), so I have to switch to a TTY and back{{< ann 8>}} to get a cursor after logging in when my laptop comes back from suspend, which is tedious
+* After enabling caching on my laptop, I got dropped into an emergency shell after reboot. LVM hadn't activated my `home` LV, and when I activated it manually, I got an interesting error:
+
+`/usr/sbin/cache_check: execvp failed: No such file or directory`
+
+Turns out you need to install the `thin-provisioning-tools` package to use LVM cache, something that I vaguely remember running into when setting up hactar, but which isn't mentioned anywhere in the documentation
+
 
 #### Notes
 
@@ -103,3 +114,5 @@ One more reboot, and everything came up as expected. Next job, upgrade my laptop
 4. {{< ann_text 4>}} This whole crazy scheme could have been avoided if I had a pair of large SSDs I could setup as RAID 0. Donations gratefully accepted.
 5. {{< ann_text 5>}} This is called 'write-back' caching. It is also possible to configure LVM cache to use a 'write-through' scheme where writes go directly to the slow disk. This is safer - if the fast disk fails before data has been copied back to the slow disk, you will loose it - but has a performance penalty, but I consider the risk of loss in 'write-back' to be acceptable. 'write-through' is designed more for systems that are using volatile storage systems like battery-backed RAM disks as cache. If power was to go out unexpectedly, you would loose the cache volume and everything that didn't get written back. With an SSD if I loose power when I reboot the data is still there, and LVM can finish its write-back.
 6. {{< ann_text 6>}} Yes, I do make regular backups of all the critical parts of my system, I'm going through this exercise to try and avoid having to replace the non-critical stuff that I don't backup because of storage limits. As I said before, Donations gratefully accepted
+7. {{< ann_text 7>}} Have you spotted the theme yet?
+8. {{< ann_text 8>}} Ctrl+Alt+F1, Ctrl+Alt+F7
