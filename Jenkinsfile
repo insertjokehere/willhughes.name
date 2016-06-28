@@ -6,12 +6,10 @@ node('docker') {
   def container = docker.build('willhughes_name')
 
   container.inside {
-    stage 'npm'
-    sh('npm install .')
 
     stage 'build'
     sh('''#!/bin/bash
-    node ./node_modules/.bin/gulp release
+    gulp
     if [[ -z `find public/css/ -type f -empty` ]]; then true; else false; fi
     if [[ -z `find public/js/ -type f -empty` ]]; then true; else false; fi
     ''')
