@@ -10,9 +10,18 @@ RUN wget https://github.com/spf13/hugo/releases/download/v${HUGO_VER}/hugo_${HUG
 
 RUN pip3 install pygments
 
-RUN adduser --quiet --uid 106 --ingroup nogroup --no-create-home --shell /bin/bash jenkins
+WORKDIR /mnt/data
 
-RUN mkdir -p /home/jenkins
+COPY package.json /mnt/data
 
-RUN chown jenkins:nogroup -R /home/jenkins
+RUN npm install . --global --silent
 
+ENV NODE_PATH="/usr/local/lib/node_modules/blog-hugo/node_modules"
+
+ENV PATH="${PATH}:/usr/local/lib/node_modules/blog-hugo/node_modules/.bin"
+
+ENV HOME="/home"
+
+EXPOSE 1313
+
+ENTRYPOINT ["hugo"]

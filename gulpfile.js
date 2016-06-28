@@ -22,7 +22,7 @@ paths = {
     content: ['content/**/*']
 }
 
-gulp.task('release', ['mini_jpg', 'mini_png', 'index'], function () {});
+gulp.task('default', ['mini_jpg', 'mini_png', 'index'], function () {});
 
 gulp.task('clean', function () {
     return gulp.src('public', {read: false})
