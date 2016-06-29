@@ -26,7 +26,7 @@ ENV NODE_PATH="/usr/local/lib/node_modules/blog-hugo/node_modules"
 
 ENV PATH="${PATH}:/usr/local/lib/node_modules/blog-hugo/node_modules/.bin"
 
-ENV HOME="/home"
+#ENV HOME="/home"
 
 EXPOSE 1313
 
