@@ -10,6 +10,12 @@ RUN wget https://github.com/spf13/hugo/releases/download/v${HUGO_VER}/hugo_${HUG
 
 RUN pip3 install pygments
 
+RUN adduser --quiet --uid 106 --ingroup nogroup --no-create-home --shell /bin/bash jenkins
+
+RUN mkdir -p /home/jenkins
+
+RUN chown jenkins:nogroup -R /home/jenkins
+
 WORKDIR /mnt/data
 
 COPY package.json /mnt/data
