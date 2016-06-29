@@ -24,20 +24,19 @@ It does this by beeping at you. Twice.
 
 _beep beep_
 
-Dearest Human,
+<code>Dearest Human,</code>
 
-It has come to my attention that you aborted your preset cooking program one minute and forty-eight seconds from the end and have not instructed me to restart it for two minutes, therefore I am assuming that you are no longer in need of my services at this time. I feel it fitting to inform you of this fact, and to remind you that if you desire my services again, you need only to ask.
+<code>It has come to my attention that you aborted your preset cooking program one minute and forty-eight seconds from the end and have not instructed me to restart it for two minutes, therefore I am assuming that you are no longer in need of my services at this time. I feel it fitting to inform you of this fact, and to remind you that if you desire my services again, you need only to ask.</code>
 
-Yours Faithfully,<br />
-Microwave
+<code>Yours Faithfully,<br />
+Microwave</code>
 
+<code>Dearest Microwave,</code>
 
-Dearest Microwave,
+<code>Please kindly shut the hell up.</code>
 
-Please kindly shut the hell up.
-
-Yours Sledgehammeringly,<br />
-Will
+<code>Yours Sledgehammeringly,<br />
+Will</code>
 
 Before you dismiss this complaint as being a minor nit-pick, consider the implicit assumption that caused the designers to implement this feature:
 

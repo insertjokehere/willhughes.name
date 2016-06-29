@@ -12,3 +12,7 @@ code, kbd, pre, samp {
     font-size: 15pt;
     line-height: 135%;
 }
+
+#menu {
+    overflow-x: hidden;
+}
