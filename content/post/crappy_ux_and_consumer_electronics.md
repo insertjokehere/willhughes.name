@@ -24,23 +24,20 @@ It does this by beeping at you. Twice.
 
 _beep beep_
 
-<code>
 Dearest Human,
 
 It has come to my attention that you aborted your preset cooking program one minute and forty-eight seconds from the end and have not instructed me to restart it for two minutes, therefore I am assuming that you are no longer in need of my services at this time. I feel it fitting to inform you of this fact, and to remind you that if you desire my services again, you need only to ask.
 
 Yours Faithfully,<br />
 Microwave
-</code>
 
-<code>
+
 Dearest Microwave,
 
 Please kindly shut the hell up.
 
 Yours Sledgehammeringly,<br />
 Will
-</code>
 
 Before you dismiss this complaint as being a minor nit-pick, consider the implicit assumption that caused the designers to implement this feature:
 
