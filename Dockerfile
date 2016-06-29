@@ -30,4 +30,4 @@ ENV HOME="/home"
 
 EXPOSE 1313
 
-ENTRYPOINT ["hugo"]
+#ENTRYPOINT ["hugo"]
