@@ -2,6 +2,4 @@
 
 docker build -t willhughes.name .
 
-docker run -v `pwd`:/mnt/data -v $HOME:/home --user `id -u`:`id -g` --entrypoint="gulp" willhughes.name
-
-docker run -v `pwd`:/mnt/data -p 1313:1313 willhughes.name serve --bind 0.0.0.0 --buildDrafts
+docker run --rm -ti -v `pwd`:/mnt/data --user 106:106 -p 1313:1313 willhughes.name /bin/bash -c "cp -r /mnt/data/* /home/jenkins && cd /home/jenkins && gulp && hugo serve --bind 0.0.0.0 --buildDrafts"
