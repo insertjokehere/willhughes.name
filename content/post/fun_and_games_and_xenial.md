@@ -8,7 +8,7 @@ topics = []
 
 +++
 
-I have just finished upgrading my main workstation at home ('hactar') from Ubuntu 15.10 'Wily' to Ubuntu 16.04 'Xenial' which, after 3 days of trying, turned out to be one of the most involved upgrades I have ever undertaken. At the end of the day this was because of a bug{{< ann 1 >}} in the LVM2 package on Xenial, and was a bit challenging to fix without just nuking the system and starting again
+I have just finished upgrading my main workstation at home ('hactar') from Ubuntu 15.10 'Wily' to Ubuntu 16.04 'Xenial' which, after 3 days of trying, turned out to be one of the most involved upgrades I have ever undertaken. At the end of the day this was because of a bug{{< ann 1 >}} in the LVM2 package on Xenial, and was a bit challenging to fix without just nuking the system and starting again.
 
 <!-- more -->
 
