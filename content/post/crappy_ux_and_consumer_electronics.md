@@ -14,6 +14,8 @@ One of the weird things that happens as you go from being a teenager to being a 
 
 I treated this process much like I would any other purchasing process for a piece of electronic goods; that is I went to a store, assessed which of the available models seemed to best fit my needs. I read reviews. I compared prices. I searched my soul to determine what was more important: a popcorn mode or a soup mode? I compared wattages. I calculated internal volumes. I considered opportunity costs.
 
+<!--more-->
+
 At the end of this, I had parted with a small sum of money, and in exchange was now the proud owner of... a microwave. A device which through the magic of physics makes cold things hot, frozen things a uniformly inappropriate temperature and warm things capable of melting through the bench. Sure, the model I settled on has more features than the standard punch-in-the-time-and-press-go model - I am a geek after all - it has a preset for popcorn, it knows how to reheat baked beans, it can melt butter on demand and it has a defrost setting that I guess technically isn't a bold-faced lie, given that things do get less frosty in places. What I am trying to say is that it does, essentially, perform the function that it was advertised to perform.
 
 It is also the most horribly aggravating piece of consumer electronics I have ever purchased, and I paid actual money for a cell phone that ran Windows Mobile.

@@ -10,7 +10,7 @@ topics = []
 
 I have just finished upgrading my main workstation at home ('hactar') from Ubuntu 15.10 'Wily' to Ubuntu 16.04 'Xenial' which, after 3 days of trying, turned out to be one of the most involved upgrades I have ever undertaken. At the end of the day this was because of a bug{{< ann 1 >}} in the LVM2 package on Xenial, and was a bit challenging to fix without just nuking the system and starting again.
 
-<!-- more -->
+<!--more-->
 
 This should go without saying, but in the course of this post I'm going to be describing some fairly hairy things you can do if you find yourself stuck in the situation I was, and I make no promises at all that what worked for me isn't going to wipe all your drives and cause sand to start leaking out of your Ethernet card. Backup your data as soon as you have the chance.
 
