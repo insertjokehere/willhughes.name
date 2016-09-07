@@ -12,6 +12,8 @@ I recently sent the following to the `mozilla.dev.security.policy` mailing list 
 
 <!--more-->
 
+_The situation is ongoing, see updates at the bottom of the post_
+
 For context, WoSign are a certificate authority who participate in (among others) the Mozilla Root Trust program, and as such are able to issue TLS certificates which are trusted by most internet users. Recently it has been discovered that WoSign have mis-issued a number of certificates, some through software bugs and some through bad policy.
 
 ### The Original Message
@@ -40,6 +42,19 @@ Thank you all for your time,
 
 Will Hughes
 
+### Update 07/09/16
+
+* My message to this list has been released by the moderator, read it [here](https://groups.google.com/d/msg/mozilla.dev.security.policy/k9PBmyLCi8I/mi6vaappDgAJ)
+* Since I published my message, the WoSign certs I issued{{< ann 1 >}} have been published to WoSigns' CT log
+* WoSign have [published](https://groups.google.com/d/msg/mozilla.dev.security.policy/k9PBmyLCi8I/BU85QtmzDQAJ) an [initial report](https://www.wosign.com/report/wosign_incidents_report_09042016.pdf) into the incident. In my opinion, this report is very light on details, and reads more as an ass-covering exercise. WoSign have [promised](https://groups.google.com/d/msg/mozilla.dev.security.policy/k9PBmyLCi8I/3VgNhi42DgAJ) that they will be publishing a further report, exactly what this will cover is unclear
+* Peter Bowen also [highlighted](https://groups.google.com/d/msg/mozilla.dev.security.policy/k9PBmyLCi8I/zs9x0nSjDQAJ) that WoSign have issued two certificates using the unapproved 'SM2' algorithm using their live CA cert, in violation of the Baseline Requirements
+* I am starting to feel that the problems WoSign are having are not small, isolated screwups but the result of systematic failure on their part:
+  - Richard Wang{{< ann 3 >}} [clarified](https://groups.google.com/d/msg/mozilla.dev.security.policy/k9PBmyLCi8I/QE90nepQDgAJ) that the first mis-issued GitHub cert was held for manual review, and approved by a human reviewer. The cert was held for review because it contained the name 'github', which is on WoSigns' list of domains that need to be reviewed to avoid abuse. The mistake was only found when the researcher attempted to issue another GitHub cert abusing the same bug, and the reviewer noticed and checked to see if other certs had been issued the same way
+  - WoSigns' insistence that by publishing all certificates to a CT log they ["prevent the mis-issuance in the future"](https://bugzilla.mozilla.org/show_bug.cgi?id=1293366#c4) of invalid certs is either disingenuous or a sign of staggering incompetence. As a certificate authority, their job is to not issue bad certificates in the first place - publishing all certs to CT only helps the public catch them when they break the rules, it does nothing to stop the rule breaking in the first place
+* Because of the way WoSigns' roots are cross-signed by other more reputable CAs{{< ann 4 >}}, it is impossible to preemptively distrust WoSign without breaking trust for a large number of legitimate sites using certs from reputable CAs
+
 #### Notes
 1. {{< ann_text 1 >}}I issued two certificate via WoSign in May 2016 for hosts that were not internet facing, because it was impractical for me to issue LetsEncrypt certs for those hosts. I have since updated my tooling, issued LetsEncrypt certs and revoked the WoSign certs. I note that neither of the WoSign certs appear on crt.sh
 2. {{< ann_text 2 >}}I understand that in the short time frame, a full post-mortem may not be practical, but an initial assessment of the causes of the incident should have already been completed
+3. {{< ann_text 3 >}}CEO of WoSign
+4. {{< ann_text 4 >}}This is not an uncommon practice, Lets Encrypts' roots are trusted this way
