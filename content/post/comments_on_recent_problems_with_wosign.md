@@ -53,6 +53,10 @@ Will Hughes
   - WoSigns' insistence that by publishing all certificates to a CT log they ["prevent the mis-issuance in the future"](https://bugzilla.mozilla.org/show_bug.cgi?id=1293366#c4) of invalid certs is either disingenuous or a sign of staggering incompetence. As a certificate authority, their job is to not issue bad certificates in the first place - publishing all certs to CT only helps the public catch them when they break the rules, it does nothing to stop the rule breaking in the first place
 * Because of the way WoSigns' roots are cross-signed by other more reputable CAs{{< ann 4 >}}, it is impossible to preemptively distrust WoSign without breaking trust for a large number of legitimate sites using certs from reputable CAs
 
+### Update 19/09/16
+
+* WoSign have published their [final report](https://www.wosign.com/report/WoSign_Incident_Final_Report_09162016.pdf) on the matter
+
 #### Notes
 1. {{< ann_text 1 >}}I issued two certificate via WoSign in May 2016 for hosts that were not internet facing, because it was impractical for me to issue LetsEncrypt certs for those hosts. I have since updated my tooling, issued LetsEncrypt certs and revoked the WoSign certs. I note that neither of the WoSign certs appear on crt.sh
 2. {{< ann_text 2 >}}I understand that in the short time frame, a full post-mortem may not be practical, but an initial assessment of the causes of the incident should have already been completed
