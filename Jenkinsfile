@@ -27,7 +27,11 @@ node('docker') {
 
   stage 'upload'
   sshagent(['6ba10844-b480-4dbe-be8f-c692dbfcdfe7']) {
-    sh('''cd public
+    sh('''if [ ! -d venv ]; then
+        virtualenv venv
+    fi
+    pip install awscli
+    cd public
     aws s3 sync . s3://www.willhughes.name --exclude ".git/*" --cache-control max-age=43200
     ''')
   }
