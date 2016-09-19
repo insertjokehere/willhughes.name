@@ -33,7 +33,7 @@ node('docker') {
     . venv/bin/activate
     pip install awscli
     cd public
-    aws s3 sync . s3://www.willhughes.name --exclude ".git/*" --cache-control max-age=43200
+    aws s3 sync . s3://www.willhughes.name --exclude ".git/*" --exclude ".git*" --delete --cache-control max-age=43200
     ''')
   }
 
