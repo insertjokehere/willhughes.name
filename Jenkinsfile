@@ -30,6 +30,7 @@ node('docker') {
     sh('''if [ ! -d venv ]; then
         virtualenv venv
     fi
+    . venv/bin/activate
     pip install awscli
     cd public
     aws s3 sync . s3://www.willhughes.name --exclude ".git/*" --cache-control max-age=43200
