@@ -13,4 +13,4 @@ topics = []
 
 {{< youtube TGLTaBDhXGI >}}
 
-The [Source for the example app](http://git.willhughes.name/pycon-2015-mezzanine-demo-site/) and [my slides](http://git.willhughes.name/pycon-2015-mezzanine-slides/) are available from my Git server
+The [Source for the example app](https://github.com/insertjokehere/pycon-2015-mezzanine-demo-site) and [my slides](https://github.com/insertjokehere/pycon-2015-mezzanine-slides) are available on Github
