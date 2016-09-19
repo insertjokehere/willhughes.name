@@ -28,7 +28,7 @@ node('docker') {
   stage 'upload'
   sshagent(['6ba10844-b480-4dbe-be8f-c692dbfcdfe7']) {
     sh('''cd public
-    rsync -avz . www-static@zaphod.hhome.me:/srv/http/willhughes.name/
+    aws s3 sync . s3://www.willhughes.name --exclude ".git/*" --cache-control max-age=43200
     ''')
   }
 
