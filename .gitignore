@@ -3,3 +3,4 @@ public/
 node_modules/
 static/search.json
 bower_components/
+themes/blackburn/node_modules/
