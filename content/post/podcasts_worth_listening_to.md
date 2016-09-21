@@ -71,4 +71,14 @@ It is a deep source of shame that I only recently discovered _The Bugle_, having
 
 I discovered _The Bugle_ at a slightly awkward position, where it has just returned from an almost year-long hiatus, and switched from its previous weekly schedule to a monthly one, so the back catalogue covers events that are well out of date by the time I'm listening to them, and the most recent episodes on the feed are largely 'clip shows' from older episodes as well as some of Andy's' solo work. [Episode 292](https://soundcloud.com/the-bugle/bugle-292-a-career-defining-election), in which they cover the results of the most recent British general election, is a particularly funny episode, and it is interesting to hear John talking about a subject he would never be able to cover on his show. _The Bugle_ has been running for 7 years now, and it is neat to see the seeds of _Last Week Tonight_ in the show.
 
-<link rel="stylesheet" href="/css/podcasts-worth-listening-to.css" />
+<style>
+img {
+    width: 150px;
+    height: 150px;
+    float: left;
+    margin-right: 10px;
+}
+h3 {
+    clear: both;
+}
+</style>

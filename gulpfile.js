@@ -15,93 +15,34 @@ const inlinesource = require('gulp-inline-source');
 const clean = require('gulp-clean');
 const cleanCSS = require('gulp-clean-css');
 var uglify = require('gulp-uglify');
+const webpack = require('webpack');
+var gutil = require("gulp-util");
 
-paths = {
-    handlebars: ['templates/*.hbs'],
-    indexed: ['public/{post,repo}/**/*.html'],
-    content: ['content/**/*']
-}
-
-gulp.task('default', ['mini_jpg', 'mini_png', 'index'], function () {});
+gulp.task('default', ['mini_jpg', 'mini_png', 'mini_html'], function () {});
 
 gulp.task('clean', function () {
     return gulp.src('public', {read: false})
 	.pipe(clean());
 });
 
-gulp.task('bower', ['clean'], function() {
-  return bower();
+gulp.task("webpack", function(callback) {
+    // run webpack
+    webpack(require('./themes/blackburn/webpack.config.js'), function(err, stats) {
+        if(err) throw new gutil.PluginError("webpack", err);
+        gutil.log("[webpack]", stats.toString({
+            // output options
+        }));
+        callback();
+    });
 });
 
-gulp.task('bower_copy', ['bower'], function() {
-    gulp.src('bower_components/lunr.js/lunr.js')
-	.pipe(gulp.dest('./static/js'));
+gulp.task('hugo', ['webpack'], shell.task(['hugo']));
 
-    gulp.src('bower_components/jquery/dist/jquery.js')
-	.pipe(gulp.dest('./static/js'));
-
-    gulp.src('bower_components/pure/pure.css')
-	.pipe(gulp.dest('./static/css'));
-
-    gulp.src('bower_components/pure/grids-responsive-old-ie.css')
-	.pipe(gulp.dest('./static/css'));
-
-    gulp.src('bower_components/pure/grids-responsive.css')
-	.pipe(gulp.dest('./static/css'));
-
-    gulp.src('bower_components/font-awesome/fonts/*')
-	.pipe(gulp.dest('./static/fonts/'));
-
-    gulp.src('bower_components/font-awesome/css/font-awesome.css')
-	.pipe(gulp.dest('./static/css'));
-
-    gulp.src('bower_components/handlebars/handlebars.runtime.js')
-	.pipe(gulp.dest('./static/js'));
-});
-
-
-gulp.task('handlebars', ['bower_copy'], function(){
-    return gulp.src(paths.handlebars)
-	.pipe(handlebars({
-	    handlebars: require('handlebars')
-	}))
-	.pipe(wrap('Handlebars.template(<%= contents %>)'))
-	.pipe(declare({
-	    namespace: 'Blog.templates',
-	    noRedeclare: true, // Avoid duplicate declarations
-	}))
-	.pipe(concat('templates.js'))
-	.pipe(gulp.dest('static/js/'));
-});
-
-gulp.task('hugo', ['handlebars'], shell.task(['hugo']));
-
-gulp.task('mini_js', ['hugo'], function () {
-    const f = filter(['*', '!*.min.*']);
-
-    return gulp.src('public/js/*.js')
-	.pipe(uglify())
-	.pipe(gulp.dest('public/js'));
-});
-
-gulp.task('mini_css', ['hugo'], function () {
-    return gulp.src('public/css/*.css')
-	.pipe(cleanCSS({debug: true}, function(details) {
-            console.log(details.name + ': ' + Math.round((details.stats.minifiedSize / details.stats.originalSize) * 100) + '%');
-        }))
-	.pipe(gulp.dest('public/css'));
-});
-
-gulp.task('inline', ['mini_css', 'mini_js'], function () {
+gulp.task('mini_html', ['hugo'], function () {
     return gulp.src('public/**/*.html')
-        .pipe(inlinesource())
-        .pipe(gulp.dest('public'));
-});
-
-gulp.task('mini_html', ['inline'], function() {
-  return gulp.src('public/**/*.html')
-    .pipe(htmlmin({collapseWhitespace: true}))
-    .pipe(gulp.dest('public'))
+               .pipe(inlinesource())
+               .pipe(htmlmin({collapseWhitespace: true}))
+               .pipe(gulp.dest('public'));
 });
 
 gulp.task('mini_png', ['hugo'], function() {
@@ -122,11 +63,4 @@ gulp.task('mini_jpg', ['hugo'], function() {
 	    use: [jpegtran()]
 	}))
 	.pipe(gulp.dest('public/img/'))
-});
-
-
-gulp.task('index', ['mini_html'], function () {
-    return gulp.src(paths.indexed)
-	.pipe(indexer('search.json'))
-	.pipe(gulp.dest('./public'));
 });
