@@ -1,22 +1,13 @@
 const gulp = require('gulp');
 const shell = require('gulp-shell');
 const htmlmin = require('gulp-htmlmin');
-const indexer = require('./indexer.js');
-const bower = require('gulp-bower');
 const imagemin = require('gulp-imagemin');
 const pngquant = require('imagemin-pngquant');
 const jpegtran = require('imagemin-jpegtran');
-const filter = require('gulp-filter');
-const handlebars = require('gulp-handlebars');
-const wrap = require('gulp-wrap');
-const declare = require('gulp-declare');
-const concat = require('gulp-concat');
 const inlinesource = require('gulp-inline-source');
 const clean = require('gulp-clean');
-const cleanCSS = require('gulp-clean-css');
-var uglify = require('gulp-uglify');
 const webpack = require('webpack');
-var gutil = require("gulp-util");
+const gutil = require("gulp-util");
 
 gulp.task('default', ['mini_jpg', 'mini_png', 'mini_html'], function () {});
 

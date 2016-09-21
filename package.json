@@ -4,30 +4,18 @@
   "description": "Source for my blog, willhughes.name, using Hugo",
   "main": "gulpfile.js",
   "dependencies": {
-    "bower": "^1.7.7",
     "cheerio": "^0.20.0",
     "gulp": "^3.9.1",
     "gulp-bower": "0.0.13",
     "gulp-clean": "^0.3.2",
-    "gulp-clean-css": "^2.0.10",
-    "gulp-concat": "^2.6.0",
-    "gulp-declare": "^0.3.0",
-    "gulp-filter": "^4.0.0",
-    "gulp-handlebars": "^4.0.0",
     "gulp-htmlmin": "^1.3.0",
     "gulp-imagemin": "^2.4.0",
     "gulp-inline-source": "^2.1.0",
     "gulp-shell": "^0.5.2",
-    "gulp-uglify": "^1.5.3",
     "gulp-util": "^3.0.7",
-    "gulp-wrap": "^0.11.0",
-    "handlebars": "^4.0.5",
     "imagemin-jpegtran": "^4.3.2",
     "imagemin-pngquant": "^4.2.2",
-    "lunr": "^0.7.0",
-    "through": "^2.3.8",
-      "uglify": "^0.1.5",
-      "blackburn": "./themes/blackburn"
+    "blackburn": "./themes/blackburn"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
