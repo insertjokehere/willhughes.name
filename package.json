@@ -4,6 +4,7 @@
   "description": "Source for my blog, willhughes.name, using Hugo",
   "main": "gulpfile.js",
   "dependencies": {
+    "blackburn": "./themes/blackburn",
     "cheerio": "^0.20.0",
     "gulp": "^3.9.1",
     "gulp-bower": "0.0.13",
@@ -15,7 +16,7 @@
     "gulp-util": "^3.0.7",
     "imagemin-jpegtran": "^4.3.2",
     "imagemin-pngquant": "^4.2.2",
-    "blackburn": "./themes/blackburn"
+    "webpack": "^1.13.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

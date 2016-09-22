@@ -1,4 +1,4 @@
-FROM node:4.4
+FROM node:6
 
 ENV HUGO_VER=0.16
 
