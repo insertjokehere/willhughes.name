@@ -19,7 +19,7 @@ RUN chown jenkins:nogroup -R /home/jenkins
 WORKDIR /mnt/data
 
 COPY package.json /mnt/data
-COPY themes/blackburn /mnt/data/themes/blackburn
+COPY themes/blackburn/package.json /mnt/data/themes/blackburn/package.json
 COPY supervisor.conf /etc/supervisor/supervisord.conf
 
 RUN npm install . --global --silent

@@ -1,4 +1,4 @@
-<tr>
+<tr{{ if .Draft }} class="draft"{{ end }}>
   <td><a href="{{ .Permalink }}">{{ .Title }}</a></td>
   <td>{{ .Params.version }}</td>
   <td>{{ range .Params.architectures }} {{ . }} {{ end }}</td>

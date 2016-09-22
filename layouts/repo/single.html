@@ -1,6 +1,6 @@
 {{ partial "header.html" . }}
 
-<div class="header">
+<div class="header{{ if .Draft }} draft{{ end }}">
   <h1>{{ .Title }}</h1>
   <h2>{{ .Description }}</h2>
 </div>
