@@ -1,14 +1,14 @@
 +++
-date = "2016-06-09T12:29:14+12:00"
+date = "2016-09-23T11:49:36+12:00"
 description = ""
-draft = true
-tags = ['Bugs']
-title = "An annotated anthology of fun bugs"
+draft = false
+tags = ['Bugs', 'LVM', 'Puppet', 'Python']
+title = "An annotated anthology of bugs"
 topics = []
 
 +++
 
-A list of bugs that I have stumbled over in my travels that are fun, unusual or otherwise notable
+A list of bugs that I have stumbled over in my travels that are fun, unusual, shocking or otherwise notable
 
 <!--more-->
 
