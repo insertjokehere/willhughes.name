@@ -18,15 +18,7 @@ RUN chown jenkins:nogroup -R /home/jenkins
 
 WORKDIR /mnt/data
 
-COPY package.json /mnt/data
-COPY themes/blackburn/package.json /mnt/data/themes/blackburn/package.json
-
-RUN npm install . --global --silent
-
-ENV NODE_PATH="/usr/local/lib/node_modules/blog-hugo/node_modules"
-
-ENV PATH="${PATH}:/usr/local/lib/node_modules/blog-hugo/node_modules/.bin"
-
-COPY supervisor.conf /etc/supervisor/supervisord.conf
+COPY docker/supervisor.conf /etc/supervisor/supervisord.conf
+COPY docker/bin/* /usr/local/bin/
 
 EXPOSE 1313
