@@ -9,7 +9,8 @@ node('docker') {
 
     stage 'build'
     sh('''#!/bin/bash
-    gulp
+    
+    NODE_ENV=production gulp
     if [[ -z `find public/css/ -type f -empty` ]]; then true; else false; fi
     if [[ -z `find public/js/ -type f -empty` ]]; then true; else false; fi
     ''')

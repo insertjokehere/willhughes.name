@@ -20,7 +20,6 @@ WORKDIR /mnt/data
 
 COPY package.json /mnt/data
 COPY themes/blackburn/package.json /mnt/data/themes/blackburn/package.json
-COPY supervisor.conf /etc/supervisor/supervisord.conf
 
 RUN npm install . --global --silent
 
@@ -28,8 +27,6 @@ ENV NODE_PATH="/usr/local/lib/node_modules/blog-hugo/node_modules"
 
 ENV PATH="${PATH}:/usr/local/lib/node_modules/blog-hugo/node_modules/.bin"
 
-#ENV HOME="/home"
+COPY supervisor.conf /etc/supervisor/supervisord.conf
 
 EXPOSE 1313
-
-#ENTRYPOINT ["hugo"]
