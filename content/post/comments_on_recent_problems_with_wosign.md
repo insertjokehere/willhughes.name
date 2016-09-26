@@ -57,6 +57,20 @@ Will Hughes
 
 * WoSign have published their [final report](https://www.wosign.com/report/WoSign_Incident_Final_Report_09162016.pdf) on the matter
 
+### Update 27/09/16
+
+Mozilla have [announced](https://groups.google.com/forum/#!topic/mozilla.dev.security.policy/NAH6NVf3JPI) plans to remove trust in WoSign and StartCom because of these issues:
+
+> Mozilla’s CA team has lost confidence in the ability of WoSign/StartCom to faithfully and competently discharge the functions of a CA. Therefore we propose that, starting on a date to be determined in the near future, Mozilla products will no longer trust newly-issued certificates issued by either of these two CA brands. We plan to distrust only newly-issued certificates to try and reduce the impact on web users, as both of these CA brands have substantial outstanding certificate corpuses. Our proposal is that we determine “newly issued” by examining the notBefore date in the certificates. It is true that this date is chosen by the CA and therefore WoSign/StartCom could back-date certificates to get around this restriction. And there is, as we have explained, evidence that they have done this in the past. However, many eyes are on the Web PKI and if such additional back-dating is discovered (by any means), Mozilla will immediately and permanently revoke trust in all WoSign and StartCom roots.
+
+The [document they published](https://docs.google.com/document/d/1C6BlmbeQfn4a9zydVi2UvjBGv6szuSB4sMYUcVrR8vQ/edit#heading=h.39xcc9qyz431) goes into a lot of detail as to why this is happening, but the short version is:
+
+* Repeatedly issuing SHA-1 certificates in violation of the Baseline Requirements
+* WoSign failing to correctly disclose that they had taken technical control of the StartCom CA
+
+In addition to removing trust in the CAs, Mozilla will no longer accept audits completed by Ernst & Young (Hong Kong) because of their failure to detect and report issues that they should have found.
+
+
 #### Notes
 1. {{< ann_text 1 >}}I issued two certificate via WoSign in May 2016 for hosts that were not internet facing, because it was impractical for me to issue LetsEncrypt certs for those hosts. I have since updated my tooling, issued LetsEncrypt certs and revoked the WoSign certs. I note that neither of the WoSign certs appear on crt.sh
 2. {{< ann_text 2 >}}I understand that in the short time frame, a full post-mortem may not be practical, but an initial assessment of the causes of the incident should have already been completed
