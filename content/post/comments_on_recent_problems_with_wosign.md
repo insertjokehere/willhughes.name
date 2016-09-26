@@ -62,6 +62,8 @@ Will Hughes
 Mozilla have [announced](https://groups.google.com/forum/#!topic/mozilla.dev.security.policy/NAH6NVf3JPI) plans to remove trust in WoSign and StartCom because of these issues:
 
 > Mozilla’s CA team has lost confidence in the ability of WoSign/StartCom to faithfully and competently discharge the functions of a CA. Therefore we propose that, starting on a date to be determined in the near future, Mozilla products will no longer trust newly-issued certificates issued by either of these two CA brands. We plan to distrust only newly-issued certificates to try and reduce the impact on web users, as both of these CA brands have substantial outstanding certificate corpuses. Our proposal is that we determine “newly issued” by examining the notBefore date in the certificates. It is true that this date is chosen by the CA and therefore WoSign/StartCom could back-date certificates to get around this restriction. And there is, as we have explained, evidence that they have done this in the past. However, many eyes are on the Web PKI and if such additional back-dating is discovered (by any means), Mozilla will immediately and permanently revoke trust in all WoSign and StartCom roots.
+>
+> _[Mozilla, 'WoSign and StartCom', 27/09/2016](https://docs.google.com/document/d/1C6BlmbeQfn4a9zydVi2UvjBGv6szuSB4sMYUcVrR8vQ/edit#heading=h.cb0l2fjfht30)_
 
 The [document they published](https://docs.google.com/document/d/1C6BlmbeQfn4a9zydVi2UvjBGv6szuSB4sMYUcVrR8vQ/edit#heading=h.39xcc9qyz431) goes into a lot of detail as to why this is happening, but the short version is:
 
