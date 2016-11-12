@@ -29,7 +29,7 @@ node('docker') {
   stage 'upload'
   withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'b4d1ca70-47a0-48e7-9871-5757171c49b1', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID']]) {
     sh('''if [ ! -d venv ]; then
-        virtualenv venv
+        python -m virtualenv venv
     fi
     . venv/bin/activate
     pip install awscli
