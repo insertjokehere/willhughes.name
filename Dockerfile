@@ -1,6 +1,6 @@
 FROM node:6
 
-ENV HUGO_VER=0.17
+ENV HUGO_VER=0.18
 
 RUN apt-get update && apt-get install -y \
 		ca-certificates build-essential python3 python3-pip linkchecker supervisor \
