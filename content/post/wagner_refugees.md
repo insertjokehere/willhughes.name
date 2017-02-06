@@ -27,3 +27,15 @@ Thank you for your time in reading this letter, and I hope you take some of its 
 Yours Respectfully,
 
 William Hughes
+
+_Update: I recieved this response from Ms Wagner on 2/2/17_
+
+Dear William, 
+
+Thanks for your email. The PM at his media conference today stated that NZ doesn't agree with Trumps policy & that is not acceptable here. 
+
+We have also increased our refugee numbers because of the Syrian conflict. And built a new Mangere Centre to ensure extra refugees can be well looked after.
+
+But of course we are concerned about what is happening in the USA & will continue to monitor while respecting Kiwi values. 
+
+Best regards Nicky
