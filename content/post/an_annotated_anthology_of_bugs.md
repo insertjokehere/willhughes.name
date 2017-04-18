@@ -1,5 +1,5 @@
 +++
-date = "2016-09-23T11:49:36+12:00"
+date = "2017-04-19T09:35:16+12:00"
 description = ""
 draft = false
 tags = ['Bugs', 'LVM', 'Puppet', 'Python']
@@ -11,6 +11,12 @@ topics = []
 A list of bugs that I have stumbled over in my travels that are fun, unusual, shocking or otherwise notable
 
 <!--more-->
+
+_Update, 19/04/17_
+
+* NetworkManager in Ubuntu 12.10 or newer ignores DNS settings supplied by OpenVPN server after establishing a VPN connection: [Ubuntu bug #1211110](https://bugs.launchpad.net/ubuntu/+source/openvpn/+bug/1211110)
+
+_Original Post_
 
 * Firefox on Android does not support SNI when negotiation SSL sessions for the sync client or when fetching favicons. [Bugzilla #765064](https://bugzilla.mozilla.org/show_bug.cgi?id=765064) goes into some detail as to why this is the case, but it has been a known bug since at least 2012. No SNI support in some components of a major web browser. In 2016. Yup.
 
