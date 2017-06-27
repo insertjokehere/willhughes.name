@@ -8,6 +8,13 @@ const inlinesource = require('gulp-inline-source');
 const clean = require('gulp-clean');
 const webpack = require('webpack');
 const gutil = require("gulp-util");
+const rename = require("gulp-rename");
+const imageResize = require('gulp-image-resize');
+
+function thumbnail(images) {
+    return images.pipe(imageResize({ width: 250 }))
+		 .pipe(rename(function (path) { path.basename = "thumbs/" + path.basename; }))
+}
 
 gulp.task('default', ['mini_jpg', 'mini_png', 'mini_html'], function () {});
 
@@ -37,21 +44,29 @@ gulp.task('mini_html', ['hugo'], function () {
 });
 
 gulp.task('mini_png', ['hugo'], function() {
-    return gulp.src('public/img/**/*.png')
-	.pipe(imagemin({
-	    progressive: true,
-	    svgoPlugins: [{removeViewBox: false}],
-	    use: [pngquant()]
-	}))
-	.pipe(gulp.dest('public/img/'))
+    var images = gulp.src('public/img/**/*.png');
+    
+    images.pipe(imagemin({
+	progressive: true,
+	svgoPlugins: [{removeViewBox: false}],
+	use: [pngquant()]
+    }))
+	  .pipe(gulp.dest('public/img/'))
+
+    thumbnail(images).pipe(gulp.dest('public/img/'))
+
 });
 
 gulp.task('mini_jpg', ['hugo'], function() {
-    return gulp.src('public/img/**/*.jpg')
-	.pipe(imagemin({
-	    progressive: true,
-	    svgoPlugins: [{removeViewBox: false}],
-	    use: [jpegtran()]
-	}))
-	.pipe(gulp.dest('public/img/'))
+    var images = gulp.src('public/img/**/*.jpg');
+    
+    images.pipe(imagemin({
+	progressive: true,
+	svgoPlugins: [{removeViewBox: false}],
+	use: [jpegtran()]
+    }))
+	  .pipe(gulp.dest('public/img/'))
+
+    thumbnail(images).pipe(gulp.dest('public/img/'))
+    
 });
