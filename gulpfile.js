@@ -11,12 +11,7 @@ const gutil = require("gulp-util");
 const rename = require("gulp-rename");
 const imageResize = require('gulp-image-resize');
 
-function thumbnail(images) {
-    return images.pipe(imageResize({ width: 250 }))
-		 .pipe(rename(function (path) { path.basename = "thumbs/" + path.basename; }))
-}
-
-gulp.task('default', ['mini_jpg', 'mini_png', 'mini_html'], function () {});
+gulp.task('default', ['hugo'], function () {});
 
 gulp.task('clean', function () {
     return gulp.src('public', {read: false})
@@ -25,7 +20,7 @@ gulp.task('clean', function () {
 
 gulp.task("webpack", function(callback) {
     // run webpack
-    webpack(require('./themes/blackburn/webpack.config.js'), function(err, stats) {
+    return webpack(require('./themes/blackburn/webpack.config.js'), function(err, stats) {
         if(err) throw new gutil.PluginError("webpack", err);
         gutil.log("[webpack]", stats.toString({
             // output options
@@ -34,7 +29,7 @@ gulp.task("webpack", function(callback) {
     });
 });
 
-gulp.task('hugo', ['webpack'], shell.task(['hugo']));
+gulp.task('hugo', ['webpack', 'mini_png', 'mini_jpg', 'thumbnails'], shell.task(['hugo']));
 
 gulp.task('mini_html', ['hugo'], function () {
     return gulp.src('public/**/*.html')
@@ -43,30 +38,36 @@ gulp.task('mini_html', ['hugo'], function () {
                .pipe(gulp.dest('public'));
 });
 
-gulp.task('mini_png', ['hugo'], function() {
-    var images = gulp.src('public/img/**/*.png');
-    
-    images.pipe(imagemin({
-	progressive: true,
-	svgoPlugins: [{removeViewBox: false}],
-	use: [pngquant()]
-    }))
-	  .pipe(gulp.dest('public/img/'))
-
-    thumbnail(images).pipe(gulp.dest('public/img/'))
+gulp.task('mini_png', function() {
+    return gulp.src('assets/img/**/*.png')
+	       .pipe(imagemin({
+		   progressive: true,
+		   svgoPlugins: [{removeViewBox: false}],
+		   use: [pngquant()]
+	       }))
+	       .pipe(gulp.dest('static/img/'))
 
 });
 
-gulp.task('mini_jpg', ['hugo'], function() {
-    var images = gulp.src('public/img/**/*.jpg');
-    
-    images.pipe(imagemin({
-	progressive: true,
-	svgoPlugins: [{removeViewBox: false}],
-	use: [jpegtran()]
-    }))
-	  .pipe(gulp.dest('public/img/'))
+gulp.task('mini_jpg', function() {
+    return gulp.src('assets/img/**/*.jpg')
 
-    thumbnail(images).pipe(gulp.dest('public/img/'))
+	       .pipe(imagemin({
+		   progressive: true,
+		   svgoPlugins: [{removeViewBox: false}],
+		   use: [jpegtran()]
+	       }))
+	       .pipe(gulp.dest('static/img/'))
     
+});
+
+gulp.task('thumbnails', function() {
+    return gulp.src('assets/img/**/*.{jpg,png}')
+	       .pipe(imageResize({ width: 250 }))
+	       .pipe(rename(function (path) { path.basename = "thumbs/" + path.basename; }))
+    	       .pipe(gulp.dest('static/img/'));
+});
+
+gulp.task('watch', function () {
+    gulp.watch('assets/img/**/*.{jpg,png}', ['thumbnails', 'mini_png', 'mini_jpg']);
 });
