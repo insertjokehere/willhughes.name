@@ -16,6 +16,7 @@ slug = "reverse_engineering_orvibo_s20c"
 {{< contents >}}
 {{% contentsitem index="1" title="Attempt 1: New Firmware" %}}
 {{% contentsitem index="2" title="Attempt 2: Packet Capture" %}}
+{{% contentsitem index="3" title="Attempt 3: Replay attacks, prior art" %}}
 {{< /contents >}}
 
 {{% section index="1" title="Attempt 1: New Firmware" %}}
@@ -56,6 +57,51 @@ Next steps:
 * Connect my other switch and compare packets. The S20 included the MAC address of the switch in packets, perhaps a similar scheme here?
 * Redirect traffic for the Homemate server to my laptop, write a script to set up a TCP listener and try simple packet replays, see how far I can get doing that
 
+{{% section index="3" title="Attempt 3: Replay attacks, prior art" %}}
+
+*7 July 2017*
+
+I wrote a really simple Python script that setup a socket server to listen for connections on port 10001, and configured my networks' DNS to respond to `homemate.orvibo.com` with my laptops' IP. I tried a naïve approach and responding to each packet with packets captured with Wireshark. The S20c will disconnect if it gets a packet it doesn't like, or if the server doesn't respond with a packet that it is expecting - fortunately it will reconnect after a few seconds. I managed to the the server to a state where it will accept connections from a switch, and send the right packets to complete the initial "handshake". I didn't get any further than this with that approach, the switch didn't respond to my "turn on" or "turn off" commands, and every so often would send a "heartbeat" packet, that I couldn't respond to correctly, so the switch would disconnect.
+
+After exhausting this approach, I decided to do some research. I turned up a couple of leads: a [bug report](https://github.com/Grayda/node-orvibo/issues/11) for node-orvibo discussing integration with the (closely related) B25 switch and a [wiki page](https://github.com/Grayda/node-orvibo2/wiki/Notes-about-new-Orvibo-products) in the node-orvibo2 repo that lists research into the same switch.
+
+The key thing from this is the comment that:
+
+> There are two kinds of protocols used by v2 -- PK and DK. PK has encrypted JSON payload, [...] DK packets are encrypted with a separate key. Don't know if the key is the same across all Orvibo products
+
+and a comment on the node-orvibo issue that the PK key can be found in the decompiled source of the Orvibo "Kepler" app, in `com/orvibo/lib/kepler/core/AESCoder.java`.
+
+Looking at my packet captures, there are only two 'PK' packets - these are packets that start with `0x68 0x64 [two bytes, packet length] 0x70 0x6b` (in ASCII `hd  pk`), the initial packet that the switch sends to the server:
+
+```
+00000000  68 64 00 ba 70 6b 22 1c  99 9c 00 00 00 00 00 00   hd..pk". ........
+00000010  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00   ........ ........
+00000020  00 00 00 00 00 00 00 00  00 00 2e 8d fc 89 e7 bc   ........ ........
+00000030  96 40 cb 68 a1 b7 08 aa  0f 65 6a 19 6f 73 a5 54   .@.h.... .ej.os.T
+00000040  e2 ee 46 e0 a5 0b 64 d8  86 cd 5b 1a 87 c4 1f 66   ..F...d. ..[....f
+00000050  71 37 62 68 ec 5b 66 0d  b2 c5 88 6a 05 67 13 e0   q7bh.[f. ...j.g..
+00000060  d9 bc 4a 0c 2c 50 58 df  65 2d d9 b1 5b d1 7b 27   ..J.,PX. e-..[.{'
+00000070  05 cd 39 fc fd 62 ae 76  c6 e2 f5 df 9d 66 3c 72   ..9..b.v .....f<r
+00000080  18 72 5f c7 49 1b 42 b5  f8 85 39 3c 74 4e 6a e4   .r_.I.B. ..9<tNj.
+00000090  b4 be aa 4e 73 67 65 70  fb 87 c8 cf 7e 0d 03 f7   ...Nsgep ....~...
+000000A0  20 89 79 fa 64 3b bc 7c  ec 86 e1 1d 4c 3d 0c 8a    .y.d;.| ....L=..
+000000B0  b5 9e 5a a3 7e 3e 59 73  5f b6                     ..Z.~>Ys _.
+```
+
+and the response from the server:
+
+```
+00000000  68 64 00 6a 70 6b 6d f4  41 22 32 65 61 62 33 65   hd.jpkm. A"2eab3e
+00000010  34 35 38 30 31 63 34 34  63 32 38 66 30 36 34 30   45801c44 c28f0640
+00000020  61 30 31 39 33 61 34 37  35 31 39 b3 af dc 29 32   a0193a47 519...)2
+00000030  21 5f 5f 53 7b d1 11 54  17 d8 b3 74 6d 4e 65 e1   !__S{..T ...tmNe.
+00000040  f4 46 f3 25 01 9c 6a 94  9e 8d ea 6d 1b b3 f6 68   .F.%..j. ...m...h
+00000050  87 88 4a 29 41 82 ec e5  56 fd e0 6f 41 cb b0 6f   ..J)A... V..oA..o
+00000060  37 99 95 a4 ee 70 b1 78  18 00                     7....p.x ..
+```
+
+The first two bytes for all packets are the same (`0x68 0x64`), and the next two bytes (`0x00 0xba` in the first packet, `0x00 0x6a` in the second) is the length of the full packet. The following two bytes (`0x70 0x6b`) are the packet type (ASCII `pk` or `dk`). I'm not sure about the next 4 bytes - possibly a crc32?. The next 32 bytes seem to be an ID. The first packet from the switch have it set as 32 nulls, the response from the server includes a random looking ID, and all subsequent packets include the ID.
+
 {{% galleryinit %}}
 
 #### Notes
@@ -66,3 +112,4 @@ Next steps:
 1. {{< ann_text 4 >}}those plastic molding forms are expensive after all
 1. {{< ann_text 5 >}}which isn't on Google Play, so you have to disable security checks and sideload a .apk from a random .cn site - no thanks
 1. {{< ann_text 6 >}}finally, something in Network Manager that wasn't a massive buggy pain in the neck to get working!
+
