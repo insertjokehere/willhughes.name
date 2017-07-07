@@ -3,7 +3,7 @@ tags = ["IoT", "Reverse Engineering"]
 draft = false
 description = ""
 topics = []
-date = "2017-06-28T22:58:52+12:00"
+date = "2017-07-07T21:56:28+12:00"
 title = "Reverse Engineering the Orvibo S20c WiFi Switch"
 slug = "reverse_engineering_orvibo_s20c"
 
@@ -100,7 +100,25 @@ and the response from the server:
 00000060  37 99 95 a4 ee 70 b1 78  18 00                     7....p.x ..
 ```
 
-The first two bytes for all packets are the same (`0x68 0x64`), and the next two bytes (`0x00 0xba` in the first packet, `0x00 0x6a` in the second) is the length of the full packet. The following two bytes (`0x70 0x6b`) are the packet type (ASCII `pk` or `dk`). I'm not sure about the next 4 bytes - possibly a crc32?. The next 32 bytes seem to be an ID. The first packet from the switch have it set as 32 nulls, the response from the server includes a random looking ID, and all subsequent packets include the ID.
+The first two bytes for all packets are the same (`0x68 0x64`), and the next two bytes (`0x00 0xba` in the first packet, `0x00 0x6a` in the second) is the length of the full packet. The following two bytes (`0x70 0x6b`) are the packet type (ASCII `pk`). The next 4 bytes are the CRC32 of the encrypted payload (bytes 42 onwards). The next 32 bytes seem to be an ID. The first packet from the switch have it set as 32 nulls, the response from the server includes a random looking ID, and all subsequent packets include the ID. The rest of the packet is JSON, encrypted with AES-ECB, using PKCS#5. Decrypting the packet with the key from the "Kepler" app{{< ann 7 >}} yields:
+
+```json
+{'hardwareVersion': 'v1.0.0', 'modelId': '56d124ba95474fc98aafdb830e933789', 'serial': 1, 'softwareVersion': 'v2.0.6', 'language': 'chinese', 'cmd': 0}
+```
+
+from the switch and
+
+```json
+{'status': 0, 'key': '...', 'cmd': 0, 'serial': 1}
+```
+
+from the server. The value of `key` is used as the encryption/decryption key for all subsequent 'DK' packets (packets with bytes 5 and 6 set to `0x64 0x6b`, ASCII `dk`)
+
+I've put the script I wrote to do the decryption, as well as a stream of packet captures and the decoded version in [a github repo](https://github.com/insertjokehere/homemate-bridge/tree/master/research)
+
+Next steps:
+
+* Rewrite the naïve script to decode packets from the switch and build responses using the encryption scheme
 
 {{% galleryinit %}}
 
@@ -112,4 +130,4 @@ The first two bytes for all packets are the same (`0x68 0x64`), and the next two
 1. {{< ann_text 4 >}}those plastic molding forms are expensive after all
 1. {{< ann_text 5 >}}which isn't on Google Play, so you have to disable security checks and sideload a .apk from a random .cn site - no thanks
 1. {{< ann_text 6 >}}finally, something in Network Manager that wasn't a massive buggy pain in the neck to get working!
-
+1. {{< ann_text 7 >}}Which I'm not going to post here until I'm sure there won't be legal consequences
