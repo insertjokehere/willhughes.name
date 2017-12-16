@@ -16,7 +16,7 @@ This should go without saying, but in the course of this post I'm going to be de
 
 ### Setup
 
-Before diving into the weeds of the mess I got my system into, its worth describing how I've configured my storage devices on this machine. Hactar has three disk drives; a 120GB SSD{{< ann 2>}} that stores the EFI system partition, with the rest of the disk formatted as an LVM physical volume, and a pair of 500GB spinning rust drives configured in a RAID 0 mirror{{< ann 3 >}} formatted as a physical volume.
+Before diving into the weeds of the mess I got my system into, its worth describing how I've configured my storage devices on this machine. Hactar has three disk drives; a 120GB SSD{{< ann 2>}} that stores the EFI system partition, with the rest of the disk formatted as an LVM physical volume, and a pair of 500GB spinning rust drives configured in a RAID 1 mirror{{< ann 3 >}} formatted as a physical volume.
 
 Both of these physical volumes are part of the '`hactar`' volume group, and all of the data for the system is stored on these drives. The SSD stores the root and swap partitions, with the rest of the disk set aside as a cache for the home partition, which is stored on the spinning rust{{< ann 4 >}}. Disk caching was introduced in the version of LVM that shipped with Ubuntu 14.10 'Vivid', and adds integration with the `dm-cache` module that ships with the Linux kernel. Put simply, LVM cache lets you use a small, fast disk as a cache for a large, slower disk. The most commonly accessed blocks on the large disk are stored on the fast disk, so reads for those blocks don't need to wait for the slow disk, and I've configured it so that writes to cached blocks are written to the fast disk first, then copied back to the slow disk when the disk is idle{{< ann 5 >}}.
 
@@ -111,7 +111,7 @@ Turns out you need to install the `thin-provisioning-tools` package to use LVM c
 1. {{< ann_text 1>}} [Ubuntu bug #1556602](https://bugs.launchpad.net/ubuntu/+source/lvm2/+bug/1556602)
 2. {{< ann_text 2>}} `/dev/sda` in the diagrams
 3. {{< ann_text 3>}} `/dev/md0`
-4. {{< ann_text 4>}} This whole crazy scheme could have been avoided if I had a pair of large SSDs I could setup as RAID 0. Donations gratefully accepted.
+4. {{< ann_text 4>}} This whole crazy scheme could have been avoided if I had a pair of large SSDs I could setup as RAID 1. Donations gratefully accepted.
 5. {{< ann_text 5>}} This is called 'write-back' caching. It is also possible to configure LVM cache to use a 'write-through' scheme where writes go directly to the slow disk. This is safer - if the fast disk fails before data has been copied back to the slow disk, you will loose it - but has a performance penalty, but I consider the risk of loss in 'write-back' to be acceptable. 'write-through' is designed more for systems that are using volatile storage systems like battery-backed RAM disks as cache. If power was to go out unexpectedly, you would loose the cache volume and everything that didn't get written back. With an SSD if I loose power when I reboot the data is still there, and LVM can finish its write-back.
 6. {{< ann_text 6>}} Yes, I do make regular backups of all the critical parts of my system, I'm going through this exercise to try and avoid having to replace the non-critical stuff that I don't backup because of storage limits. As I said before, Donations gratefully accepted
 7. {{< ann_text 7>}} Have you spotted the theme yet?
