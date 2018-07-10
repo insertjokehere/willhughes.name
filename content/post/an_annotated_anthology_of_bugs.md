@@ -1,5 +1,5 @@
 +++
-date = "2017-04-19T09:35:16+12:00"
+date = "2018-07-10T14:34:21+12:00"
 description = ""
 draft = false
 tags = ['Bugs', 'LVM', 'Puppet', 'Python']
@@ -12,13 +12,17 @@ A list of bugs that I have stumbled over in my travels that are fun, unusual, sh
 
 <!--more-->
 
+_Update, 10/07/18_
+
+* NetworkManager (why is it always NetworkManager?) shows a super useful "device not managed" entry in the network list for every virtual interface on the system which - if you use Docker at all - means your screen will be full of useless entries: [Ubuntu bug #1458322](https://bugs.launchpad.net/ubuntu/+source/network-manager/+bug/1458322) from 2015 (!?!) has had a patch attached since January 2017, but noone seems interested in actually doing anything with it.
+
 _Update, 19/04/17_
 
 * NetworkManager in Ubuntu 12.10 or newer ignores DNS settings supplied by OpenVPN server after establishing a VPN connection: [Ubuntu bug #1211110](https://bugs.launchpad.net/ubuntu/+source/openvpn/+bug/1211110)
 
 _Original Post_
 
-* Firefox on Android does not support SNI when negotiation SSL sessions for the sync client or when fetching favicons. [Bugzilla #765064](https://bugzilla.mozilla.org/show_bug.cgi?id=765064) goes into some detail as to why this is the case, but it has been a known bug since at least 2012. No SNI support in some components of a major web browser. In 2016. Yup.
+* Firefox on Android does not support SNI when negotiation SSL sessions for the sync client or when fetching favicons. [Bugzilla #765064](https://bugzilla.mozilla.org/show_bug.cgi?id=765064) goes into some detail as to why this is the case, but it has been a known bug since at least 2012. No SNI support in some components of a major web browser. In ~~2016~~ 2018. Yup.
 
 * The official APT module for Puppet doesn't correctly handle PPAs on Ubuntu Trusty or newer: [MODULES-1630](https://tickets.puppetlabs.com/browse/MODULES-1630). `add-apt-repository` is not idempotent, so before calling it puppet checks to see if the file that it creates exists. This works fine on older versions of Ubuntu, but with Trusty the path of the file changed. The result of this is `add-apt-repository` is called on every puppet run, and because of this `add-apt-repository` repeatedly comments out the repo URL that is already in the file, and adds it again to the end. For some reason, `add-apt-repository` consumes an inordinate amount of I/O bandwidth as this file grows.
 
