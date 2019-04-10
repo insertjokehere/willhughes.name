@@ -9,7 +9,7 @@ slug = "reverse_engineering_orvibo_s20c"
 
 +++
 
-*This post is a work-in-progress, and will be updated as I figure more things out*
+*And now for our thilling conclusion!*
 
 <!--more-->
 
@@ -17,6 +17,7 @@ slug = "reverse_engineering_orvibo_s20c"
 {{% contentsitem index="1" title="Attempt 1: New Firmware" %}}
 {{% contentsitem index="2" title="Attempt 2: Packet Capture" %}}
 {{% contentsitem index="3" title="Attempt 3: Replay attacks, prior art" %}}
+{{% contentsitem index="4" title="Belated Conclusion" %}}
 {{< /contents >}}
 
 {{% section index="1" title="Attempt 1: New Firmware" %}}
@@ -119,6 +120,26 @@ I've put the script I wrote to do the decryption, as well as a stream of packet 
 Next steps:
 
 * Rewrite the naïve script to decode packets from the switch and build responses using the encryption scheme
+
+{{% section index="4" title="Belated Conclusion" %}}
+
+*10 April 2019*
+
+So I mostly figured out how the switch works - turns out once you crack the encryption, the protocol isn't very complicated. I've written a mostly-functional [homemate-bridge](https://github.com/insertjokehere/homemate-bridge) Python script that pretends to be the Orvibo server and advertises the switch to HomeAssistant over MQTT. The script _works_, but needs a bit of a clean up:
+
+* The code is **gross**. I wrote this in a hurry, before I knew about asyncio. Ideally it needs to be scrapped and rewritten using an AsyncIO DatagramProtocol server, and an asyncio-compatible MQTT client
+* I wrote the [python-hassdevice](https://github.com/insertjokehere/python-hassdevice) library to provide a way to make it easier to write python scripts that connect to HomeAssistant over MQTT. Ironically, using the library has made maintainting the bridge _harder_; the abstraction is too ridgid, and doesn't do what I need it to. Fixing bugs is painful because I have to tweak code in two repos and re-deploy
+* There isn't any proper documentation about the bits of the protocol I figured out
+* There is a long-standing bug where if the MQTT server restarts I have to restart the bridge and all the physical switches, which is super annoying
+
+All-in-all, I am proud of what I achieved in this project:
+
+* I made a thing _that works_. Even if I never get around to fixing up the rough edges, it works and I use it. Win.
+* Other people seem to be using it as well - I've had several people asking questions on the Github issue tracker. One person even found that it seems to work with a different model switch that supports energy monitoring, and has figured out how to add support for that to the bridge
+
+So thats it. I made a thing, I learnt a lot, I'm not super great at documenting my work.
+
+_I really hope noone was waiting two years for the thrilling conclusion to this tale…_
 
 {{% galleryinit %}}
 
