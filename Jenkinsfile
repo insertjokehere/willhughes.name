@@ -32,7 +32,7 @@ node('docker') {
       stack = 'whn-preprod'
       namespace = 'whn-preprod'
       chart = 'internal/staticsite'
-      version = '0.1.1'
+      version = '0.1.2'
       args = [
       'image.image': image
       ]
