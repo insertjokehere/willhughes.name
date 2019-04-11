@@ -34,8 +34,7 @@ node('docker') {
       chart = 'internal/staticsite'
       version = '0.1.0'
       args = [
-      'image.image': image,
-      'domain': 'whn-preprod.hhome.me'
+      'image.image': image
       ]
     }
   }
