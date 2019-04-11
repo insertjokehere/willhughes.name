@@ -55,7 +55,7 @@ Will Hughes
 
 ### Update 19/09/16
 
-* WoSign have published their [final report](https://www.wosign.com/report/WoSign_Incident_Final_Report_09162016.pdf) on the matter
+* WoSign have published their [final report](https://web.archive.org/web/20170204031031/https://www.wosign.com/report/wosign_incidents_report_09042016.pdf) on the matter
 
 ### Update 27/09/16
 
