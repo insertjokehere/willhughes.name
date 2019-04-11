@@ -11,6 +11,7 @@ node('docker') {
 
     stage ('build') {
       sh('''#!/bin/bash -e
+    rm -rf public/ || true
     whn_install_deps.sh `pwd`
     NODE_ENV=production ./node_modules/.bin/gulp
     ''')
