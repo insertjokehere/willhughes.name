@@ -28,12 +28,6 @@ tag = "tags"
     weight = 2
     identifier = "about"
     url = "/about/"
-  [[menu.main]]
-    name = "Repo"
-    pre = "<i class='fa fa-cube fa-fw'></i>"
-    weight = 3
-    identifier = "repo"
-    url = "/repo/"
 
 [social]
   # Link your social networking accouns to the side menu
