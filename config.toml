@@ -9,9 +9,6 @@ googleAnalytics = "UA-60679520-3"
 subtitle = "Maximising engagement by never publishing anything"
 
 [taxonomies]
-architecture = "architectures"
-distribution = "distributions"
-component = "components"
 tag = "tags"
 
 [menu]
