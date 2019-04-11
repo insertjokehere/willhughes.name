@@ -12,7 +12,7 @@ Ubuntu Xenial isn't an officially supported operating system for the Raspberry P
 
 ## The short version
 
-1. Add my personal [apt repo](/repo) to your system
+1. ~~Add my personal apt repo to your system~~{{<ann 4>}}
 1. Install the `pi-bluetooth` package
 1. `sudo service hciuart start`{{<ann 1>}}
 1. Run `hcitool dev`, and make sure the MAC reported looks plausible
@@ -55,3 +55,4 @@ One gotcha with `hciattach` is that it will attempt to start the device even if 
 1. {{<ann_text 1>}} It may take a couple of tries to start the service successfully
 1. {{<ann_text 2>}} Under a somewhat restrictive [licence](https://raw.githubusercontent.com/insertjokehere/pi-firmware-bt/master/LICENCE.broadcom_bcm43xx) 
 1. {{<ann_text 3>}} SHA1 sum `c0fff507841e02396c981174c546046d9c80cf04`. As far as I can tell, this is the only version of the firmware available
+1. {{<ann_text 4>}} I used to have an Apt repo available with pre-built versions of these packages, but I don't anymore - you will need to build the packages yourself. Sorry.
