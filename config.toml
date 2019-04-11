@@ -6,7 +6,7 @@ pygmentsstyle = "tango"
 
 [params]
 googleAnalytics = "UA-60679520-3"
-subtitle = "subtitle'); DROP TABLE posts;--"
+subtitle = "Maximising engagement by never publishing anything"
 
 [taxonomies]
 architecture = "architectures"
