@@ -14,8 +14,11 @@ node('docker') {
     rm -rf public/ || true
     whn_install_deps.sh `pwd`
     NODE_ENV=production ./node_modules/.bin/gulp
+    tar -cf site.tar public/*
     ''')
     }
+
+    archiveArtifacts artifacts: 'site.tar'
 
   }
 
