@@ -1,0 +1,17 @@
+node {
+  stage ('upload') {
+    copyArtifacts filter: 'site.tar', projectName: 'willhughes.name', selector: lastSuccessful()
+
+    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'b4d1ca70-47a0-48e7-9871-5757171c49b1', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID']]) {
+      sh('''if [ ! -d venv ]; then
+        python -m virtualenv venv
+    fi
+    . venv/bin/activate
+    tar -xf site.tar
+    pip install awscli
+    cd public
+    aws s3 sync . s3://www.willhughes.name --exclude ".git/*" --exclude ".git*" --delete --cache-control max-age=43200
+    ''')
+    }
+  }
+}
