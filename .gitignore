@@ -1,8 +1,9 @@
 *~
-public/
 node_modules/
 static/search.json
 static/img/
 bower_components/
 themes/blackburn/node_modules/
 .npm/
+.v8flags*
+public/

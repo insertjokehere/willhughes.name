@@ -1,5 +1,9 @@
 #!/bin/bash
 
-docker build -t willhughes.name .
+docker build --pull -t willhughes_name .
 
-docker run --rm -ti -v `pwd`:/mnt/data --user 116:116 -p 1313:1313 willhughes.name /bin/bash -c "cp -r /mnt/data/* /home/jenkins && whn_install_deps.sh /home/jenkins && cd /home/jenkins && NODE_ENV=production ./node_modules/.bin/gulp && cd public && python -m SimpleHTTPServer 1313"
+docker run --rm -ti -v `pwd`:/mnt/data --user `id -u`:`id -g` willhughes_name /bin/bash -c "NODE_ENV=production ./node_modules/.bin/gulp"
+
+docker build --pull -t willhughes_name:static -f Dockerfile.static .
+
+docker run --rm -ti -p 1313:80 willhughes_name:static
