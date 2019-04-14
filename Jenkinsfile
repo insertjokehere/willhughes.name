@@ -48,7 +48,7 @@ node('docker') {
   }
 
   stage ('downstream') {
-    result = sh (script: "git log -1 | egrep '$/publish^'", returnStatus: true)
+    result = sh (script: "git log -1 | egrep '\$/publish^'", returnStatus: true)
     if (result == 0) {
       build job: 'willhughes.name-publish', wait: false
     }
