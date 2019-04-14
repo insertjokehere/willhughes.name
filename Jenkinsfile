@@ -47,4 +47,11 @@ node('docker') {
     sh('docker run --rm willhughes_name linkchecker https://whn-preprod.hhome.me/ --check-extern')
   }
 
+  stage ('downstream') {
+    result = sh (script: "git log -1 | egrep '$/publish^'", returnStatus: true)
+    if (result == 0) {
+      build job: 'willhughes.name-publish', wait: false
+    }
+  }
+
 }
