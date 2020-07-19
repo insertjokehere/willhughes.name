@@ -30,28 +30,12 @@ node('docker') {
     }
   }
 
-  stage ('publish-preprod') {
-    def image = image_cannonical_id('harbor.hhome.me/library/willhughes_name:static')
-    helmDeploy {
-      stack = 'whn-preprod'
-      namespace = 'whn-preprod'
-      chart = 'internal/staticsite'
-      version = '0.1.3'
-      args = [
-      'image.image': image
-      ]
-    }
-  }
-
-  stage ('check-links') {
-    sh('docker run --rm willhughes_name linkchecker https://whn-preprod.hhome.me/ --check-extern || true')
-  }
-
   stage ('downstream') {
     result = sh (script: "git log -1 | grep '/publish'", returnStatus: true)
     if (result == 0) {
       build job: 'willhughes.name-publish', wait: false
     }
+    build job: 'helm-configs', wait: false
   }
 
 }
