@@ -2,7 +2,7 @@ node {
   stage ('upload') {
     copyArtifacts filter: 'site.tar', projectName: 'willhughes.name', selector: lastSuccessful()
 
-    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'b4d1ca70-47a0-48e7-9871-5757171c49b1', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID']]) {
+    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'willhughes.name-jenkins', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID']]) {
       sh('''if [ ! -d venv ]; then
         python -m virtualenv venv
     fi
