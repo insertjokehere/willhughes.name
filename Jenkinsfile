@@ -74,7 +74,7 @@ node() {
 mkdir ~/.ssh
 chmod 0700 ~/.ssh
 ssh-keyscan -p 2252 gitea.hhome.me > ~/.ssh/known_hosts
-ssh-add ${SSH_KEYFILE}
+echo "IdentityFile ${SSH_KEYFILE}" > ~/.ssh/config
 git remote add gitea ssh://git@gitea.hhome.me:2252/sites/willhughes.name.git
 git push -f gitea $(git rev-parse HEAD):published'''
                 }
@@ -104,7 +104,7 @@ awscli('jenkins-willhughes-name') {
 mkdir ~/.ssh
 chmod 0700 ~/.ssh
 ssh-keyscan github.com > ~/.ssh/known_hosts
-ssh-add ${SSH_KEYFILE}
+echo "IdentityFile ${SSH_KEYFILE}" > ~/.ssh/config
 git add remote github git@github.com:insertjokehere/willhughes.name.git
 git push -f github $(git rev-parse HEAD):master
 '''
