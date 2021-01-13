@@ -105,7 +105,7 @@ mkdir ~/.ssh
 chmod 0700 ~/.ssh
 echo "StrictHostKeyChecking no" > ~/.ssh/config
 echo "IdentityFile ${SSH_KEYFILE}" >> ~/.ssh/config
-git add remote github git@github.com:insertjokehere/willhughes.name.git
+git remote add github git@github.com:insertjokehere/willhughes.name.git
 git push -f github $(git rev-parse HEAD):master
 '''
                 }
