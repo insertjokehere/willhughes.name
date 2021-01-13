@@ -115,9 +115,7 @@ ssh-keyscan github.com > ~/.ssh/known_hosts
 echo "IdentityFile ${SSH_KEYFILE}" > ~/.ssh/config
 git remote add github git@github.com:insertjokehere/willhughes.name.git
 git push -f github $(git rev-parse HEAD):master'''
-                }
             }
-            build job: 'Kubernetes/helm-configs/master', wait: false
         }
     }
 }
