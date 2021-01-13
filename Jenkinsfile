@@ -73,7 +73,7 @@ node() {
                     sh '''
 mkdir ~/.ssh
 chmod 0700 ~/.ssh
-ssh-keyscan gitea.hhome.me:2252 > ~/.ssh/known_hosts
+ssh-keyscan -p 2252 gitea.hhome.me > ~/.ssh/known_hosts
 git remote add gitea ssh://git@gitea.hhome.me:2252/sites/willhughes.name.git
 git push -f gitea $(git rev-parse HEAD):published'''
                 }
