@@ -62,7 +62,18 @@ node() {
             checkout scm
             result = sh (script: "git log -1 | grep '/publish'", returnStatus: true)
             if (result == 0) {
-                sh 'git push -f origin $(git rev-parse HEAD):published'
+                withCredentials([
+                    sshUserPrivateKey(
+                        credentialsId: 'jenkins-ssh',
+                        keyFileVariable: '',
+                        passphraseVariable: '',
+                        usernameVariable: ''
+                    )
+                ]) {
+                    sh '''
+git remote add gitea ssh://git@gitea.hhome.me:2252/sites/willhughes.name.git
+git push -f gitea $(git rev-parse HEAD):published'''
+                }
             }
             build job: 'Kubernetes/helm-configs/master', wait: false
         }
@@ -74,8 +85,8 @@ awscli('jenkins-willhughes-name') {
         container('main') {
             when(BRANCH_NAME == 'published') {
                 copyArtifacts filter: 'site.zip', fingerprintArtifacts: true, projectName: '${JOB_NAME}', selector: specific('${BUILD_NUMBER}')
-                unzip zipFile: 'site.zip'
-                sh 'aws s3 sync . s3://www.willhughes.name --exclude ".git/*" --exclude ".git*" --delete --cache-control max-age=43200'
+                unzip zipFile: 'site.zip', dir: 'public'
+                sh 'aws s3 sync public/ s3://www.willhughes.name --exclude ".git/*" --exclude ".git*" --delete --cache-control max-age=43200'
                 withCredentials([
                     sshUserPrivateKey(
                         credentialsId: 'jenkins-willhughes-name-github',
