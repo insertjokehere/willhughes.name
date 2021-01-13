@@ -71,6 +71,7 @@ node() {
                     )
                 ]) {
                     sh '''
+ssh-keyscan gitea.hhome.me:2252 > ~/.ssh/known_hosts
 git remote add gitea ssh://git@gitea.hhome.me:2252/sites/willhughes.name.git
 git push -f gitea $(git rev-parse HEAD):published'''
                 }
@@ -84,6 +85,7 @@ awscli('jenkins-willhughes-name') {
     stage('publish') {
         container('main') {
             when(BRANCH_NAME == 'published') {
+                checkout scm
                 copyArtifacts filter: 'site.zip', fingerprintArtifacts: true, projectName: '${JOB_NAME}', selector: specific('${BUILD_NUMBER}')
                 unzip zipFile: 'site.zip', dir: 'public'
                 sh 'aws s3 sync public/ s3://www.willhughes.name --exclude ".git/*" --exclude ".git*" --delete --cache-control max-age=43200'
@@ -96,6 +98,7 @@ awscli('jenkins-willhughes-name') {
                     )
                 ]) {
                     sh '''
+ssh-keyscan github.com > ~/.ssh/known_hosts
 git add remote github git@github.com:insertjokehere/willhughes.name.git
 git push -f github $(git rev-parse HEAD):master
 '''
