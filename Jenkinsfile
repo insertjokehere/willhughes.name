@@ -62,7 +62,7 @@ node() {
             checkout scm
             result = sh (script: "git log -1 | grep '/publish'", returnStatus: true)
             if (result == 0) {
-                sh 'git push -f origin master:published'
+                sh 'git push -f origin $(git rev-parse HEAD):published'
             }
             build job: 'Kubernetes/helm-configs/master', wait: false
         }
@@ -86,7 +86,7 @@ awscli('jenkins-willhughes-name') {
                 ]) {
                     sh '''
 git add remote github git@github.com:insertjokehere/willhughes.name.git
-git push -f github master:master
+git push -f github $(git rev-parse HEAD):master
 '''
                 }
             }
