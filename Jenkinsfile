@@ -1,41 +1,79 @@
-node('docker') {
+def digest
+def static_digest
+def build_tag = uniqueTag()
 
-  checkout scm
-  def container
+kanikoPod() {
+    checkout scm
+    stage('build') {
+        container('kaniko') {
+            digest = kanikoBuild {
+                repo = 'library/willhughes_name'
+                tag = build_tag
+            }
+        }
+    }
+}
 
-  stage ('container') {
-    container = docker.build('willhughes_name')
-  }
-
-  container.inside {
-
+withPod(digest) {
+    checkout scm
     stage ('build') {
-      sh('''#!/bin/bash -e
-    rm -rf public/ || true
-    whn_install_deps.sh `pwd`
-    NODE_ENV=production ./node_modules/.bin/gulp
-    tar -cf site.tar public/*
-    ''')
+        sh('''#!/bin/bash -e
+rm -rf public/ || true
+whn_install_deps.sh `pwd`
+NODE_ENV=production ./node_modules/.bin/gulp''')
     }
+    zip archive: false, dir: 'public/', glob: '', zipFile: 'site.zip'
+    archiveArtifacts artifacts: 'site.zip', fingerprint: true
+}
 
-    archiveArtifacts artifacts: 'site.tar'
-
-  }
-
-  stage ('build-static') {
-    buildAndPush {
-      image = 'library/willhughes_name'
-      dockerfile = 'Dockerfile.static'
-      tag = 'static'
+kanikoPod() {
+    checkout scm
+    copyArtifacts filter: 'site.zip', fingerprintArtifacts: true, projectName: '${JOB_NAME}', selector: specific('${BUILD_NUMBER}')
+    unzip zipFile: 'site.zip', dir: 'public'
+    stage('build-static') {
+        container('kaniko') {
+            static_digest = kanikoBuild {
+                repo = 'library/willhughes_name-static'
+                tag = build_tag
+                dockerfile = 'Dockerfile.static'
+            }
+        }
     }
-  }
+}
 
-  stage ('downstream') {
-    result = sh (script: "git log -1 | grep '/publish'", returnStatus: true)
-    if (result == 0) {
-      build job: 'willhughes.name-publish', wait: false
+repotool() {
+    stage('repo') {
+        container('main') {
+            if (BRANCH_NAME == 'master') {
+                updateTag(static_digest, 'latest')
+            } else {
+                removeTag(static_digest)
+            }
+            removeTag(digest)
+        }
     }
-    build job: 'helm-configs', wait: false
-  }
+}
 
+node() {
+    stage('downstream') {
+        when(BRANCH_NAME == 'master') {
+            checkout scm
+            result = sh (script: "git log -1 | grep '/publish'", returnStatus: true)
+            if (result == 0) {
+                sh 'git push -f origin master:published'
+            }
+            build job: 'Kubernetes/helm-configs/master', wait: false
+        }
+    }
+}
+
+awscli('jenkins-willhughes-name') {
+    stage('publish') {
+        when(BRANCH_NAME == 'published') {
+            copyArtifacts filter: 'site.zip', fingerprintArtifacts: true, projectName: '${JOB_NAME}', selector: specific('${BUILD_NUMBER}')
+            unzip zipFile: 'site.zip'
+            sh 'aws s3 sync . s3://www.willhughes.name --exclude ".git/*" --exclude ".git*" --delete --cache-control max-age=43200'
+            // TODO: push to github
+        }
+    }
 }
