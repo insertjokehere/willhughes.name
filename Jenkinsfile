@@ -88,28 +88,36 @@ awscli('jenkins-willhughes-name') {
     stage('publish') {
         container('main') {
             when(BRANCH_NAME == 'published') {
-                checkout scm
                 copyArtifacts filter: 'site.zip', fingerprintArtifacts: true, projectName: '${JOB_NAME}', selector: specific('${BUILD_NUMBER}')
                 unzip zipFile: 'site.zip', dir: 'public'
                 sh 'aws s3 sync public/ s3://www.willhughes.name --exclude ".git/*" --exclude ".git*" --delete --cache-control max-age=43200'
-                withCredentials([
-                    sshUserPrivateKey(
-                        credentialsId: 'jenkins-willhughes-name-github',
-                        keyFileVariable: 'SSH_KEYFILE',
-                        passphraseVariable: '',
-                        usernameVariable: ''
+            }
+        }
+    }
+}
+
+node() {
+    stage('publish-github') {
+        when(BRANCH_NAME == 'published') {
+            checkout scm
+            withCredentials([
+                sshUserPrivateKey(
+                    credentialsId: 'jenkins-willhughes-name-github',
+                    keyFileVariable: 'SSH_KEYFILE',
+                    passphraseVariable: '',
+                    usernameVariable: ''
                     )
-                ]) {
-                    sh '''
+            ]) {
+                sh '''
 mkdir ~/.ssh
 chmod 0700 ~/.ssh
-echo "StrictHostKeyChecking no" > ~/.ssh/config
-echo "IdentityFile ${SSH_KEYFILE}" >> ~/.ssh/config
+ssh-keyscan github.com > ~/.ssh/known_hosts
+echo "IdentityFile ${SSH_KEYFILE}" > ~/.ssh/config
 git remote add github git@github.com:insertjokehere/willhughes.name.git
-git push -f github $(git rev-parse HEAD):master
-'''
+git push -f github $(git rev-parse HEAD):master'''
                 }
             }
+            build job: 'Kubernetes/helm-configs/master', wait: false
         }
     }
 }
