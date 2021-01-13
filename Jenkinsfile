@@ -103,8 +103,8 @@ awscli('jenkins-willhughes-name') {
                     sh '''
 mkdir ~/.ssh
 chmod 0700 ~/.ssh
-ssh-keyscan github.com > ~/.ssh/known_hosts
-echo "IdentityFile ${SSH_KEYFILE}" > ~/.ssh/config
+echo "StrictHostKeyChecking no" > ~/.ssh/config
+echo "IdentityFile ${SSH_KEYFILE}" >> ~/.ssh/config
 git add remote github git@github.com:insertjokehere/willhughes.name.git
 git push -f github $(git rev-parse HEAD):master
 '''
