@@ -65,7 +65,7 @@ node() {
                 withCredentials([
                     sshUserPrivateKey(
                         credentialsId: 'jenkins-ssh',
-                        keyFileVariable: '',
+                        keyFileVariable: 'SSH_KEYFILE',
                         passphraseVariable: '',
                         usernameVariable: ''
                     )
@@ -74,6 +74,7 @@ node() {
 mkdir ~/.ssh
 chmod 0700 ~/.ssh
 ssh-keyscan -p 2252 gitea.hhome.me > ~/.ssh/known_hosts
+ssh-add ${SSH_KEYFILE}
 git remote add gitea ssh://git@gitea.hhome.me:2252/sites/willhughes.name.git
 git push -f gitea $(git rev-parse HEAD):published'''
                 }
@@ -94,7 +95,7 @@ awscli('jenkins-willhughes-name') {
                 withCredentials([
                     sshUserPrivateKey(
                         credentialsId: 'jenkins-willhughes-name-github',
-                        keyFileVariable: '',
+                        keyFileVariable: 'SSH_KEYFILE',
                         passphraseVariable: '',
                         usernameVariable: ''
                     )
@@ -103,6 +104,7 @@ awscli('jenkins-willhughes-name') {
 mkdir ~/.ssh
 chmod 0700 ~/.ssh
 ssh-keyscan github.com > ~/.ssh/known_hosts
+ssh-add ${SSH_KEYFILE}
 git add remote github git@github.com:insertjokehere/willhughes.name.git
 git push -f github $(git rev-parse HEAD):master
 '''
