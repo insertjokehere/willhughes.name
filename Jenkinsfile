@@ -76,7 +76,19 @@ awscli('jenkins-willhughes-name') {
                 copyArtifacts filter: 'site.zip', fingerprintArtifacts: true, projectName: '${JOB_NAME}', selector: specific('${BUILD_NUMBER}')
                 unzip zipFile: 'site.zip'
                 sh 'aws s3 sync . s3://www.willhughes.name --exclude ".git/*" --exclude ".git*" --delete --cache-control max-age=43200'
-                // TODO: push to github
+                withCredentials([
+                    sshUserPrivateKey(
+                        credentialsId: 'jenkins-willhughes-name-github',
+                        keyFileVariable: '',
+                        passphraseVariable: '',
+                        usernameVariable: ''
+                    )
+                ]) {
+                    sh '''
+git add remote github git@github.com:insertjokehere/willhughes.name.git
+git push -f github master:master
+'''
+                }
             }
         }
     }
