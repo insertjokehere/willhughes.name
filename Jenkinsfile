@@ -4,7 +4,7 @@ def build_tag = uniqueTag()
 
 kanikoPod() {
     checkout scm
-    stage('build') {
+    stage('container') {
         container('kaniko') {
             digest = kanikoBuild {
                 repo = 'library/willhughes_name'
@@ -17,13 +17,15 @@ kanikoPod() {
 withPod(digest) {
     checkout scm
     stage ('build') {
-        sh('''#!/bin/bash -e
+        container('main') {
+            sh('''#!/bin/bash -e
 rm -rf public/ || true
 /usr/local/bin/whn_install_deps.sh `pwd`
 NODE_ENV=production ./node_modules/.bin/gulp''')
+        }
+        zip archive: false, dir: 'public/', glob: '', zipFile: 'site.zip'
+        archiveArtifacts artifacts: 'site.zip', fingerprint: true
     }
-    zip archive: false, dir: 'public/', glob: '', zipFile: 'site.zip'
-    archiveArtifacts artifacts: 'site.zip', fingerprint: true
 }
 
 kanikoPod() {
@@ -69,11 +71,13 @@ node() {
 
 awscli('jenkins-willhughes-name') {
     stage('publish') {
-        when(BRANCH_NAME == 'published') {
-            copyArtifacts filter: 'site.zip', fingerprintArtifacts: true, projectName: '${JOB_NAME}', selector: specific('${BUILD_NUMBER}')
-            unzip zipFile: 'site.zip'
-            sh 'aws s3 sync . s3://www.willhughes.name --exclude ".git/*" --exclude ".git*" --delete --cache-control max-age=43200'
-            // TODO: push to github
+        container('main') {
+            when(BRANCH_NAME == 'published') {
+                copyArtifacts filter: 'site.zip', fingerprintArtifacts: true, projectName: '${JOB_NAME}', selector: specific('${BUILD_NUMBER}')
+                unzip zipFile: 'site.zip'
+                sh 'aws s3 sync . s3://www.willhughes.name --exclude ".git/*" --exclude ".git*" --delete --cache-control max-age=43200'
+                // TODO: push to github
+            }
         }
     }
 }
