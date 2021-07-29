@@ -1,13 +1,12 @@
-def build_tag = uniqueTag()
-def digest = new me.hhome.ImgReference('harbor.hhome.me', 'library/willhughes_name', build_tag)
+def digest
 def static_digest
-
+def build_tag = uniqueTag()
 
 kanikoPod() {
     checkout scm
     stage('container') {
         container('kaniko') {
-            kanikoBuild {
+            digest = kanikoBuild {
                 repo = 'library/willhughes_name'
                 tag = build_tag
             }
