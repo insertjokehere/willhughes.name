@@ -25,6 +25,12 @@ tag = "tags"
     weight = 2
     identifier = "about"
     url = "/about/"
+  [[menu.main]]
+    name = "Leap Seconds"
+    pre = "<i class='fa fa-clock-o fa-fw'></i>"
+    weight = 3
+    identifier = "leap"
+    url = "https://565851109.xyz/"
 
 [social]
   # Link your social networking accouns to the side menu
