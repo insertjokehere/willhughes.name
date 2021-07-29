@@ -1,6 +1,6 @@
 def digest
 def static_digest
-def build_tag = uniqueTag()
+def tag = uniqueTag()
 
 kanikoPod() {
     checkout scm
@@ -8,7 +8,7 @@ kanikoPod() {
         container('kaniko') {
             digest = kanikoBuild {
                 repo = 'library/willhughes_name'
-                tag = build_tag
+                tag = tag
             }
         }
     }
