@@ -40,7 +40,7 @@ pwd
 ls
 cd public
 ls
-mc mirror . minio/static/
+mc mirror --overwrite . minio/static/
 """
                 }
             }
