@@ -1,5 +1,4 @@
 def digest
-def static_digest
 def build_tag = uniqueTag()
 
 kanikoPod() {
@@ -25,34 +24,6 @@ NODE_ENV=production ./node_modules/.bin/gulp''')
         }
         zip archive: false, dir: 'public/', glob: '', zipFile: 'site.zip'
         archiveArtifacts artifacts: 'site.zip', fingerprint: true
-    }
-}
-
-kanikoPod() {
-    checkout scm
-    copyArtifacts filter: 'site.zip', fingerprintArtifacts: true, projectName: '${JOB_NAME}', selector: specific('${BUILD_NUMBER}')
-    unzip zipFile: 'site.zip', dir: 'public'
-    stage('build-static') {
-        container('kaniko') {
-            static_digest = kanikoBuild {
-                repo = 'library/willhughes_name-static'
-                tag = build_tag
-                dockerfile = 'Dockerfile.static'
-            }
-        }
-    }
-}
-
-repotool() {
-    stage('repo') {
-        container('main') {
-            if (BRANCH_NAME == 'master') {
-                updateTag(static_digest, 'latest')
-            } else {
-                removeTag(static_digest)
-            }
-            removeTag(digest)
-        }
     }
 }
 
