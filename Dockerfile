@@ -10,12 +10,6 @@ RUN wget -q https://github.com/spf13/hugo/releases/download/v${HUGO_VER}/hugo_${
 
 RUN pip3 install pygments
 
-RUN adduser --quiet --uid 116 --ingroup nogroup --no-create-home --shell /bin/bash jenkins
-
-RUN mkdir -p /home/jenkins
-
-RUN chown jenkins:nogroup -R /home/jenkins
-
 WORKDIR /mnt/data
 
 COPY docker/supervisor.conf /etc/supervisor/supervisord.conf
