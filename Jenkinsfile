@@ -54,7 +54,7 @@ node() {
             checkout scm
             result = sh (script: "git log -1 | grep '/publish'", returnStatus: true)
             if (result == 0) {
-                gitReplicate('jenkins-ssh', 'ssh://git@gitea.hhome.me:2252/sites/willhughes.name.git', 'published', '-p 2252 gitea.hhome.me') {}
+                gitReplicate('jenkins-ssh', 'ssh://git@gitea.hhome.me:2252/sites/willhughes.name.git', 'published', '-p 2252 gitea.hhome.me')
             }
         }
     }
@@ -76,7 +76,7 @@ node() {
     stage('publish-github') {
         when(BRANCH_NAME == 'published') {
             checkout scm
-            gitReplicate('jenkins-willhughes-name-github', 'git@github.com:insertjokehere/willhughes.name.git', 'master', 'github.com') {}
+            gitReplicate('jenkins-willhughes-name-github', 'git@github.com:insertjokehere/willhughes.name.git', 'master', 'github.com')
         }
     }
 }
