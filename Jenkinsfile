@@ -58,7 +58,7 @@ pwd
 ls
 cd public
 ls
-mc cp * minio/static/${BRANCH_NAME}/
+mc cp -r * minio/static/${BRANCH_NAME}/
 """
                             }
                         }
