@@ -47,7 +47,7 @@ spec:
                 )
             ]) {
                 when(BRANCH_NAME == 'master' || BRANCH_NAME == 'published') {
-                    stage("upload") {
+                    stage("publish-preprod") {
                         container('main') {
                             copyArtifacts filter: "site.zip", fingerprintArtifacts: true, projectName: '${JOB_NAME}', selector: specific('${BUILD_NUMBER}')
                             unzip zipFile: 'site.zip', dir: 'public'
@@ -69,35 +69,19 @@ mc cp -r * minio/static/
         }
 
 node() {
-    stage('downstream') {
+    stage('publish-git') {
         when(BRANCH_NAME == 'master') {
             checkout scm
             result = sh (script: "git log -1 | grep '/publish'", returnStatus: true)
             if (result == 0) {
-                withCredentials([
-                    sshUserPrivateKey(
-                        credentialsId: 'jenkins-ssh',
-                        keyFileVariable: 'SSH_KEYFILE',
-                        passphraseVariable: '',
-                        usernameVariable: ''
-                    )
-                ]) {
-                    sh '''
-mkdir ~/.ssh
-chmod 0700 ~/.ssh
-ssh-keyscan -p 2252 gitea.hhome.me > ~/.ssh/known_hosts
-echo "IdentityFile ${SSH_KEYFILE}" > ~/.ssh/config
-git remote add gitea ssh://git@gitea.hhome.me:2252/sites/willhughes.name.git
-git push -f gitea $(git rev-parse HEAD):published'''
-                }
+                gitReplicate('jenkins-ssh', 'ssh://git@gitea.hhome.me:2252/sites/willhughes.name.git', 'published', '-p 2252 gitea.hhome.me') {}
             }
-            build job: 'Kubernetes/helm-configs/master', wait: false
         }
     }
 }
 
 awscli('jenkins-willhughes-name') {
-    stage('publish') {
+    stage('publish-s3') {
         container('main') {
             when(BRANCH_NAME == 'published') {
                 copyArtifacts filter: 'site.zip', fingerprintArtifacts: true, projectName: '${JOB_NAME}', selector: specific('${BUILD_NUMBER}')
@@ -112,22 +96,7 @@ node() {
     stage('publish-github') {
         when(BRANCH_NAME == 'published') {
             checkout scm
-            withCredentials([
-                sshUserPrivateKey(
-                    credentialsId: 'jenkins-willhughes-name-github',
-                    keyFileVariable: 'SSH_KEYFILE',
-                    passphraseVariable: '',
-                    usernameVariable: ''
-                    )
-            ]) {
-                sh '''
-mkdir ~/.ssh
-chmod 0700 ~/.ssh
-ssh-keyscan github.com > ~/.ssh/known_hosts
-echo "IdentityFile ${SSH_KEYFILE}" > ~/.ssh/config
-git remote add github git@github.com:insertjokehere/willhughes.name.git
-git push -f github $(git rev-parse HEAD):master'''
-            }
+            gitReplicate('jenkins-willhughes-name-github', 'git@github.com:insertjokehere/willhughes.name.git', 'master', 'github.com') {}
         }
     }
 }
