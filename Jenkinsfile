@@ -46,11 +46,11 @@ spec:
                     secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
                 )
             ]) {
-                checkout scm
-                stage("upload") {
-                    container('main') {
-                        copyArtifacts filter: "site.zip", fingerprintArtifacts: true, projectName: '${JOB_NAME}', selector: specific('${BUILD_NUMBER}')
-                        unzip zipFile: 'site.zip', dir: 'public'
+                when(BRANCH_NAME == 'master' || BRANCH_NAME == 'published') {
+                    stage("upload") {
+                        container('main') {
+                            copyArtifacts filter: "site.zip", fingerprintArtifacts: true, projectName: '${JOB_NAME}', selector: specific('${BUILD_NUMBER}')
+                            unzip zipFile: 'site.zip', dir: 'public'
                             ansiColor('xterm') {
                                 sh """
 mc alias set minio https://s3.whn-preprod.hhome.me/ \$AWS_ACCESS_KEY_ID \$AWS_SECRET_ACCESS_KEY
@@ -58,8 +58,9 @@ pwd
 ls
 cd public
 ls
-mc cp -r * minio/static/${BRANCH_NAME}/
+mc cp -r * minio/static/
 """
+                                }
                             }
                         }
                     }
