@@ -40,7 +40,7 @@ pwd
 ls
 cd public
 ls
-mc cp -r * minio/static/
+mc mirror . minio/static/
 """
                 }
             }
@@ -67,6 +67,7 @@ awscli('jenkins-willhughes-name') {
                 copyArtifacts filter: 'site.zip', fingerprintArtifacts: true, projectName: '${JOB_NAME}', selector: specific('${BUILD_NUMBER}')
                 unzip zipFile: 'site.zip', dir: 'public'
                 sh 'aws s3 sync public/ s3://www.willhughes.name --exclude ".git/*" --exclude ".git*" --delete --cache-control max-age=43200'
+                sh 'aws cloudfront create-invalidation --distribution-id EA06J9WB5EOXF --paths "/*"'
             }
         }
     }
