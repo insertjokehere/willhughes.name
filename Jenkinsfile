@@ -28,8 +28,8 @@ NODE_ENV=production ./node_modules/.bin/gulp''')
 }
 
 minioCli('jenkins-whn-preprod') {
-    when(BRANCH_NAME == 'master' || BRANCH_NAME == 'published') {
-        stage("publish-preprod") {
+    stage("publish-preprod") {
+        when(BRANCH_NAME == 'master' || BRANCH_NAME == 'published') {
             container('main') {
                 copyArtifacts filter: "site.zip", fingerprintArtifacts: true, projectName: '${JOB_NAME}', selector: specific('${BUILD_NUMBER}')
                 unzip zipFile: 'site.zip', dir: 'public'
