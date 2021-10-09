@@ -1,4 +1,4 @@
-FROM node:6
+FROM node:6@sha256:e133e66ec3bfc98da0440e552f452e5cdf6413319d27a2db3b01ac4b319759b3
 
 # datasource=github-releases depName=gohugoio/hugo
 ENV HUGO_VER=v0.87.0
