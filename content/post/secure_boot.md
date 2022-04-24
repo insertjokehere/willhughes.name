@@ -1,17 +1,17 @@
 +++
-draft = true
-tags = []
-topics = []
-description = ""
+draft = false
+date = "2022-04-24T21:50:54+12:00"
+tags = ["Ubuntu", "LVM", "Security"]
 title = "Actually Secure Boot"
 slug = "actually-secure-boot"
+description = ""
 +++
 
-In case you hadn't noticed, computers have gotten rather complicated over the last few years. One of the ares this is most apparent, is in their firmware - entire operating systems{{< ann 1 >}} deadicated to the deceptively complex task of just getting the damn thing up and running. 
+In case you hadn't noticed, computers have gotten rather complicated over the last few years.
 
-<!-- more -->
+<!--more-->
 
-With all this complexity comes useful features, including "Secure Boot" - the wonderous ability to establish a "chain of trust"{{< ann 2 >}} where each piece of the operating system is cryptographically verified by the previous piece in the chain, so you can be fairly sure{{< ann 3 >}} that if there is some malicious code on your computer, it isn't hiding in the operating system or a device driver. This doesn't entirely eliminate the risk of malware, but it does make bad guys sad, which means its worth doing.
+One of the ares this is most apparent, is in their firmware - entire operating systems{{< ann 1 >}} deadicated to the deceptively complex task of just getting the damn thing up and running. With all this complexity comes useful features, including "Secure Boot" - the wonderous ability to establish a "chain of trust"{{< ann 2 >}} where each piece of the operating system is cryptographically verified by the previous piece in the chain, so you can be fairly sure{{< ann 3 >}} that if there is some malicious code on your computer, it isn't hiding in the operating system or a device driver. This doesn't entirely eliminate the risk of malware, but it does make bad guys sad, which means its worth doing.
 
 ## Using Secure Boot
 
