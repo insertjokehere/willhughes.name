@@ -40,7 +40,7 @@ pwd
 ls
 cd public
 ls
-mc mirror --overwrite . minio/static/
+mc mirror --overwrite . minio/willhughes-name-preprod/
 """
                 }
             }
