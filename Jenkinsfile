@@ -27,7 +27,7 @@ NODE_ENV=production ./node_modules/.bin/gulp''')
     }
 }
 
-minioCli('jenkins-whn-preprod') {
+minioCli('willhughes-name-preprod-jenkins') {
     stage("publish-preprod") {
         when(BRANCH_NAME == 'master' || BRANCH_NAME == 'published') {
             container('main') {
@@ -35,7 +35,7 @@ minioCli('jenkins-whn-preprod') {
                 unzip zipFile: 'site.zip', dir: 'public'
                 ansiColor('xterm') {
                     sh """
-mc alias set minio https://s3.whn-preprod.hhome.me/ \$AWS_ACCESS_KEY_ID \$AWS_SECRET_ACCESS_KEY
+mc alias set minio https://minio.k8s-nz1.hhome.me \$AWS_ACCESS_KEY_ID \$AWS_SECRET_ACCESS_KEY
 pwd
 ls
 cd public
