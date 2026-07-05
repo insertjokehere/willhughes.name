@@ -27,7 +27,7 @@ NODE_ENV=production ./node_modules/.bin/gulp''')
     }
 }
 
-minioCli('willhughes-name-preprod-jenkins') {
+minioCli('willhughes-name-preprod-garage-jenkins') {
     stage("publish-preprod") {
         when(BRANCH_NAME == 'master' || BRANCH_NAME == 'published') {
             container('main') {
@@ -35,12 +35,12 @@ minioCli('willhughes-name-preprod-jenkins') {
                 unzip zipFile: 'site.zip', dir: 'public'
                 ansiColor('xterm') {
                     sh """
-mc alias set minio https://minio.k8s-nz1.hhome.me \$AWS_ACCESS_KEY_ID \$AWS_SECRET_ACCESS_KEY
+mc alias set garage https://s3.k8s-nz1.hhome.me \$AWS_ACCESS_KEY_ID \$AWS_SECRET_ACCESS_KEY
 pwd
 ls
 cd public
 ls
-mc mirror --overwrite . minio/willhughes-name-preprod/
+mc mirror --overwrite . garage/willhughes-name-preprod/
 """
                 }
             }
