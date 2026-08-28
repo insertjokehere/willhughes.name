@@ -1,0 +1,14 @@
+{{ $section := .Page.Section }}
+{{ $slug := .Page.Slug }}
+
+<figure itemscope itemtype="http://schema.org/ImageObject">
+    <a href="/img/{{ $section }}/{{ $slug }}/{{ .Get "file" }}" itemprop="contentUrl" data-size="{{ .Get "size" }}">
+	<img src="/img/{{ $section }}/{{ $slug }}/thumbs/{{ .Get "file" }}" itemprop="thumbnail" alt="{{ .Get "caption" }}" />
+    </a>
+
+
+    <figcaption itemprop="caption description">
+	{{ .Get "caption" }}
+	<span itemprop="copyrightHolder">{{ .Get "copyrightHolder" }}</span>
+    </figcaption>
+</figure>

@@ -1,0 +1,119 @@
+blockquote {
+    background: #f9f9f9;
+    border-left: 10px solid #ccc;
+    margin: 1.5em 10px;
+    padding: 0.5em 10px;
+}
+
+article.draft header h2::before {
+    content: "[DRAFT]  "
+}
+
+div.draft, tr.draft {
+    background: #ffc0c0
+}
+
+@font-face {
+    font-family: 'Iosevka';
+    src: url('../fonts/iosevka-term-regular.ttf') format('truetype');
+    font-style: monospace;
+}
+
+code, kbd, pre, samp {
+    font-family: Iosevka,monospace;
+    background: #f8f8f8
+}
+
+#menu {
+    overflow-x: hidden;
+}
+
+.header, h1, h2, h3, h4 {
+  font-family: "TypoPRO Raleway", serif
+}
+
+html {
+  font-family: "TypoPRO Open Sans", Helvetica, Arial, sans-serif
+}
+
+a {
+  color: #3b8bba;
+  text-decoration: none;
+}
+a:hover,
+a:focus {
+  text-decoration: underline;
+}
+a:visited {
+  color: #265778;
+}
+
+.small-print {
+  font-size: 0.8em;
+  margin: 0.6em;
+}
+
+.post-meta {
+  font-size: 90%;
+}
+
+article > footer {
+  text-align: right;
+}
+
+.prev-next-post {
+  margin-top: 2em;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.prev-next-post .prev {
+  float: left;
+  text-align: left;
+  overflow: hidden;
+}
+
+.prev-next-post .next {
+  float: right;
+  text-align: right;
+  overflow: hidden;
+}
+
+#menu .brand {
+  font-family: Raleway;
+  font-weight: bold;
+  font-size: 1em;
+  letter-spacing: 0.1em;
+  text-transform: none;
+  background: transparent;
+  text-decoration: none;
+  margin: 0.5em 0;
+}
+
+#menu .pure-menu {
+  font-size: 0.9em;
+}
+
+i {
+  display: inline-block;
+  margin-right: 0.2em;
+}
+
+.pagination {
+  text-align: center;
+  margin-top: 3em;
+}
+
+.pagination a {
+  color: #265778;
+}
+
+.contents h5 {
+    margin-bottom: 0;
+}
+
+.contents ol {
+    margin-top: 0;
+}
