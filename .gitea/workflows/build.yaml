@@ -1,0 +1,102 @@
+# Builds the site with Hugo and publishes it. Replaces the old Jenkinsfile.
+#
+# There is no node/gulp/webpack step any more: the theme is vendored under
+# themes/blackburn/ with its CSS/JS bundle pre-built and committed, and the
+# optimised post images are committed under static/img/. The build is `hugo`.
+#
+# No branches: filter on push -- every branch validates that the site still
+# builds, and the publish steps gate themselves on the branch instead.
+#
+# config.toml sets baseurl = "/", so a single build artifact serves both preprod
+# and production; there is no per-environment rebuild, and no artifact hand-off
+# between jobs the way the Jenkins pipeline needed one.
+#
+# Note: content/post/leapsecond.md uses the built-in {{< tweet >}} shortcode,
+# which resolves against publish.twitter.com at build time. The runner needs
+# egress to it or that page fails the build.
+#
+# Required secrets (org-level unless noted):
+#   CACHE_ACCESS_KEY_ID / CACHE_SECRET_ACCESS_KEY  shared gitea-actions cache bucket
+#   PREPROD_BUCKET_ACCESS_KEY_ID / PREPROD_BUCKET_SECRET_ACCESS_KEY  (repo, from
+#                                                  terraform-gitea's buckets: entry)
+#   GITHUB_MIRROR_SSH_PRIVATE_KEY                  (repo) deploy key for the GitHub mirror
+# Required variables:
+#   PREPROD_BUCKET_ENDPOINT / PREPROD_BUCKET_NAME  (repo, same terraform-gitea entry)
+#   AWS_ROLE_ARN                                   (repo) role assumed for the prod publish
+name: build
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: debian-trixie
+    steps:
+      # Fully-qualified host: this Gitea resolves bare `actions/*` against itself,
+      # so external actions must name gitea.com explicitly.
+      - uses: https://gitea.com/actions/checkout@v4
+
+      # Puts hugo and aws on PATH from .mise.toml.
+      - uses: infrastructure/gitea-actions/with-mise@v1
+        with:
+          access_key_id: ${{ secrets.CACHE_ACCESS_KEY_ID }}
+          secret_access_key: ${{ secrets.CACHE_SECRET_ACCESS_KEY }}
+
+      - name: Build site
+        run: hugo
+
+      - name: Publish to preprod
+        if: github.ref_name == 'master' || github.ref_name == 'published'
+        env:
+          # terraform-gitea's `buckets:` entry for this repo expands to these four
+          # names off the PREPROD_BUCKET prefix: the key pair as secrets, and
+          # endpoint/name as variables (they aren't secret, and variables stay
+          # readable in the UI and unmasked in logs).
+          BUCKET_ACCESS_KEY_ID: ${{ secrets.PREPROD_BUCKET_ACCESS_KEY_ID }}
+          BUCKET_SECRET_ACCESS_KEY: ${{ secrets.PREPROD_BUCKET_SECRET_ACCESS_KEY }}
+          BUCKET_ENDPOINT: ${{ vars.PREPROD_BUCKET_ENDPOINT }}
+          BUCKET_NAME: ${{ vars.PREPROD_BUCKET_NAME }}
+        run: |
+          set -euo pipefail
+          mc alias set garage "$BUCKET_ENDPOINT" "$BUCKET_ACCESS_KEY_ID" "$BUCKET_SECRET_ACCESS_KEY"
+          # --remove is new. The Jenkins job mirrored without it, so pages deleted
+          # from the site have been lingering in the bucket; the first run after
+          # this lands prunes them.
+          mc mirror --overwrite --remove public/ "garage/$BUCKET_NAME/"
+
+      # Keyless: mints a repo-scoped OIDC token from oidc.gitea.hhome.me and trades
+      # it for short-lived AWS credentials. The broker binds `repository`, not
+      # `ref`, so the published-only gate has to live here rather than in IAM.
+      - name: Assume the production publish role
+        if: github.ref_name == 'published'
+        uses: infrastructure/gitea-actions/aws-oidc-login@v1
+        with:
+          role_arn: ${{ vars.AWS_ROLE_ARN }}
+
+      - name: Publish to production
+        if: github.ref_name == 'published'
+        run: |
+          set -euo pipefail
+          aws s3 sync public/ s3://www.willhughes.name --delete --cache-control max-age=43200
+          aws cloudfront create-invalidation --distribution-id EA06J9WB5EOXF --paths "/*"
+
+  mirror:
+    # Source mirror to GitHub. Independent of the build output, so no `needs:` --
+    # it runs in parallel and needs neither mise nor Hugo.
+    if: github.ref_name == 'published'
+    runs-on: debian-trixie
+    steps:
+      - uses: https://gitea.com/actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Push to GitHub
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.GITHUB_MIRROR_SSH_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          ssh-keyscan github.com >> ~/.ssh/known_hosts 2>/dev/null
+          eval "$(ssh-agent -s)" >/dev/null
+          printf '%s\n' "$SSH_PRIVATE_KEY" | ssh-add -
+          git push --force git@github.com:insertjokehere/willhughes.name.git HEAD:master
