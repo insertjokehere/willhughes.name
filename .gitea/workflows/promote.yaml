@@ -1,0 +1,41 @@
+# Promotes master onto the `published` branch. That push is what triggers the
+# production publish and GitHub mirror in build.yaml.
+#
+# Replaces the old Jenkins gate, which promoted whenever the latest commit
+# message on master happened to contain the string "/publish" -- easy to trip by
+# accident from a stray word in a commit body. Promotion is now an explicit,
+# manual action from the Actions UI.
+#
+# Required secrets:
+#   GITOPS_SSH_PRIVATE_KEY  org-level, reuses the existing jenkins-ssh key
+name: promote
+
+on:
+  workflow_dispatch:
+
+jobs:
+  promote:
+    # workflow_dispatch can be run against any branch from the UI; production
+    # only ever ships from master.
+    if: github.ref_name == 'master'
+    runs-on: debian-trixie
+    steps:
+      - uses: https://gitea.com/actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Advance the published branch
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.GITOPS_SSH_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          ssh-keyscan -p 2252 gitea.hhome.me >> ~/.ssh/known_hosts 2>/dev/null
+          eval "$(ssh-agent -s)" >/dev/null
+          printf '%s\n' "$SSH_PRIVATE_KEY" | ssh-add -
+          # Pushing over SSH as a real key rather than with the automatic job
+          # token, so that the resulting push to `published` triggers build.yaml.
+          #
+          # Deliberately not forced: if `published` has diverged from master this
+          # fails loudly instead of silently discarding whatever is on it.
+          git push ssh://git@gitea.hhome.me:2252/sites/willhughes.name.git HEAD:published

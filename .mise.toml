@@ -1,0 +1,9 @@
+# Hugo is pinned to the same version the old Dockerfile installed. This is the
+# *non-extended* build (no Dart Sass) -- the theme's CSS is plain CSS bundled
+# ahead of time, so nothing here needs the extended binary.
+#
+# Nothing else belongs here: the debian-trixie runner already ships `aws` and
+# `mc` (see "Runner assumptions" in infrastructure/gitea-actions' README), so
+# the publish steps need no install step of their own.
+[tools]
+hugo = "0.87.0"
