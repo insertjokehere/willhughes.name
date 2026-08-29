@@ -17,11 +17,11 @@
 #
 # Required secrets (org-level unless noted):
 #   CACHE_ACCESS_KEY_ID / CACHE_SECRET_ACCESS_KEY  shared gitea-actions cache bucket
-#   PREPROD_BUCKET_ACCESS_KEY_ID / PREPROD_BUCKET_SECRET_ACCESS_KEY  (repo, from
+#   PREPROD_ACCESS_KEY_ID / PREPROD_SECRET_ACCESS_KEY  (repo, from
 #                                                  terraform-gitea's buckets: entry)
 #   GITHUB_MIRROR_SSH_PRIVATE_KEY                  (repo) deploy key for the GitHub mirror
 # Required variables:
-#   PREPROD_BUCKET_ENDPOINT / PREPROD_BUCKET_NAME  (repo, same terraform-gitea entry)
+#   PREPROD_ENDPOINT / PREPROD_NAME             (repo, same terraform-gitea entry)
 #   AWS_ROLE_ARN                                   (repo) role assumed for the prod publish
 name: build
 
@@ -49,13 +49,17 @@ jobs:
         if: github.ref_name == 'master' || github.ref_name == 'published'
         env:
           # terraform-gitea's `buckets:` entry for this repo expands to these four
-          # names off the PREPROD_BUCKET prefix: the key pair as secrets, and
-          # endpoint/name as variables (they aren't secret, and variables stay
-          # readable in the UI and unmasked in logs).
-          BUCKET_ACCESS_KEY_ID: ${{ secrets.PREPROD_BUCKET_ACCESS_KEY_ID }}
-          BUCKET_SECRET_ACCESS_KEY: ${{ secrets.PREPROD_BUCKET_SECRET_ACCESS_KEY }}
-          BUCKET_ENDPOINT: ${{ vars.PREPROD_BUCKET_ENDPOINT }}
-          BUCKET_NAME: ${{ vars.PREPROD_BUCKET_NAME }}
+          # names off the PREPROD prefix: the key pair as secrets, and endpoint/
+          # name as variables (they aren't secret, and variables stay readable in
+          # the UI and unmasked in logs).
+          #
+          # The prefix is short because the Gitea SDK the Terraform provider uses
+          # rejects secret names over ~30 characters ("name to long"), and the
+          # longest suffix here is _SECRET_ACCESS_KEY at 18.
+          BUCKET_ACCESS_KEY_ID: ${{ secrets.PREPROD_ACCESS_KEY_ID }}
+          BUCKET_SECRET_ACCESS_KEY: ${{ secrets.PREPROD_SECRET_ACCESS_KEY }}
+          BUCKET_ENDPOINT: ${{ vars.PREPROD_ENDPOINT }}
+          BUCKET_NAME: ${{ vars.PREPROD_NAME }}
         run: |
           set -euo pipefail
           mc alias set garage "$BUCKET_ENDPOINT" "$BUCKET_ACCESS_KEY_ID" "$BUCKET_SECRET_ACCESS_KEY"
