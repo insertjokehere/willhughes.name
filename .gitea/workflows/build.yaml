@@ -19,7 +19,8 @@
 #   CACHE_ACCESS_KEY_ID / CACHE_SECRET_ACCESS_KEY  shared gitea-actions cache bucket
 #   PREPROD_ACCESS_KEY_ID / PREPROD_SECRET_ACCESS_KEY  (repo, from
 #                                                  terraform-gitea's buckets: entry)
-#   GITHUB_MIRROR_SSH_PRIVATE_KEY                  (repo) deploy key for the GitHub mirror
+#   GH_MIRROR_SSH_PRIVATE_KEY                      (repo) deploy key for the GitHub mirror
+#                                                  (not GITHUB_*: Gitea rejects that prefix)
 # Required variables:
 #   PREPROD_ENDPOINT / PREPROD_NAME             (repo, same terraform-gitea entry)
 #   AWS_ROLE_ARN                                   (repo) role assumed for the prod publish
@@ -96,7 +97,9 @@ jobs:
 
       - name: Push to GitHub
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.GITHUB_MIRROR_SSH_PRIVATE_KEY }}
+          # Not GITHUB_MIRROR_*: Gitea rejects any secret name matching
+          # (?i)^GIT(EA|HUB)_, the same rule GitHub Actions applies.
+          SSH_PRIVATE_KEY: ${{ secrets.GH_MIRROR_SSH_PRIVATE_KEY }}
         run: |
           set -euo pipefail
           mkdir -p ~/.ssh && chmod 700 ~/.ssh
